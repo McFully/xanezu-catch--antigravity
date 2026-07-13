@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+        <filter id="reptileSkin">
+            <feTurbulence type="turbulence" baseFrequency="0.2" numOctaves="2" result="skin"/>
+            <feDisplacementMap in="SourceGraphic" in2="skin" scale="2"/>
+        </filter>
+        <linearGradient id="snakeGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#2E7D32"/>
+            <stop offset="50%" stop-color="#4CAF50"/>
+            <stop offset="100%" stop-color="#1B5E20"/>
+        </linearGradient>
+    </defs>
+    <g filter="url(#reptileSkin)">
+        <!-- Coiled/Hanging body -->
+        <path d="M50,0 Q80,20 50,40 T50,80 Q20,95 50,100" fill="none" stroke="url(#snakeGrad)" stroke-width="20" stroke-linecap="round"/>
+        <!-- Pattern spots -->
+        <circle cx="55" cy="20" r="4" fill="#1B5E20" opacity="0.6"/>
+        <circle cx="45" cy="45" r="4" fill="#1B5E20" opacity="0.6"/>
+        <circle cx="55" cy="70" r="4" fill="#1B5E20" opacity="0.6"/>
+        <!-- Head details -->
+        <ellipse cx="50" cy="100" rx="15" ry="10" fill="url(#snakeGrad)"/>
+        <!-- Tongue -->
+        <path d="M50,110 L45,120 M50,110 L55,120" stroke="#FF5252" stroke-width="2" fill="none"/>
+        <!-- Eyes -->
+        <circle cx="43" cy="98" r="2.5" fill="#FFEB3B"/>
+        <circle cx="57" cy="98" r="2.5" fill="#FFEB3B"/>
+        <circle cx="43" cy="98" r="1" fill="#000"/>
+        <circle cx="57" cy="98" r="1" fill="#000"/>
+    </g>
+</svg>

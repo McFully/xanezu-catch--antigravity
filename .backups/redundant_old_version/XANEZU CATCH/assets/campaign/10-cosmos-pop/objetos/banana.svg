@@ -1,0 +1,38 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <defs>
+        <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+        </filter>
+        <linearGradient id="bananaBody" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFE135"/>
+            <stop offset="40%" stop-color="#FFD700"/>
+            <stop offset="100%" stop-color="#E6AC00"/>
+        </linearGradient>
+        <linearGradient id="bananaHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FFFACD" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#FFE135" stop-opacity="0"/>
+        </linearGradient>
+    </defs>
+    <g filter="url(#dropShadow)">
+        <!-- Banana body - classic curved crescent shape -->
+        <path d="M 25,72 C 15,60 12,40 22,25 C 30,14 42,10 55,12 C 48,18 40,30 38,45 C 36,60 40,70 48,78 C 38,80 30,78 25,72 Z" 
+              fill="url(#bananaBody)" stroke="#C8960C" stroke-width="1.5"/>
+        <!-- Inner curve detail -->
+        <path d="M 48,78 C 40,70 36,60 38,45 C 40,30 48,18 55,12 C 65,10 72,15 75,22 C 65,20 52,30 48,48 C 44,62 48,72 55,78 C 52,80 50,79 48,78 Z" 
+              fill="url(#bananaBody)" stroke="#C8960C" stroke-width="1"/>
+        <!-- Light highlight on top curve -->
+        <path d="M 30,30 C 35,20 45,14 55,13 C 48,19 42,28 40,40 C 38,32 32,26 30,30 Z" 
+              fill="url(#bananaHighlight)"/>
+        <!-- Banana tip (top) -->
+        <ellipse cx="55" cy="11" rx="4" ry="3" fill="#8B6914" transform="rotate(-20 55 11)"/>
+        <!-- Banana tip (bottom) -->
+        <ellipse cx="25" cy="73" rx="3" ry="2.5" fill="#6B4E0A" transform="rotate(30 25 73)"/>
+        <!-- Brown spots for realism -->
+        <circle cx="35" cy="50" r="1.5" fill="#8B7500" opacity="0.4"/>
+        <circle cx="45" cy="35" r="1" fill="#8B7500" opacity="0.3"/>
+        <circle cx="42" cy="60" r="1.2" fill="#8B7500" opacity="0.35"/>
+        <!-- Center ridge line -->
+        <path d="M 50,16 C 44,28 42,45 46,65 C 48,72 50,76 52,78" 
+              fill="none" stroke="#DAA520" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+    </g>
+</svg>

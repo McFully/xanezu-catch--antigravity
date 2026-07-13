@@ -1,0 +1,32 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <defs>
+        <filter id="rainbowGlow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+    </defs>
+    <g filter="url(#rainbowGlow)">
+        <!-- Rainbow arcs from outside to inside -->
+        <path d="M 10,75 A 40,40 0 0,1 90,75" fill="none" stroke="#F44336" stroke-width="6" stroke-linecap="round"/>
+        <path d="M 16,75 A 34,34 0 0,1 84,75" fill="none" stroke="#FF9800" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 21,75 A 29,29 0 0,1 79,75" fill="none" stroke="#FFEB3B" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 26,75 A 24,24 0 0,1 74,75" fill="none" stroke="#4CAF50" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 31,75 A 19,19 0 0,1 69,75" fill="none" stroke="#2196F3" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 36,75 A 14,14 0 0,1 64,75" fill="none" stroke="#9C27B0" stroke-width="4" stroke-linecap="round"/>
+        <!-- Clouds at base -->
+        <g fill="#FFF" opacity="0.9">
+            <circle cx="12" cy="76" r="8"/>
+            <circle cx="6" cy="78" r="6"/>
+            <circle cx="18" cy="80" r="7"/>
+            <circle cx="88" cy="76" r="8"/>
+            <circle cx="94" cy="78" r="6"/>
+            <circle cx="82" cy="80" r="7"/>
+        </g>
+        <!-- Sparkles -->
+        <circle cx="30" cy="35" r="2" fill="#FFF" opacity="0.8"/>
+        <circle cx="50" cy="28" r="2.5" fill="#FFEB3B" opacity="0.7"/>
+        <circle cx="70" cy="35" r="2" fill="#FFF" opacity="0.8"/>
+        <!-- Star sparkle -->
+        <text x="45" y="22" font-size="12" fill="#FFD700" opacity="0.8">✨</text>
+    </g>
+</svg>

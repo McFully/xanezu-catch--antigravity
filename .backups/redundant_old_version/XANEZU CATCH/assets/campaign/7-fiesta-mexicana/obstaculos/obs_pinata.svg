@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="pin1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF8800"/>
+    </linearGradient>
+    <linearGradient id="pin2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF4400"/>
+      <stop offset="100%" stop-color="#CC2200"/>
+    </linearGradient>
+    <linearGradient id="pin3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00BBFF"/>
+      <stop offset="100%" stop-color="#0066CC"/>
+    </linearGradient>
+    <radialGradient id="pglow2" cx="50%" cy="35%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="pblur2"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <!-- Rope from ceiling -->
+  <path d="M50 0 Q46 15 50 30" stroke="#5a3a00" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Rope knot -->
+  <circle cx="50" cy="32" r="5" fill="#5a3a00" stroke="#3a2000" stroke-width="1.5"/>
+  <!-- Glow -->
+  <ellipse cx="50" cy="110" rx="44" ry="70" fill="url(#pglow2)" filter="url(#pblur2)"/>
+  <!-- Piñata body (donkey shape simplified as festive star/diamond) -->
+  <!-- Central festive cone bottom -->
+  <polygon points="50,40 14,100 50,170 86,100" fill="url(#pin1)" stroke="#CC8800" stroke-width="2"/>
+  <!-- Colorful tissue paper strips (fringe) -->
+  <!-- Yellow sector -->
+  <path d="M14 100 Q5 110 8 130 L20 125 Q12 115 14 100Z" fill="#FFD700"/>
+  <path d="M8 130 Q5 145 12 160 L22 150 Q15 140 8 130Z" fill="#FFD700"/>
+  <!-- Red sector -->
+  <path d="M20 60 Q10 72 14 100 L26 92 Q18 75 20 60Z" fill="url(#pin2)"/>
+  <path d="M50 40 Q35 48 20 60 L32 58 Q40 50 50 40Z" fill="url(#pin2)"/>
+  <!-- Blue sector -->
+  <path d="M86 100 Q95 110 92 130 L80 125 Q88 115 86 100Z" fill="url(#pin3)"/>
+  <path d="M92 130 Q95 145 88 160 L78 150 Q85 140 92 130Z" fill="url(#pin3)"/>
+  <!-- Green sector -->
+  <path d="M80 60 Q90 72 86 100 L74 92 Q82 75 80 60Z" fill="#00CC44"/>
+  <path d="M50 40 Q65 48 80 60 L68 58 Q60 50 50 40Z" fill="#00CC44"/>
+  <!-- Purple sector top right -->
+  <path d="M50 170 Q38 155 14 100 L26 100 Q38 145 50 156Z" fill="#9900FF" opacity="0.85"/>
+  <path d="M50 170 Q62 155 86 100 L74 100 Q62 145 50 156Z" fill="#FF00AA" opacity="0.85"/>
+  <!-- Star points (piñata star shape extra cones) -->
+  <!-- Left star cone -->
+  <polygon points="14,100 0,80 10,115" fill="url(#pin2)"/>
+  <!-- Right star cone -->
+  <polygon points="86,100 100,80 90,115" fill="url(#pin3)"/>
+  <!-- Bottom star cone -->
+  <polygon points="50,170 38,192 62,192" fill="#FFD700"/>
+  <!-- Extra fringe lines (decorative crepe paper) -->
+  <path d="M14,100 Q8,105 4,112" stroke="#FFD700" stroke-width="2" fill="none"/>
+  <path d="M14,100 Q6,108 2,118" stroke="#FF4400" stroke-width="2" fill="none"/>
+  <path d="M86,100 Q92,105 96,112" stroke="#00BBFF" stroke-width="2" fill="none"/>
+  <path d="M86,100 Q94,108 98,118" stroke="#00CC44" stroke-width="2" fill="none"/>
+  <!-- Center highlight -->
+  <ellipse cx="40" cy="78" rx="12" ry="8" fill="white" fill-opacity="0.15" transform="rotate(-15,40,78)"/>
+  <!-- Donkey face hint -->
+  <circle cx="50" cy="65" r="12" fill="#FFD700" stroke="#CC8800" stroke-width="1.5"/>
+  <ellipse cx="44" cy="63" rx="4" ry="4" fill="#5a3000"/>
+  <ellipse cx="56" cy="63" rx="4" ry="4" fill="#5a3000"/>
+  <circle cx="43" cy="62" r="1.5" fill="white"/>
+  <circle cx="55" cy="62" r="1.5" fill="white"/>
+  <!-- Snout -->
+  <ellipse cx="50" cy="72" rx="8" ry="5" fill="#F0A060"/>
+  <circle cx="47" cy="71" r="2" fill="#CC7040"/>
+  <circle cx="53" cy="71" r="2" fill="#CC7040"/>
+  <!-- Ears -->
+  <ellipse cx="38" cy="52" rx="6" ry="9" fill="#FFD700" stroke="#CC8800" stroke-width="1.5"/>
+  <ellipse cx="62" cy="52" rx="6" ry="9" fill="#FFD700" stroke="#CC8800" stroke-width="1.5"/>
+  <!-- Grin -->
+  <path d="M43 76 Q50 80 57 76" stroke="#5a3000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

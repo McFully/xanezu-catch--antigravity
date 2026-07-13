@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="rt1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a0a"/>
+      <stop offset="100%" stop-color="#3d6a15"/>
+    </linearGradient>
+    <radialGradient id="rglow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#44ff88" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#44ff88" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="rblur"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+  <!-- Glow -->
+  <ellipse cx="50" cy="100" rx="42" ry="55" fill="url(#rglow)" filter="url(#rblur)"/>
+  <!-- Main root trunk -->
+  <path d="M50 0 Q38 40 45 80 Q35 120 42 160 Q46 185 50 200" stroke="#1a3a0a" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M50 0 Q38 40 45 80 Q35 120 42 160 Q46 185 50 200" stroke="#3d6a15" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M50 0 Q38 40 45 80 Q35 120 42 160" stroke="#5aaa25" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Left root 1 (organic curved) -->
+  <path d="M47 25 Q20 22 5 38" stroke="#1a3a0a" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M47 25 Q20 22 5 38" stroke="#3d6a15" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Left wrist curl -->
+  <path d="M5 38 Q-2 48 4 55 Q10 48 8 42" fill="#2d5a10" stroke="#1a3a0a" stroke-width="1"/>
+  <!-- Right root 1 -->
+  <path d="M46 55 Q72 50 90 62" stroke="#1a3a0a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M46 55 Q72 50 90 62" stroke="#3d6a15" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M90 62 Q98 70 94 78 Q87 68 89 63" fill="#2d5a10" stroke="#1a3a0a" stroke-width="1"/>
+  <!-- Left root 2 -->
+  <path d="M44 90 Q18 85 4 100" stroke="#1a3a0a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M44 90 Q18 85 4 100" stroke="#3d6a15" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M4 100 Q-3 112 3 118 Q9 110 7 103" fill="#2d5a10" stroke="#1a3a0a" stroke-width="1"/>
+  <!-- Right root 2 -->
+  <path d="M42 120 Q68 114 86 126" stroke="#1a3a0a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M42 120 Q68 114 86 126" stroke="#3d6a15" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M86 126 Q94 136 90 144 Q83 134 85 128" fill="#2d5a10" stroke="#1a3a0a" stroke-width="1"/>
+  <!-- Mud splats on roots -->
+  <ellipse cx="18" cy="26" rx="7" ry="5" fill="#4a3510" opacity="0.8" transform="rotate(-10,18,26)"/>
+  <ellipse cx="72" cy="60" rx="6" ry="4" fill="#4a3510" opacity="0.8" transform="rotate(5,72,60)"/>
+  <ellipse cx="15" cy="94" rx="6" ry="4" fill="#4a3510" opacity="0.8"/>
+  <!-- Dripping mud drops -->
+  <circle cx="8" cy="46" r="3" fill="#4a3510"/>
+  <circle cx="8" cy="55" r="2" fill="#4a3510"/>
+  <ellipse cx="8" cy="62" rx="2" ry="3" fill="#4a3510"/>
+  <circle cx="88" cy="72" r="3" fill="#4a3510"/>
+  <ellipse cx="88" cy="82" rx="2" ry="3" fill="#4a3510"/>
+  <!-- Root texture detail -->
+  <path d="M50 0 Q48 25 46 50" stroke="#5aaa25" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- Mysterious eyes hiding in roots -->
+  <ellipse cx="22" cy="38" rx="5" ry="4" fill="#001100"/>
+  <ellipse cx="22" cy="38" rx="3" ry="3" fill="#00FF44" opacity="0.9"/>
+  <circle cx="21" cy="37" r="1" fill="white"/>
+</svg>

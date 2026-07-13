@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="rb1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#888"/>
+      <stop offset="50%" stop-color="#DDDDDD"/>
+      <stop offset="100%" stop-color="#666"/>
+    </linearGradient>
+    <linearGradient id="rb2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="50%" stop-color="#CCC"/>
+      <stop offset="100%" stop-color="#555"/>
+    </linearGradient>
+    <radialGradient id="eyeGlow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#FF4400" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#AA2200" stop-opacity="0.8"/>
+    </radialGradient>
+    <filter id="rpblur"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+  <!-- Spring body legs -->
+  <path d="M38 80 Q34 88 38 96 Q42 88 38 80" stroke="#888" stroke-width="3" fill="none"/>
+  <path d="M62 80 Q66 88 62 96 Q58 88 62 80" stroke="#888" stroke-width="3" fill="none"/>
+  <!-- Feet/base wheels -->
+  <circle cx="38" cy="96" r="7" fill="#555" stroke="#333" stroke-width="1.5"/>
+  <circle cx="62" cy="96" r="7" fill="#555" stroke="#333" stroke-width="1.5"/>
+  <circle cx="38" cy="96" r="4" fill="#888"/>
+  <circle cx="62" cy="96" r="4" fill="#888"/>
+  <!-- Body box (wind-up robot) -->
+  <rect x="22" y="48" width="56" height="38" rx="8" fill="url(#rb2)" stroke="#444" stroke-width="2"/>
+  <!-- Body rivet/bolt details -->
+  <circle cx="27" cy="53" r="2.5" fill="#555" stroke="#333" stroke-width="1"/>
+  <circle cx="73" cy="53" r="2.5" fill="#555" stroke="#333" stroke-width="1"/>
+  <circle cx="27" cy="81" r="2.5" fill="#555" stroke="#333" stroke-width="1"/>
+  <circle cx="73" cy="81" r="2.5" fill="#555" stroke="#333" stroke-width="1"/>
+  <!-- Chest screen/window -->
+  <rect x="35" y="55" width="30" height="22" rx="4" fill="#111" stroke="#558" stroke-width="1.5"/>
+  <!-- Screen glow -->
+  <rect x="36" y="56" width="28" height="20" rx="3" fill="#004466" opacity="0.8"/>
+  <!-- Screen data lines -->
+  <line x1="38" y1="62" x2="62" y2="62" stroke="#00FFFF" stroke-width="1" opacity="0.6"/>
+  <line x1="38" y1="67" x2="55" y2="67" stroke="#00FFFF" stroke-width="1" opacity="0.5"/>
+  <line x1="38" y1="72" x2="60" y2="72" stroke="#00FFFF" stroke-width="1" opacity="0.4"/>
+  <!-- Arms -->
+  <rect x="2" y="50" width="22" height="12" rx="6" fill="url(#rb1)" stroke="#444" stroke-width="1.5"/>
+  <rect x="76" y="50" width="22" height="12" rx="6" fill="url(#rb1)" stroke="#444" stroke-width="1.5"/>
+  <!-- Hand (claw) left -->
+  <circle cx="6" cy="56" r="5" fill="#555" stroke="#333" stroke-width="1"/>
+  <rect x="2" y="53" width="4" height="6" rx="2" fill="#777" transform="rotate(-20,4,56)"/>
+  <rect x="4" y="52" width="4" height="7" rx="2" fill="#777"/>
+  <!-- Hand right (holding wrench) -->
+  <circle cx="94" cy="56" r="5" fill="#555" stroke="#333" stroke-width="1"/>
+  <rect x="92" y="50" width="4" height="12" rx="2" fill="#CCA000" stroke="#8B6500" stroke-width="1" transform="rotate(-15,94,56)"/>
+  <!-- Head (round) -->
+  <circle cx="50" cy="35" r="22" fill="url(#rb1)" stroke="#444" stroke-width="2"/>
+  <!-- Antenna -->
+  <line x1="50" y1="13" x2="50" y2="3" stroke="#555" stroke-width="2.5"/>
+  <circle cx="50" cy="2" r="4" fill="#FF4400" stroke="#AA2200" stroke-width="1.5"/>
+  <!-- Eye visor -->
+  <rect x="28" y="28" width="44" height="16" rx="8" fill="#111" stroke="#336" stroke-width="1.5"/>
+  <!-- Eyes (glowing red LED) -->
+  <ellipse cx="38" cy="36" rx="7" ry="6" fill="url(#eyeGlow)"/>
+  <ellipse cx="62" cy="36" rx="7" ry="6" fill="url(#eyeGlow)"/>
+  <!-- Eye scan lines -->
+  <ellipse cx="38" cy="36" rx="7" ry="6" fill="none" stroke="#FF6644" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="62" cy="36" rx="7" ry="6" fill="none" stroke="#FF6644" stroke-width="1" opacity="0.5"/>
+  <!-- Eye glow effect -->
+  <ellipse cx="38" cy="36" rx="10" ry="9" fill="#FF4400" filter="url(#rpblur)" opacity="0.4"/>
+  <ellipse cx="62" cy="36" rx="10" ry="9" fill="#FF4400" filter="url(#rpblur)" opacity="0.4"/>
+  <!-- Wind-up key on back (visible as side detail) -->
+  <rect x="78" y="38" width="8" height="14" rx="3" fill="#AA8800" stroke="#8B6500" stroke-width="1.5"/>
+  <ellipse cx="82" cy="37" rx="5" ry="5" fill="none" stroke="#AA8800" stroke-width="2"/>
+  <!-- Mouth grill -->
+  <path d="M35 46 Q50 50 65 46" stroke="#555" stroke-width="2" fill="none"/>
+  <line x1="40" y1="46" x2="40" y2="49" stroke="#555" stroke-width="1.5"/>
+  <line x1="50" y1="47" x2="50" y2="50" stroke="#555" stroke-width="1.5"/>
+  <line x1="60" y1="46" x2="60" y2="49" stroke="#555" stroke-width="1.5"/>
+</svg>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<!-- DEPRECATED: Esta arquitectura 100% Canvas legacy ha sido superada. 
+         Usar src/app/canvas/game-canvas.ts para el gameplay y componentes Angular para UI. -->
+	<meta name="description"
+		content="Xanezu Catch - Una experiencia arcade premium 100% Canvas. (Versión Legado)">
+	<title>Xanezu Catch | LEGACY CANVAS</title>
+
+	
+    <!-- Fuentes Modernas -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Outfit:wght@400;600;700;800&family=Titan+One&display=swap" rel="stylesheet">
+	
+    <!-- Estilo Base para el Canvas -->
+    <link rel="stylesheet" href="index.css">
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+    <!-- Contenedor Único del Juego -->
+    <div id="game-container">
+        <canvas id="game"></canvas>
+    </div>
+
+    <!-- Gestión de Errores Críticos -->
+	<script src="js/core/ErrorLogger.js"></script>
+    
+    <!-- Punto de Entrada Principal -->
+	<script type="module" src="js/main.js?v=0.2.1-FIX"></script>
+</body>
+
+</html>

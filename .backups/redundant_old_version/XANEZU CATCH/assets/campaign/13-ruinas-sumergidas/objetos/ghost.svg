@@ -1,0 +1,46 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <defs>
+        <filter id="ghostGlow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+        <radialGradient id="ghostBody" cx="50%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="50%" stop-color="#E8E8F0"/>
+            <stop offset="100%" stop-color="#B8B8D0"/>
+        </radialGradient>
+        <radialGradient id="ghostCheek" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFB3D9" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#FFB3D9" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+    <g filter="url(#ghostGlow)">
+        <!-- Ghost body - rounded top with wavy bottom -->
+        <path d="M 50,10 C 25,10 15,28 15,45 L 15,70 
+                 C 15,75 20,72 25,75 C 30,78 32,82 37,78 
+                 C 42,74 45,78 50,82 C 55,78 58,74 63,78 
+                 C 68,82 70,78 75,75 C 80,72 85,75 85,70 
+                 L 85,45 C 85,28 75,10 50,10 Z" 
+              fill="url(#ghostBody)" stroke="#9999BB" stroke-width="1" opacity="0.92"/>
+        <!-- Left eye -->
+        <ellipse cx="38" cy="38" rx="7" ry="9" fill="#2D2D44"/>
+        <ellipse cx="36" cy="36" rx="3" ry="3.5" fill="#FFFFFF"/>
+        <!-- Right eye -->
+        <ellipse cx="62" cy="38" rx="7" ry="9" fill="#2D2D44"/>
+        <ellipse cx="60" cy="36" rx="3" ry="3.5" fill="#FFFFFF"/>
+        <!-- Cute open mouth -->
+        <ellipse cx="50" cy="55" rx="6" ry="5" fill="#2D2D44"/>
+        <ellipse cx="50" cy="53" rx="4" ry="2" fill="#FF6B8A" opacity="0.6"/>
+        <!-- Cheek blush -->
+        <circle cx="28" cy="48" r="6" fill="url(#ghostCheek)"/>
+        <circle cx="72" cy="48" r="6" fill="url(#ghostCheek)"/>
+        <!-- Little arms/flippers -->
+        <path d="M 15,50 C 8,48 5,52 8,56 C 10,58 14,57 15,55" fill="url(#ghostBody)" stroke="#9999BB" stroke-width="0.8"/>
+        <path d="M 85,50 C 92,48 95,52 92,56 C 90,58 86,57 85,55" fill="url(#ghostBody)" stroke="#9999BB" stroke-width="0.8"/>
+        <!-- Highlight shine -->
+        <ellipse cx="42" cy="22" rx="12" ry="6" fill="#FFFFFF" opacity="0.4" transform="rotate(-15 42 22)"/>
+    </g>
+</svg>

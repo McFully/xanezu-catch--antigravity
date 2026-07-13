@@ -1,0 +1,30 @@
+ACUERDO DE LICENCIA DE USUARIO FINAL (EULA) PARA XANEZU CATCH
+
+IMPORTANTE: LEA ATENTAMENTE ESTE ACUERDO ANTES DE INSTALAR O UTILIZAR EL SOFTWARE.
+
+1. CONCESIÓN DE LICENCIA
+Aritz (el "Licenciante") le otorga una licencia no exclusiva y no transferible para utilizar el Software XANEZU CATCH únicamente para fines personales y no comerciales.
+
+2. RESTRICCIONES
+Usted NO podrá:
+- Realizar ingeniería inversa, descompilar o desensamblar el Software.
+- Modificar, adaptar o crear trabajos derivados basados en el Software.
+- Alquilar, arrendar, prestar o distribuir el Software a terceros.
+- Utilizar el Software para cualquier propósito ilegal.
+
+3. PROPIEDAD INTELECTUAL
+El Software y todos los derechos de autor, marcas comerciales y otros derechos de propiedad intelectual contenidos en el mismo son propiedad del Licenciante. Este acuerdo no le otorga ningún derecho de propiedad sobre el Software.
+
+4. RENUNCIA DE GARANTÍA
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA. EL LICENCIANTE NO GARANTIZA QUE EL SOFTWARE SATISFAGA SUS NECESIDADES O QUE SU FUNCIONAMIENTO SEA ININTERRUMPIDO O LIBRE DE ERRORES.
+
+5. LIMITACIÓN DE RESPONSABILIDAD
+EN NINGÚN CASO EL LICENCIANTE SERÁ RESPONSABLE POR DAÑOS DIRECTOS, INDIRECTOS, INCIDENTALES O CONSECUENTES QUE SURJAN DEL USO O LA INCAPACIDAD DE USO DEL SOFTWARE.
+
+6. TERMINACIÓN
+Este acuerdo terminará automáticamente si usted incumple cualquier término del mismo. Tras la terminación, deberá destruir todas las copias del Software que tenga en su poder.
+
+7. LEY APLICABLE
+Este acuerdo se rige por las leyes vigentes en España.
+
+Al instalar este Software, usted acepta quedar vinculado por los términos de este acuerdo.

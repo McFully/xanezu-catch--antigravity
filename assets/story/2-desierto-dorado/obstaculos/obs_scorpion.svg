@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+        <filter id="shadow">
+            <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.8"/>
+        </filter>
+        <linearGradient id="scorpionGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#111"/>
+            <stop offset="50%" stop-color="#222"/>
+            <stop offset="100%" stop-color="#000"/>
+        </linearGradient>
+    </defs>
+    <!-- Scorpion Body -->
+    <g filter="url(#shadow)">
+        <!-- Legs -->
+        <path d="M30,40 L10,30 M30,50 L10,50 M30,60 L10,70 M70,40 L90,30 M70,50 L90,50 M70,60 L90,70" stroke="#000" stroke-width="4" fill="none"/>
+        <!-- Pincers -->
+        <path d="M40,30 L30,15 L20,20 M60,30 L70,15 L80,20" stroke="#000" stroke-width="5" fill="none"/>
+        <!-- Main segments -->
+        <ellipse cx="50" cy="50" rx="20" ry="25" fill="url(#scorpionGrad)"/>
+        <ellipse cx="50" cy="30" rx="15" ry="12" fill="url(#scorpionGrad)"/>
+        <!-- Tail -->
+        <path d="M50,75 Q50,95 80,95 T90,70" fill="none" stroke="#000" stroke-width="8" stroke-linecap="round"/>
+        <!-- Stinger -->
+        <path d="M90,70 L85,60 L95,60 Z" fill="#D32F2F"/>
+        <!-- Eyes -->
+        <circle cx="45" cy="25" r="2" fill="#F00"/>
+        <circle cx="55" cy="25" r="2" fill="#F00"/>
+    </g>
+</svg>

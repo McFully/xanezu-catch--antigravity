@@ -1,0 +1,88 @@
+<div class="game-container">
+  <!-- 1. CAPA DE MOTOR (CANVAS) -->
+  <!-- Solo existe si el motor debe estar activo (PLAYING o PAUSED) -->
+  @if (gameStateService.isGameplayActive()) {
+    <app-game-canvas class="canvas-layer"></app-game-canvas>
+  }
+
+  <!-- 2. CAPA DE INTERFAZ (UI DOM) -->
+  <div class="ui-layer">
+    
+    <!-- Boot Screen (Precarga Crítica) -->
+    @if (gameStateService.currentState() === GameState.BOOT) {
+      <div class="boot-screen">
+        <div class="boot-glow"></div>
+        <div class="logo-area">
+          <h1 class="game-logo">XANEZU <span>CATCH</span></h1>
+
+          @if (!preloader.isReady()) {
+            <p class="tagline">CARGANDO RECURSOS CRÍTICOS...</p>
+            <div class="pre-progress-container">
+              <div class="pre-progress-bar" [style.width.%]="preloader.progress()"></div>
+            </div>
+            <p class="pre-progress-text">{{ preloader.progress() }}%</p>
+          } @else {
+            <p class="tagline">LISTO</p>
+            <button class="btn-tap-start" (click)="onTapToStart()">
+              <span class="tap-icon">▶</span>
+              TOCA PARA INICIAR
+            </button>
+            <p class="tap-hint">Toca para activar el audio</p>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Pantalla de Inicio / Menú Principal -->
+    @if (gameStateService.currentState() === GameState.MAIN_MENU) {
+      <app-main-menu></app-main-menu>
+    }
+
+    <!-- Selector de Modo / Capítulos -->
+    @if (gameStateService.currentState() === GameState.MODE_SELECT || 
+         gameStateService.currentState() === GameState.STORY_CHAPTER_SELECT ||
+         gameStateService.currentState() === GameState.ARCADE_CHAPTER_SELECT ||
+         gameStateService.currentState() === GameState.ABLIA_CHAPTER_SELECT) {
+      <app-chapter-select></app-chapter-select>
+    }
+
+    <!-- Game Over -->
+    @if (gameStateService.currentState() === GameState.GAME_OVER) {
+      <app-game-over></app-game-over>
+    }
+
+    <!-- Configuración -->
+    @if (gameStateService.currentState() === GameState.SETTINGS) {
+      <app-settings></app-settings>
+    }
+
+    <!-- Tienda -->
+    @if (gameStateService.currentState() === GameState.SHOP) {
+      <app-shop></app-shop>
+    }
+
+    <!-- Selector de Skins -->
+    @if (gameStateService.currentState() === GameState.SKIN_SELECTOR) {
+      <app-skin-selector></app-skin-selector>
+    }
+
+    <!-- Galería de Trofeos -->
+    @if (gameStateService.currentState() === GameState.TROPHIES) {
+      <app-trophies></app-trophies>
+    }
+
+    <!-- Pantalla de Carga -->
+    @if (gameStateService.currentState() === GameState.LOADING_SCREEN) {
+      <app-loading-screen></app-loading-screen>
+    }
+
+    <!-- Victoria -->
+    @if (gameStateService.currentState() === GameState.VICTORY) {
+      <app-victory></app-victory>
+    }
+
+  </div>
+
+</div>
+
+<router-outlet />

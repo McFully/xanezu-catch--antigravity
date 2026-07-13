@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="description"
+		content="Xanezu Catch - A premium arcade experience. Jump, dash, and catch your way to glory!">
+	<title>Xanezu Catch | Premium Arcade Experience</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Outfit:wght@400;600;700;800&family=Titan+One&display=swap"
+		rel="stylesheet">
+	<link rel="icon"
+		href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='24' font-size='22'%3E%F0%9F%90%B8%3C/text%3E%3C/svg%3E">
+	<link rel="preload" as="image" href="assets/menu/fondo/mainmenu-image.webp">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="in-menu">
+	<!-- Shutter Transition -->
+	<div id="shutter">
+		<div class="shutter-top"></div>
+		<div class="shutter-bottom"></div>
+	</div>
+
+	<!-- Near Miss Flash -->
+	<div id="near-miss-flash" class="near-miss-flash"></div>
+
+	<!-- Damage Vignette Effect -->
+	<div id="damage-vignette" class="damage-vignette"></div>
+
+	<!-- Orientation Lock Overlay -->
+	<div id="orientation-lock">
+		<div class="lock-content">
+			<div class="phone-icon">📱</div>
+			<h2>ROTATE DEVICE</h2>
+			<p>Please use landscape mode for the best experience.</p>
+		</div>
+	</div>
+
+	<!-- Background Decoration -->
+	<div class="bg-glow"></div>
+
+	<!-- Gameplay Container -->
+	<div id="game-wrapper">
+		<header id="main-header" class="hud-unificado">
+			<!-- 0. SCORE (PUNTUACIÓN PRINCIPAL) -->
+			<div class="stat-box score-box">
+				<span class="label">SCORE</span>
+				<span id="score-val" class="value">0</span>
+			</div>
+
+			<!-- 1. BANANA COMBO (5 SLOTS) -->
+			<div class="stat-box-linear combo-linear">
+				<span class="label">BANANA COMBO</span>
+				<div id="combo-slots" class="slots-row">
+					<span class="slot banana-slot">🍌</span>
+					<span class="slot banana-slot">🍌</span>
+					<span class="slot banana-slot">🍌</span>
+					<span class="slot banana-slot">🍌</span>
+					<span class="slot banana-slot">🍌</span>
+				</div>
+			</div>
+
+			<!-- 1.1 BOMB COMBO (NUEVO) -->
+			<div class="stat-box-linear bomb-linear">
+				<span class="label">BOMB COMBO</span>
+				<div id="bomb-slots" class="slots-row">
+					<span class="slot bomb-slot">💣</span>
+					<span class="slot bomb-slot">💣</span>
+					<span class="slot bomb-slot">💣</span>
+					<span class="slot bomb-slot">💣</span>
+					<span class="slot bomb-slot">💣</span>
+				</div>
+			</div>
+
+			<!-- 2. LEVEL -->
+			<div class="stat-box level-box">
+				<span class="label">LEVEL</span>
+				<span id="level-val" class="value">1</span>
+			</div>
+
+			<!-- 3. PROGRESS (PROGRESO) -->
+			<div class="hud-progress-group">
+				<div class="progress-track">
+					<div id="chapter-progress-fill" class="progress-fill"></div>
+				</div>
+				<span class="label">PROGRESO <span id="progress-percent-hud">0%</span></span>
+			</div>
+
+			<!-- 4. VIDA EXTRA (10 SLOTS - 5x2 Grid) -->
+			<div class="stat-box-linear extra-life-linear">
+				<span class="label">VIDA EXTRA</span>
+				<div id="extra-life-slots" class="grid-hearts-5x2">
+					<!-- Generado dinámicamente o estático -->
+					<span class="slot heart-slot">❤️</span><span class="slot heart-slot">❤️</span><span
+						class="slot heart-slot">❤️</span><span class="slot heart-slot">❤️</span><span
+						class="slot heart-slot">❤️</span>
+					<span class="slot heart-slot">❤️</span><span class="slot heart-slot">❤️</span><span
+						class="slot heart-slot">❤️</span><span class="slot heart-slot">❤️</span><span
+						class="slot heart-slot">❤️</span>
+				</div>
+			</div>
+
+			<!-- 5. LIVES (VIDAS) -->
+			<div class="stat-box lives-box">
+				<span class="label">VIDAS</span>
+				<div id="lives-container" class="hearts-row main-hearts">
+					<!-- Inicia con 1 -->
+					<span class="heart active">❤️</span>
+				</div>
+			</div>
+
+			<!-- 6. MULTIPLICADOR -->
+			<div class="stat-box multiplier-box">
+				<span class="label">MULTIPLICADOR</span>
+				<span id="multiplier-val" class="value">x1</span>
+				<!-- Línea bar-timer eliminada en CSS -->
+			</div>
+
+
+		</header>
+
+		<main id="game-container">
+			<button id="fullscreen-btn" class="icon-btn" title="Toggle Fullscreen">⛶</button>
+			<canvas id="game" width="1280" height="720"></canvas>
+
+			<!-- ===== UI OVERLAYS (Code-Based, No Images) ===== -->
+			<div id="overlay-container">
+
+				<!-- ===== LOADING SCREEN — 3x1 GRID LAYOUT ===== -->
+				<div id="loading-overlay">
+					<div class="loading-backdrop"></div>
+
+					<div class="loading-content-aaa">
+
+						<!-- ═══ COLUMNA IZQUIERDA (25%) — Compendio de Objetos ═══ -->
+						<div class="lo-col lo-col-left">
+							<div class="lo-panel">
+								<div class="lo-panel-header">
+									<span class="lo-panel-icon">📖</span> GUÍA DE JUEGO
+								</div>
+								<div class="lo-panel-body scroll-premium">
+									<!-- Categoría: Tesoros -->
+									<div class="lo-section">
+										<div class="lo-section-title">TESOROS Y PUNTOS</div>
+										<div class="lo-prize-list">
+											<div class="lo-prize-item gold">
+												<span class="lo-pi-icon">💰</span>
+												<span class="lo-pi-name">Moneda</span>
+												<span class="lo-pi-val">200</span>
+											</div>
+											<div class="lo-prize-item rare">
+												<span class="lo-pi-icon">🔴</span>
+												<span class="lo-pi-name">Rubí</span>
+												<span class="lo-pi-val">500</span>
+											</div>
+											<div class="lo-prize-item rare">
+												<span class="lo-pi-icon">🐸</span>
+												<span class="lo-pi-name">Esmeralda</span>
+												<span class="lo-pi-val">800</span>
+											</div>
+											<div class="lo-prize-item rare">
+												<span class="lo-pi-icon">👑</span>
+												<span class="lo-pi-name">Corona</span>
+												<span class="lo-pi-val">1000</span>
+											</div>
+											<div class="lo-prize-item rare">
+												<span class="lo-pi-icon">⚪</span>
+												<span class="lo-pi-name">Perla</span>
+												<span class="lo-pi-val">1200</span>
+											</div>
+											<div class="lo-prize-item gold">
+												<span class="lo-pi-icon">🔷</span>
+												<span class="lo-pi-name">Diamante</span>
+												<span class="lo-pi-val">2000</span>
+											</div>
+										</div>
+									</div>
+
+									<!-- Categoría: Consumibles -->
+									<div class="lo-section">
+										<div class="lo-section-title">CONSUMIBLES</div>
+										<div class="lo-prize-list">
+											<div class="lo-prize-item">
+												<span class="lo-pi-icon">🍌</span>
+												<span class="lo-pi-name">Banana</span>
+												<span class="lo-pi-val">Combo+</span>
+											</div>
+											<div class="lo-prize-item">
+												<span class="lo-pi-icon">🍬</span>
+												<span class="lo-pi-name">Caramelo</span>
+												<span class="lo-pi-val">5~100</span>
+											</div>
+											<div class="lo-prize-item rare">
+												<span class="lo-pi-icon">❤️</span>
+												<span class="lo-pi-name">Vida</span>
+												<span class="lo-pi-val">+1 ❤️</span>
+											</div>
+											<div class="lo-prize-item artifact">
+												<span class="lo-pi-icon">🏺</span>
+												<span class="lo-pi-name">Artefacto</span>
+												<span class="lo-pi-val">LVL x100</span>
+											</div>
+										</div>
+									</div>
+
+									<!-- Categoría: Power-Ups -->
+									<div class="lo-section">
+										<div class="lo-section-title">POWER-UPS</div>
+										<div class="lo-prize-list">
+											<div class="lo-prize-item artifact">
+												<span class="lo-pi-icon">🧲</span>
+												<span class="lo-pi-name">Imán</span>
+												<span class="lo-pi-val">Atrae</span>
+											</div>
+											<div class="lo-prize-item artifact">
+												<span class="lo-pi-icon">🛡️</span>
+												<span class="lo-pi-name">Escudo</span>
+												<span class="lo-pi-val">Protección</span>
+											</div>
+											<div class="lo-prize-item artifact">
+												<span class="lo-pi-icon">⏳</span>
+												<span class="lo-pi-name">Reloj</span>
+												<span class="lo-pi-val">Lento</span>
+											</div>
+											<div class="lo-prize-item artifact">
+												<span class="lo-pi-icon">⚡</span>
+												<span class="lo-pi-name">Rayo</span>
+												<span class="lo-pi-val">Velocidad</span>
+											</div>
+											<div class="lo-prize-item artifact">
+												<span class="lo-pi-icon">👻</span>
+												<span class="lo-pi-name">Fantasma</span>
+												<span class="lo-pi-val">Invencible</span>
+											</div>
+											<div class="lo-prize-item gold">
+												<span class="lo-pi-icon">🌈</span>
+												<span class="lo-pi-name">Arcoíris</span>
+												<span class="lo-pi-val">Puntos x2</span>
+											</div>
+										</div>
+									</div>
+
+									<!-- Mi Progreso -->
+									<div class="lo-section">
+										<div class="lo-section-title">MI SESIÓN</div>
+										<div class="lo-prize-list">
+											<div class="lo-prize-item rare">
+												<span class="lo-pi-icon">🐸</span>
+												<span class="lo-pi-name">FROG COINS</span>
+												<span class="lo-pi-val" id="lo-gems">0</span>
+											</div>
+											<div class="lo-prize-item gold">
+												<span class="lo-pi-icon">🎯</span>
+												<span class="lo-pi-name">Total Items</span>
+												<span class="lo-pi-val" id="lo-items">0</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- ═══ COLUMNA CENTRAL (50%) — Hub Principal ═══ -->
+						<div class="lo-col lo-col-center">
+							<div class="lo-center-hub">
+								<div class="lo-title-box">
+									<div class="lo-logo-icon">🐸</div>
+									<h2 class="lo-game-title">XANEZU CATCH</h2>
+									<span class="lo-chapter-tag" id="lo-chapter-tag">PREPARANDO AVENTURA</span>
+								</div>
+
+								<div class="lo-progress-container">
+									<div class="lo-bar-outer">
+										<div id="loading-bar-fill" class="lo-bar-fill"></div>
+									</div>
+									<div class="lo-info">
+										<span class="lo-status loading-status">Inicializando...</span>
+										<span class="lo-percent" id="lo-percent">0%</span>
+									</div>
+								</div>
+
+								<div class="lo-tip-box">
+									<span class="tip-header">💡 GAME TIP</span>
+									<p class="tip-text" id="loading-tip-text">¡Usa el ratón o el dedo para atrapar los
+										dulces!</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- ═══ COLUMNA DERECHA (25%) — Estadísticas ═══ -->
+						<div class="lo-col lo-col-right">
+							<div class="lo-panel">
+								<div class="lo-panel-header">
+									<span class="lo-panel-icon">📈</span> ESTADÍSTICAS
+								</div>
+								<div class="lo-panel-body">
+									<div class="lo-stat-row">
+										<span class="lo-stat-icon">🎮</span>
+										<div class="lo-stat-info">
+											<span class="lo-stat-label">Partidas</span>
+											<span class="lo-stat-value" id="lo-stat-games">0</span>
+										</div>
+									</div>
+									<div class="lo-stat-row">
+										<span class="lo-stat-icon">⏱️</span>
+										<div class="lo-stat-info">
+											<span class="lo-stat-label">Tiempo Jugado</span>
+											<span class="lo-stat-value" id="lo-stat-time">0m</span>
+										</div>
+									</div>
+									<div class="lo-stat-row">
+										<span class="lo-stat-icon">⭐</span>
+										<div class="lo-stat-info">
+											<span class="lo-stat-label">Nivel Máximo</span>
+											<span class="lo-stat-value" id="lo-stat-level">1</span>
+										</div>
+									</div>
+									<div class="lo-stat-row">
+										<span class="lo-stat-icon">📖</span>
+										<div class="lo-stat-info">
+											<span class="lo-stat-label">Capítulo</span>
+											<span class="lo-stat-value" id="lo-stat-chapter">1</span>
+										</div>
+									</div>
+									<div class="lo-stat-row">
+										<span class="lo-stat-icon">💨</span>
+										<div class="lo-stat-info">
+											<span class="lo-stat-label">Dashes</span>
+											<span class="lo-stat-value" id="lo-stat-dashes">0</span>
+										</div>
+									</div>
+									<div class="lo-stat-row">
+										<span class="lo-stat-icon">💀</span>
+										<div class="lo-stat-info">
+											<span class="lo-stat-label">Muertes</span>
+											<span class="lo-stat-value" id="lo-stat-deaths">0</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- ===== MAIN MENU ===== -->
+				<div id="menu-overlay" class="overlay main-menu active">
+					<div class="menu-screen">
+						<!-- Title Area Eliminada (ya está en el fondo) -->
+
+
+						<!-- Main Mode Cards -->
+						<div class="menu-buttons">
+							<!-- CAMPAÑA -->
+							<button class="menu-btn mode-card mode-story" onclick="goToStory(this)">
+								<div class="card-glow"></div>
+								<div class="card-badge">HISTORIA</div>
+								<div class="card-icon">🗺️</div>
+								<div class="card-info">
+									<span class="card-title">CAMPAÑA</span>
+									<span class="card-desc">Explora los biomas y rescata el mundo</span>
+								</div>
+							</button>
+
+							<!-- INFINITO -->
+							<button class="menu-btn mode-card mode-infinite" onclick="startInfinite(this)">
+								<div class="card-glow"></div>
+								<div class="card-badge">HARD</div>
+								<div class="card-icon">🌌</div>
+								<div class="card-info">
+									<span class="card-title">INFINITO</span>
+									<span class="card-desc">Resistencia total sin límites</span>
+								</div>
+							</button>
+
+							<!-- ARCADE -->
+							<button class="menu-btn mode-card mode-arcade" onclick="goToArcade(this)">
+								<div class="card-glow"></div>
+								<div class="card-badge">CLASSIC</div>
+								<div class="card-icon">🕹️</div>
+								<div class="card-info">
+									<span class="card-title">ARCADE</span>
+									<span class="card-desc">Sesión rápida de acción pura</span>
+								</div>
+							</button>
+
+							<!-- ABL IA -->
+							<button class="menu-btn mode-card mode-abl" onclick="goToABL(this)">
+								<div class="card-glow"></div>
+								<div class="card-badge">SMART</div>
+								<div class="card-icon">🤖</div>
+								<div class="card-info">
+									<span class="card-title">ABL IA</span>
+									<span class="card-desc">Dificultad adaptativa inteligente</span>
+								</div>
+							</button>
+						</div>
+
+
+						<!-- Secondary Buttons (Nuevos) -->
+						<div class="menu-sub-buttons">
+							<button class="menu-btn-small" onclick="showTrophies(this)">
+								<span class="btn-icon">🏆</span> TROFEOS
+							</button>
+							<button class="menu-btn-small" onclick="showSettings(this)">
+								<span class="btn-icon">⚙️</span> SETTINGS
+							</button>
+							<button class="menu-btn-small" onclick="showShop(this)">
+								<span class="btn-icon">🛒</span> TIENDA
+							</button>
+							<button class="menu-btn-small" onclick="game.toggleMusic()">
+								<span class="btn-icon">🔊</span> MUTE / UNMUTE
+							</button>
+						</div>
+
+
+
+
+						<div id="audio-status" class="audio-status">🔊 CLIC PARA AUDIO</div>
+					</div>
+				</div>
+
+				<!-- ===== CHAPTER SELECT ===== -->
+				<div id="chapter-overlay" class="overlay">
+					<div class="menu-screen chapter-screen">
+						<div class="screen-header">
+							<button class="back-button" onclick="returnToMenu(this)" title="Back">
+								<span>◀</span> BACK
+							</button>
+							<h2 class="screen-title">Seleccionar capítulo</h2>
+							<div class="spacer"></div>
+						</div>
+
+						<!-- Chapter Preview Panel -->
+						<div class="chapter-preview-panel" id="chapter-preview">
+							<button class="preview-close-btn" onclick="hideChapterPreview()">✕</button>
+							<div class="preview-bg" id="preview-bg"></div>
+							<div class="preview-content">
+								<div class="preview-header">
+									<span class="preview-chapter-num" id="preview-chapter-num">01</span>
+									<span class="preview-chapter-name" id="preview-chapter-name">Selva Tropical</span>
+								</div>
+								<div class="preview-stats">
+									<div class="preview-stat">
+										<span class="stat-icon">🎮</span>
+										<span class="stat-label">Mejor Score</span>
+										<span class="stat-value" id="preview-best-score">0</span>
+									</div>
+									<div class="preview-stat">
+										<span class="stat-icon">⭐</span>
+										<span class="stat-label">Nivel Máximo</span>
+										<span class="stat-value" id="preview-max-level">1</span>
+									</div>
+								</div>
+								<div class="preview-actions">
+									<button class="preview-play-btn primary-btn" id="preview-play-btn"
+										onclick="startChapterFromPreview(this)">
+										<span class="btn-icon">▶</span>
+										<span class="btn-label">JUGAR</span>
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="chapter-grid" id="chapter-grid">
+							<!-- Generado dinámicamente -->
+						</div>
+						<div class="chapter-pagination">
+							<button class="pag-btn prev" id="prev-page" onclick="window.game.ui.prevChapterPage()"
+								title="Previous Page">
+								<span>◀</span>
+							</button>
+							<div class="page-indicator" id="page-indicator">PAGE 01 / 02</div>
+							<button class="pag-btn next" id="next-page" onclick="window.game.ui.nextChapterPage()"
+								title="Next Page">
+								<span>▶</span>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== TROPHY ROOM ===== -->
+				<div id="trophy-overlay" class="overlay">
+					<div class="menu-screen trophy-screen">
+						<div class="screen-header">
+							<button class="back-button" onclick="returnToMenu(this)" title="Back">
+								<span>◀</span> BACK
+							</button>
+							<h2 class="screen-title trophy-title">🏆 LOGROS</h2>
+							<div class="spacer"></div>
+						</div>
+						<div class="trophy-grid" id="trophy-list">
+							<!-- 1. Novice Jumper -->
+							<div class="trophy-card trophy-gold" data-id="score1k">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">🥉</div>
+								<div class="trophy-main">NOVICE JUMPER</div>
+								<div class="trophy-goal">Score Reach: 1,000 Pts</div>
+								<div class="trophy-record" id="trophy-score1k">0 / 1,000</div>
+							</div>
+							<!-- 2. Sky Master -->
+							<div class="trophy-card trophy-gold" data-id="score10k">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">🥇</div>
+								<div class="trophy-main">SKY MASTER</div>
+								<div class="trophy-goal">Score Reach: 10,000 Pts</div>
+								<div class="trophy-record" id="trophy-score10k">0 / 10,000</div>
+							</div>
+							<!-- 3. Coin Collector -->
+							<div class="trophy-card trophy-gold" data-id="coins50">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">💰</div>
+								<div class="trophy-main">COIN COLLECTOR</div>
+								<div class="trophy-goal">Collect: 50 Coins</div>
+								<div class="trophy-record" id="trophy-coins50">0 / 50</div>
+							</div>
+							<!-- 4. Deep Diver -->
+							<div class="trophy-card trophy-gold" data-id="chapter4">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">🌊</div>
+								<div class="trophy-main">DEEP DIVER</div>
+								<div class="trophy-goal">Reach: Chapter 4</div>
+								<div class="trophy-record" id="trophy-chapter4">Ch. 1</div>
+							</div>
+							<!-- 5. Astronaut -->
+							<div class="trophy-card trophy-gold" data-id="chapter8">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">👩‍🚀</div>
+								<div class="trophy-main">ASTRONAUT</div>
+								<div class="trophy-goal">Reach: Chapter 8</div>
+								<div class="trophy-record" id="trophy-chapter8">Ch. 1</div>
+							</div>
+							<!-- 6. Combo King -->
+							<div class="trophy-card trophy-gold" data-id="combo10">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">🔥</div>
+								<div class="trophy-main">COMBO KING</div>
+								<div class="trophy-goal">Reach: 10x Combo</div>
+								<div class="trophy-record" id="trophy-combo10">0x</div>
+							</div>
+							<!-- 7. First Blood -->
+							<div class="trophy-card trophy-gold" data-id="first_blood">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">🍌</div>
+								<div class="trophy-main">FIRST BLOOD</div>
+								<div class="trophy-goal">First: Explosion Combo!</div>
+								<div class="trophy-record" id="trophy-first_blood">NO</div>
+							</div>
+							<!-- 8. Speed Demon -->
+							<div class="trophy-card trophy-gold" data-id="speed_demon">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">⚡</div>
+								<div class="trophy-main">SPEED DEMON</div>
+								<div class="trophy-goal">Dash: 3 Times in Air</div>
+								<div class="trophy-record" id="trophy-speed_demon">0</div>
+							</div>
+							<!-- 9. Untouchable -->
+							<div class="trophy-card trophy-gold" data-id="untouchable">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">🛡️</div>
+								<div class="trophy-main">UNTOUCHABLE</div>
+								<div class="trophy-goal">Complete: Level No Damage</div>
+								<div class="trophy-record" id="trophy-untouchable">0</div>
+							</div>
+							<!-- 10. Banana King -->
+							<div class="trophy-card trophy-gold" data-id="banana_king">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">👑</div>
+								<div class="trophy-main">BANANA KING</div>
+								<div class="trophy-goal">Collect: 100 Bananas</div>
+								<div class="trophy-record" id="trophy-banana_king">0 / 100</div>
+							</div>
+							<!-- 11. Candy Crusher -->
+							<div class="trophy-card trophy-gold" data-id="candy_crusher">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">🍬</div>
+								<div class="trophy-main">CANDY CRUSHER</div>
+								<div class="trophy-goal">Collect: 50 Green Candy</div>
+								<div class="trophy-record" id="trophy-candy_crusher">0 / 50</div>
+							</div>
+							<!-- 12. Combo God -->
+							<div class="trophy-card trophy-gold" data-id="combo_god">
+								<div class="trophy-shine"></div>
+								<div class="trophy-icon">🙌</div>
+								<div class="trophy-main">COMBO GOD</div>
+								<div class="trophy-goal">Double Combo in One Life</div>
+								<div class="trophy-record" id="trophy-combo_god">NO</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== SHOP ===== -->
+				<div id="shop-overlay" class="overlay">
+					<div class="menu-screen shop-screen">
+						<div class="screen-header">
+							<button class="back-button" onclick="returnToMenu(this)" title="Back">
+								<span>◀</span> BACK
+							</button>
+							<h2 class="screen-title">🛒 SHOP</h2>
+							<div class="shop-coins-header">
+								<span class="coin-icon">🐸</span>
+								<span id="shop-coins">0</span>
+							</div>
+						</div>
+						<div class="shop-grid">
+							<div class="shop-card" onclick="game.buyItem(1)">
+								<span class="shop-item-icon">🧲</span>
+								<span class="shop-item-name">Magnet</span>
+								<span class="shop-item-price">🐸 500</span>
+							</div>
+							<div class="shop-card" onclick="game.buyItem(2)">
+								<span class="shop-item-icon">🛡️</span>
+								<span class="shop-item-name">Shield</span>
+								<span class="shop-item-price">🐸 750</span>
+							</div>
+							<div class="shop-card" onclick="game.buyItem(3)">
+								<span class="shop-item-icon">⏳</span>
+								<span class="shop-item-name">Slow Time</span>
+								<span class="shop-item-price">🐸 600</span>
+							</div>
+							<div class="shop-card" onclick="game.buyItem(4)">
+								<span class="shop-item-icon">👻</span>
+								<span class="shop-item-name">Speed</span>
+								<span class="shop-item-price">🐸 800</span>
+							</div>
+							<div class="shop-card" onclick="game.buyItem(5)">
+								<span class="shop-item-icon">❤</span>
+								<span class="shop-item-name">Extra Life</span>
+								<span class="shop-item-price">🐸 400</span>
+							</div>
+							<div class="shop-card" onclick="game.buyItem(6)">
+								<span class="shop-item-icon">🌈</span>
+								<span class="shop-item-name">Rainbow</span>
+								<span class="shop-item-price">🐸 1000</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- ===== GAME OVER ===== -->
+				<div id="gameover-overlay" class="overlay">
+					<div class="menu-screen gameover-screen">
+						<div class="gameover-content-aaa">
+							<!-- COLUMNA IZQUIERDA (25%) - Catálogo Completo Game Over -->
+							<div class="go-col go-col-left">
+								<div class="lo-panel">
+									<div class="lo-panel-header">
+										<span class="lo-panel-icon">📖</span> GUÍA DE OBJETOS
+									</div>
+									<div class="lo-panel-body scroll-premium">
+										<!-- Tesoros -->
+										<div class="lo-section">
+											<div class="lo-section-title">VALOR DE TESOROS</div>
+											<div class="lo-prize-list">
+												<div class="lo-prize-item gold">
+													<span class="lo-pi-icon">💰</span> <span
+														class="lo-pi-name">Moneda</span> <span
+														class="lo-pi-val">200</span>
+												</div>
+												<div class="lo-prize-item rare">
+													<span class="lo-pi-icon">🔴</span> <span
+														class="lo-pi-name">Rubí</span> <span
+														class="lo-pi-val">500</span>
+												</div>
+												<div class="lo-prize-item rare">
+													<span class="lo-pi-icon">🐸</span> <span
+														class="lo-pi-name">Esmeralda</span> <span
+														class="lo-pi-val">800</span>
+												</div>
+												<div class="lo-prize-item rare">
+													<span class="lo-pi-icon">👑</span> <span
+														class="lo-pi-name">Corona</span> <span
+														class="lo-pi-val">1000</span>
+												</div>
+												<div class="lo-prize-item gold">
+													<span class="lo-pi-icon">🔷</span> <span
+														class="lo-pi-name">Diamante</span> <span
+														class="lo-pi-val">2000</span>
+												</div>
+											</div>
+										</div>
+										<!-- Utilidades -->
+										<div class="lo-section">
+											<div class="lo-section-title">UTILIDADES</div>
+											<div class="lo-prize-list">
+												<div class="lo-prize-item">
+													<span class="lo-pi-icon">❤️</span> <span
+														class="lo-pi-name">Vida</span> <span class="lo-pi-val">+1
+														❤️</span>
+												</div>
+												<div class="lo-prize-item artifact">
+													<span class="lo-pi-icon">🧲</span> <span
+														class="lo-pi-name">Imán</span> <span
+														class="lo-pi-val">Atrae</span>
+												</div>
+												<div class="lo-prize-item artifact">
+													<span class="lo-pi-icon">🛡️</span> <span
+														class="lo-pi-name">Escudo</span> <span
+														class="lo-pi-val">Protección</span>
+												</div>
+												<div class="lo-prize-item gold">
+													<span class="lo-pi-icon">🌈</span> <span
+														class="lo-pi-name">Arcoíris</span> <span
+														class="lo-pi-val">Puntos x2</span>
+												</div>
+											</div>
+										</div>
+										<!-- Stats Finales -->
+										<div class="lo-section">
+											<div class="lo-section-title">RECORD DE SESIÓN</div>
+											<div class="lo-prize-list">
+												<div class="lo-prize-item artifact">
+													<span class="lo-pi-icon">🏆</span>
+													<span class="lo-pi-name">Record</span>
+													<span class="lo-pi-val" id="final-session-record">0</span>
+												</div>
+												<div class="lo-prize-item gold">
+													<span class="lo-pi-icon">⏳</span>
+													<span class="lo-pi-name">Bonus Tiempo</span>
+													<span class="lo-pi-val" id="go-time-bonus">+0</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- COLUMNA CENTRAL (50%) - Título y Acción -->
+							<div class="go-col go-col-center">
+								<div class="go-center-wrapper">
+									<h2 class="gameover-title-premium">GAME OVER</h2>
+
+									<div class="go-score-hero">
+										<span class="score-label">PUNTUACIÓN FINAL</span>
+										<span class="score-number" id="final-score">0</span>
+									</div>
+
+									<div class="go-action-buttons">
+										<button class="menu-btn primary-btn retry-action" onclick="retry(this)">
+											<span class="btn-glow"></span>
+											<span class="btn-text">RETRY</span>
+										</button>
+										<button class="menu-btn secondary-btn" onclick="returnToMenu(this)">
+											MAIN MENU
+										</button>
+										<button class="menu-btn secondary-btn" onclick="window.game.goToStory()">
+											SELECT CHAPTER
+										</button>
+									</div>
+								</div>
+							</div>
+
+							<!-- COLUMNA DERECHA (25%) - Estadísticas -->
+							<div class="go-col go-col-right">
+								<div class="go-panel-premium">
+									<div class="go-panel-header">📈 ESTADÍSTICAS</div>
+									<div class="go-panel-bodyStats">
+										<div class="go-stat-premium">
+											<div class="stat-info">
+												<span class="label">BONUS DE TIEMPO</span>
+												<span class="value">+1.250</span>
+											</div>
+										</div>
+										<div class="go-stat-premium">
+											<div class="stat-info">
+												<span class="label">BONUS DE COMBO</span>
+												<span class="value">+840</span>
+											</div>
+										</div>
+										<div class="go-stat-premium">
+											<div class="stat-info">
+												<span class="label">MULTIPLICADOR MAX</span>
+												<span class="value">x12</span>
+											</div>
+										</div>
+										<div class="go-stat-premium total-bonus">
+											<div class="stat-info">
+												<span class="label">PUNTUACIÓN TOTAL</span>
+												<span class="value" id="gameover-total-pts">28.450</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== VICTORY ===== -->
+				<!-- ===== CONGRATULATIONS ===== -->
+				<div id="congratulations-overlay" class="overlay">
+					<div class="menu-screen gameover-screen-premium">
+						<div class="go-grid-layout">
+							<!-- COLUMNA IZQUIERDA -->
+							<div class="go-col go-col-left">
+								<div class="go-panel-premium">
+									<div class="go-panel-header">✨ RECOMPENSAS</div>
+									<div class="go-panel-body">
+										<div class="lo-section">
+											<div class="lo-section-title">DESBLOQUEOS</div>
+											<div class="lo-prize-list">
+												<div class="lo-prize-item gold">
+													<span class="lo-pi-icon">🏆</span>
+													<span class="lo-pi-name">Capítulo Completado</span>
+													<span class="lo-pi-val">+1 Nivel Max</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- COLUMNA CENTRAL (50%) - Título y Acción -->
+							<div class="go-col go-col-center">
+								<div class="go-center-wrapper">
+									<h2 class="gameover-title-premium congrats-title">CONGRATULATIONS</h2>
+
+									<div class="go-score-hero">
+										<span class="score-label">PUNTUACIÓN OBTENIDA</span>
+										<span class="score-number" id="congratulations-score">0</span>
+									</div>
+
+									<div class="go-action-buttons">
+										<button class="menu-btn primary-btn btn-congrats"
+											onclick="window.game.goToStory()">
+											<span class="btn-glow"></span>
+											<span class="btn-text">SELECT CHAPTER</span>
+										</button>
+										<button class="menu-btn secondary-btn" onclick="returnToMenu(this)">
+											MAIN MENU
+										</button>
+									</div>
+								</div>
+							</div>
+
+							<!-- COLUMNA DERECHA (25%) - Tabla XP -->
+							<div class="go-col go-col-right">
+								<div class="go-panel-premium">
+									<div class="go-panel-header">📈 TABLA DE XP</div>
+									<div class="go-panel-bodyStats xp-table-container">
+										<table class="xp-table">
+											<thead>
+												<tr class="xp-table-header-row">
+													<th class="xp-table-th">Nivel</th>
+													<th class="xp-table-th-right">XP Req.</th>
+												</tr>
+											</thead>
+											<tbody id="xp-table-body">
+												<!-- Rellenado dinámico por JS -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- ===== SETTINGS ===== -->
+				<div id="settings-overlay" class="overlay">
+					<div class="menu-screen settings-screen">
+						<div class="screen-header">
+							<button class="back-button" onclick="returnToMenu(this)" title="Back">
+								<span>◀</span> BACK
+							</button>
+							<h2 class="screen-title">⚙️ SETTINGS</h2>
+							<div class="spacer"></div>
+						</div>
+						<div class="settings-list">
+							<div class="setting-row" onclick="game.toggleSound()">
+								<span class="setting-icon">🔊</span>
+								<span class="setting-name">Sound Effects</span>
+								<div class="setting-toggle" id="toggle-sound">
+									<div class="toggle-knob"></div>
+								</div>
+							</div>
+							<div class="setting-row" onclick="game.toggleMusic()">
+								<span class="setting-icon">🎵</span>
+								<span class="setting-name">Music</span>
+								<div class="setting-toggle" id="toggle-music">
+									<div class="toggle-knob"></div>
+								</div>
+							</div>
+							<div class="setting-row">
+								<span class="setting-icon">📱</span>
+								<span class="setting-name">Vibration</span>
+								<div class="setting-toggle">
+									<div class="toggle-knob"></div>
+								</div>
+							</div>
+						</div>
+						<div class="settings-footer">
+							<p class="version-text">Xanezu Catch v1.5 — Xanezu Games</p>
+						</div>
+					</div>
+				</div>
+
+		</main>
+
+		<!-- 🎬 HUD INFERIOR (Solo en Gameplay) -->
+		<footer id="bottom-hud">
+
+			<!-- MONEDERO XANEZU -->
+			<div id="xanezu-wallet">
+				<span class="wallet-icon">🐸</span>
+				<span class="wallet-amount" id="hud-xanezu-val">0</span>
+			</div>
+
+			<div class="items-row">
+				<!-- Item 1: Shield -->
+				<div class="item-slot" id="slot-shield">
+					<span class="icon">🛡️</span>
+					<div class="cooldown-overlay"></div>
+					<span class="state-label">READY</span>
+				</div>
+				<!-- Item 2: Magnet -->
+				<div class="item-slot" id="slot-magnet">
+					<span class="icon">🧲</span>
+					<div class="cooldown-overlay"></div>
+					<span class="state-label">READY</span>
+				</div>
+				<!-- Item 3: Speed/Lightning -->
+				<div class="item-slot" id="slot-speed">
+					<span class="icon">⚡</span>
+					<div class="cooldown-overlay"></div>
+					<span class="state-label">READY</span>
+				</div>
+			</div>
+
+			<!-- 📣 TICKER DE LOGROS (Exclusivo HUD Inferior) -->
+			<div id="achievement-ticker">
+				<div class="ticker-box">
+					<div class="ticker-icon">🏆</div>
+					<div class="ticker-wrapper">
+						<div id="ticker-text" class="ticker-content">Waiting for achievements...</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script type="module" src="js/main.js"></script>
+</body>
+
+
+</html>

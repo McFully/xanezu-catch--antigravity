@@ -1,0 +1,22 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'>
+  <defs>
+    <filter id='shadow'><feDropShadow dx='0' dy='4' stdDeviation='3' flood-color='#000' flood-opacity='0.35'/></filter>
+    <linearGradient id='bodyG' x1='0' y1='0' x2='0' y2='1'>
+      <stop offset='0%' stop-color='#7dd3fc'/>
+      <stop offset='100%' stop-color='#335a88'/>
+    </linearGradient>
+  </defs>
+  <g filter='url(#shadow)'>
+    <ellipse cx='30' cy='88' rx='12' ry='9' fill='#0a1328' opacity='0.7'/>
+    <ellipse cx='70' cy='88' rx='12' ry='9' fill='#0a1328' opacity='0.7'/>
+    <ellipse cx='50' cy='46' rx='31' ry='28' fill='url(#bodyG)'/>
+    <ellipse cx='50' cy='52' rx='20' ry='15' fill='#e9f7ff' opacity='0.22'/>
+    <circle cx='34' cy='25' r='10' fill='#ffffff'/>
+    <circle cx='66' cy='25' r='10' fill='#ffffff'/>
+    <circle cx='35' cy='25' r='4' fill='#0a0a12'/>
+    <circle cx='65' cy='25' r='4' fill='#0a0a12'/>
+    <circle cx='50' cy='55' r='4' fill='#8b1a1a'/>
+    <rect x='20' y='52' width='8' height='20' fill='#335a88' opacity='0.65'/><rect x='30' y='46' width='9' height='26' fill='#7dd3fc' opacity='0.6'/><rect x='42' y='50' width='7' height='22' fill='#335a88' opacity='0.7'/><rect x='54' y='44' width='9' height='28' fill='#7dd3fc' opacity='0.62'/><rect x='66' y='48' width='8' height='24' fill='#335a88' opacity='0.7'/>
+  </g>
+  <text x='50' y='12' text-anchor='middle' font-size='7' fill='#e9f7ff' opacity='0.8'>Ciudad Nocturna</text>
+</svg>

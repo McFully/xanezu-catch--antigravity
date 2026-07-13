@@ -1,0 +1,65 @@
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const path = require('path');
+const fs = require('fs');
+
+// --- SISTEMA DE LOGS PROFESIONAL (Protocolo Universal) ---
+const LOG_DIR = path.join(__dirname, 'logs');
+if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR);
+
+function writeLog(type, data) {
+    const timestamp = new Date().toISOString();
+    const fileName = `${type}.log`;
+    const filePath = path.join(LOG_DIR, fileName);
+    const logEntry = `[${timestamp}] ${JSON.stringify(data)}\n`;
+    
+    fs.appendFileSync(filePath, logEntry);
+    console.log(`[LOG:${type.toUpperCase()}] ${logEntry.trim()}`);
+}
+
+// Inicializar log de arranque
+writeLog('startup', { version: app.getVersion(), platform: process.platform, arch: process.arch });
+
+function createWindow() {
+    const mainWindow = new BrowserWindow({
+        width: 1280,
+        height: 720,
+        title: "Xanezu Catch",
+        icon: path.join(__dirname, 'assets/menu/favicon_frog.ico'),
+        webPreferences: {
+            nodeIntegration: false,
+            contextIsolation: true,
+            sandbox: true,
+            preload: path.join(__dirname, 'preload.js')
+        },
+        backgroundColor: '#000000',
+        show: false
+    });
+
+    Menu.setApplicationMenu(null);
+    mainWindow.loadFile('index.html');
+
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.maximize();
+        mainWindow.show();
+    });
+}
+
+// --- IPC HANDLERS ---
+ipcMain.on('app:log', (event, { type, data }) => {
+    writeLog(type || 'general', data);
+});
+
+ipcMain.handle('app:get-version', () => app.getVersion());
+
+app.whenReady().then(() => {
+    createWindow();
+
+    app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    });
+});
+
+app.on('window-all-closed', () => {
+    writeLog('startup', { event: 'shutdown', status: 'normal' });
+    if (process.platform !== 'darwin') app.quit();
+});

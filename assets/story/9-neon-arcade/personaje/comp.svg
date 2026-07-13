@@ -1,0 +1,9 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+  <defs><linearGradient id='cg' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='#FF3CAC'/><stop offset='100%' stop-color='#00F5FF'/></linearGradient></defs>
+  <ellipse cx='50' cy='54' rx='32' ry='24' fill='url(#cg)'/>
+  <circle cx='38' cy='50' r='5' fill='#fff'/><circle cx='62' cy='50' r='5' fill='#fff'/>
+  <circle cx='38' cy='50' r='2' fill='#0a0a12'/><circle cx='62' cy='50' r='2' fill='#0a0a12'/>
+  <path d='M42 62 Q50 68 58 62' stroke='#fff0f8' stroke-width='2' fill='none' stroke-linecap='round'/>
+  <path d='M50 30 L54 42 L67 42 L56 50 L60 62 L50 54 L40 62 L44 50 L33 42 L46 42 Z' fill='#FF3CAC' opacity='0.55'/>
+  <rect x='18' y='24' width='64' height='4' rx='2' fill='#350b33' opacity='0.55'/>
+</svg>

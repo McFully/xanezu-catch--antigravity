@@ -1,0 +1,22 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+        <filter id="texNoise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
+            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.3 0" in="noise" result="coloredNoise"/>
+            <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply"/>
+        </filter>
+        <filter id="glowLight">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+        <linearGradient id="mainGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1b5e20"/>
+            <stop offset="50%" stop-color="#33691e"/>
+            <stop offset="100%" stop-color="#827717"/>
+        </linearGradient>
+    </defs>
+    <rect x='0' y='0' width='100' height='100' fill='none' /><path d='M0,0 L100,0 L80,20 Q60,60 50,100 Q40,60 20,20 Z' fill='#1b5e20' filter='url(#texNoise)'/><circle cx='50' cy='95' r='5' fill='#32CD32' filter='url(#glowLight)'/><path d='M20,20 Q0,50 10,80' fill='none' stroke='#32CD32' stroke-width='4' filter='url(#glowLight)'/><path d='M80,20 Q100,40 90,70' fill='none' stroke='#32CD32' stroke-width='4' filter='url(#glowLight)'/>
+</svg>

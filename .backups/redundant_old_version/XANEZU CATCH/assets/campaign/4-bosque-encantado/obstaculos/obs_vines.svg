@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="v1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a0a"/>
+      <stop offset="60%" stop-color="#2d6a10"/>
+      <stop offset="100%" stop-color="#4a9a20"/>
+    </linearGradient>
+    <radialGradient id="vglow" cx="50%" cy="30%">
+      <stop offset="0%" stop-color="#88ff44" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#88ff44" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="vblur"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+  <!-- Main vine trunk growing from top -->
+  <path d="M48 0 Q44 30 50 60 Q44 90 50 120 Q44 150 50 200" stroke="#2d5a0a" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M48 0 Q44 30 50 60 Q44 90 50 120 Q44 150 50 200" stroke="#3d7a0a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- Vine gleam -->
+  <path d="M49 0 Q45 30 51 60 Q45 90 51 120" stroke="#5aaa15" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Rune glow-->
+  <ellipse cx="50" cy="100" rx="35" ry="40" fill="url(#vglow)" filter="url(#vblur)"/>
+  <!-- Left branch 1 -->
+  <path d="M50 30 Q30 20 18 32" stroke="#2d5a0a" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M50 30 Q30 20 18 32" stroke="#3d7a0a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Left leaf 1 -->
+  <ellipse cx="16" cy="30" rx="14" ry="9" fill="#3d7a0a" stroke="#1a3a0a" stroke-width="1.5" transform="rotate(-20,16,30)"/>
+  <path d="M16 30 Q14 24 18 30" stroke="#5aaa15" stroke-width="1.5" fill="none"/>
+  <!-- Right branch 1 -->
+  <path d="M50 50 Q70 40 82 50" stroke="#2d5a0a" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M50 50 Q70 40 82 50" stroke="#3d7a0a" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Right leaf 1 -->
+  <ellipse cx="84" cy="48" rx="14" ry="9" fill="#3d7a0a" stroke="#1a3a0a" stroke-width="1.5" transform="rotate(15,84,48)"/>
+  <path d="M84 48 Q86 42 82 48" stroke="#5aaa15" stroke-width="1.5" fill="none"/>
+  <!-- Hanging rune ornaments -->
+  <circle cx="50" cy="80" r="8" fill="#aa44ff" stroke="#6600aa" stroke-width="2"/>
+  <text x="50" y="84" text-anchor="middle" font-size="8" fill="white" font-weight="bold">術</text>
+  <!-- Left branch 2 -->
+  <path d="M50 100 Q28 88 14 98" stroke="#2d5a0a" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="12" cy="97" rx="13" ry="8" fill="#3d7a0a" stroke="#1a3a0a" stroke-width="1.5" transform="rotate(-25,12,97)"/>
+  <!-- Right branch 2 -->
+  <path d="M50 120 Q72 110 85 118" stroke="#2d5a0a" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="87" cy="116" rx="13" ry="8" fill="#3d7a0a" stroke="#1a3a0a" stroke-width="1.5" transform="rotate(20,87,116)"/>
+  <!-- Second rune ornament -->
+  <circle cx="50" cy="148" r="7" fill="#aa44ff" stroke="#6600aa" stroke-width="2"/>
+  <text x="50" y="152" text-anchor="middle" font-size="8" fill="white" font-weight="bold">魔</text>
+  <!-- Firefly dots -->
+  <circle cx="22" cy="60" r="2" fill="#88ff44" opacity="0.8"/>
+  <circle cx="78" cy="75" r="2" fill="#88ff44" opacity="0.8"/>
+  <circle cx="30" cy="135" r="2" fill="#88ff44" opacity="0.7"/>
+  <circle cx="70" cy="160" r="2" fill="#88ff44" opacity="0.7"/>
+</svg>

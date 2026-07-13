@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Xanezu Catch - MODO ARCADE</title>
+
+  <style>
+    /* RESET BÁSICO */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #090b16;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    /* EL JUEGO (PHASER) */
+    #app {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* LA INTERFAZ (HTML) */
+    #ui-emergency-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999999;
+      /* Por encima de TODO */
+      pointer-events: none;
+      /* Deja pasar clics al juego si no hay botones */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .emergency-menu {
+      pointer-events: auto;
+      /* ESTO SI RECIBE CLICS */
+      background: rgba(0, 0, 0, 0.85);
+      padding: 40px;
+      border: 4px solid #A6F616;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(166, 246, 22, 0.3);
+    }
+
+    .emergency-title {
+      color: #A6F616;
+      font-size: 48px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+    }
+
+    .btn-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .emergency-btn {
+      background: #A6F616;
+      color: #000;
+      border: none;
+      padding: 20px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .emergency-btn:hover {
+      transform: scale(1.05);
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Contenedor del Juego -->
+  <div id="app"></div>
+
+  <!-- Capa de Interfaz de Emergencia -->
+  <div id="ui-emergency-layer">
+    <div class="emergency-menu">
+      <h1 class="emergency-title">XANEZU CATCH</h1>
+
+      <div class="btn-container">
+        <button class="emergency-btn" onclick="window.location.reload()">RECARGAR</button>
+        <button class="emergency-btn" onclick="alert('Iniciando Campaña...')">CAMPAÑA</button>
+        <button class="emergency-btn" onclick="alert('Iniciando Infinito...')">INFINITO</button>
+        <button class="emergency-btn" onclick="alert('Iniciando Arcade...')">ARCADE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts del juego -->
+  <script type="module" src="./src/main.js?v=3"></script>
+</body>
+
+</html>

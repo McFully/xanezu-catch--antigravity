@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="180" height="150" viewBox="0 0 180 150">
+    <defs>
+        <linearGradient id="fabricR" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#C0392B"/>
+            <stop offset="100%" stop-color="#7B241C"/>
+        </linearGradient>
+        <linearGradient id="fabricY" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#F1C40F"/>
+            <stop offset="100%" stop-color="#B7950B"/>
+        </linearGradient>
+    </defs>
+    <!-- Top wooden pole -->
+    <rect x="0" y="0" width="180" height="15" fill="#5C4033" stroke="#3E2723" stroke-width="2"/>
+    <!-- Torn fabric stripes -->
+    <path d="M 10,15 L 30,15 L 25,120 L 15,100 Z" fill="url(#fabricR)"/>
+    <path d="M 30,15 L 50,15 L 45,90 L 32,80 Z" fill="url(#fabricY)"/>
+    <path d="M 50,15 L 70,15 L 60,140 L 55,110 Z" fill="url(#fabricR)"/>
+    <path d="M 70,15 L 90,15 L 85,70 L 75,90 Z" fill="url(#fabricY)"/>
+    <path d="M 90,15 L 110,15 L 105,130 L 95,120 Z" fill="url(#fabricR)"/>
+    <path d="M 110,15 L 130,15 L 125,100 L 115,80 Z" fill="url(#fabricY)"/>
+    <path d="M 130,15 L 150,15 L 140,80 L 135,110 Z" fill="url(#fabricR)"/>
+    <path d="M 150,15 L 170,15 L 165,60 L 155,50 Z" fill="url(#fabricY)"/>
+    <!-- Stray threads -->
+    <path d="M 25,120 L 22,140 M 60,140 L 63,150 M 105,130 L 100,145" stroke="#FFFFFF" stroke-width="1" opacity="0.5"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="120" height="180" viewBox="0 0 120 180">
+    <!-- Vine/Stem hanging -->
+    <path d="M 60,0 C 70,30 50,60 60,90" fill="none" stroke="#228B22" stroke-width="6"/>
+    <circle cx="60" cy="120" r="45" fill="#FF4500" stroke="#800000" stroke-width="4"/>
+    <circle cx="50" cy="110" r="15" fill="#FFF" opacity="0.3"/>
+    <!-- Thorns/Spikes on Fruit -->
+    <path d="M 60,70 L 65,55 L 70,72" fill="#FFFF00"/>
+    <path d="M 95,95 L 115,85 L 100,105" fill="#FFFF00"/>
+    <path d="M 105,140 L 120,150 L 100,155" fill="#FFFF00"/>
+    <path d="M 70,165 L 75,185 L 60,165" fill="#FFFF00"/>
+    <path d="M 25,145 L 5,155 L 20,135" fill="#FFFF00"/>
+    <path d="M 15,100 L 0,85 L 25,95" fill="#FFFF00"/>
+    <!-- Spots -->
+    <circle cx="50" cy="140" r="6" fill="#800000"/>
+    <circle cx="80" cy="130" r="4" fill="#800000"/>
+    <circle cx="30" cy="110" r="5" fill="#800000"/>
+    <circle cx="70" cy="100" r="7" fill="#800000"/>
+</svg>

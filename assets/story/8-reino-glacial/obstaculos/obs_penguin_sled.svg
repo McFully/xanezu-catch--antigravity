@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="pg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#AACCDD"/>
+    </linearGradient>
+    <linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#CC5500"/>
+    </linearGradient>
+    <linearGradient id="pg3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#554433"/>
+      <stop offset="50%" stop-color="#887766"/>
+      <stop offset="100%" stop-color="#554433"/>
+    </linearGradient>
+    <radialGradient id="snowglow" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#AADDFF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#AADDFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="snowblur"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+  <!-- Snow glow -->
+  <circle cx="50" cy="45" r="42" fill="url(#snowglow)" filter="url(#snowblur)"/>
+  <!-- Sled base (wooden) -->
+  <rect x="8" y="72" width="84" height="12" rx="6" fill="url(#pg3)" stroke="#3a2a1a" stroke-width="1.5"/>
+  <!-- Sled sliders (curved metal) -->
+  <path d="M10 80 Q12 90 20 94 Q50 98 80 94 Q88 90 90 80" stroke="#888" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M6 78 Q8 88 14 92 Q50 97 86 92 Q92 88 94 78" stroke="#AAA" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Sled planks -->
+  <rect x="12" y="73" width="76" height="4" rx="2" fill="#AA8855"/>
+  <rect x="12" y="78" width="76" height="3" rx="1" fill="#886633"/>
+  <!-- Sled front curve piece -->
+  <path d="M74 72 Q88 65 90 78" stroke="#887766" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Rope/reins -->
+  <path d="M74 70 Q60 50 50 45" stroke="#8B6500" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Penguin body -->
+  <ellipse cx="38" cy="55" rx="22" ry="26" fill="#222222" stroke="#111" stroke-width="2"/>
+  <!-- ...belly white -->
+  <ellipse cx="38" cy="58" rx="13" ry="18" fill="white"/>
+  <!-- Penguin head -->
+  <circle cx="38" cy="26" r="18" fill="#222222" stroke="#111" stroke-width="2"/>
+  <!-- Penguin face white -->
+  <ellipse cx="38" cy="28" rx="10" ry="10" fill="white"/>
+  <!-- Eyes -->
+  <circle cx="34" cy="24" r="4" fill="white"/>
+  <circle cx="42" cy="24" r="4" fill="white"/>
+  <circle cx="34" cy="24" r="3" fill="#111"/>
+  <circle cx="42" cy="24" r="3" fill="#111"/>
+  <circle cx="33" cy="23" r="1" fill="white"/>
+  <circle cx="41" cy="23" r="1" fill="white"/>
+  <!-- Beak -->
+  <polygon points="38,30 33,35 43,35" fill="url(#pg2)" stroke="#AA5500" stroke-width="1"/>
+  <!-- Scarf (festive) -->
+  <path d="M20 36 Q38 42 56 36" stroke="#CC2200" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M20 36 Q38 42 56 36" stroke="#FF4444" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Scarf tail -->
+  <path d="M20 36 Q14 45 16 55" stroke="#CC2200" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M20 36 Q14 45 16 55" stroke="#FF4444" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Wings/flippers (holding reins) -->
+  <ellipse cx="58" cy="52" rx="10" ry="5" fill="#222" stroke="#111" stroke-width="1" transform="rotate(-30,58,52)"/>
+  <ellipse cx="18" cy="52" rx="10" ry="5" fill="#222" stroke="#111" stroke-width="1" transform="rotate(30,18,52)"/>
+  <!-- Feet on sled -->
+  <ellipse cx="30" cy="78" rx="8" ry="5" fill="url(#pg2)"/>
+  <ellipse cx="46" cy="78" rx="8" ry="5" fill="url(#pg2)"/>
+  <!-- Goggles (penguin is racing!) -->
+  <ellipse cx="34" cy="23" rx="5" ry="4" fill="none" stroke="#AA8800" stroke-width="2"/>
+  <ellipse cx="42" cy="23" rx="5" ry="4" fill="none" stroke="#AA8800" stroke-width="2"/>
+  <!-- Bridge between goggles -->
+  <line x1="39" y1="23" x2="37" y2="23" stroke="#AA8800" stroke-width="2"/>
+  <!-- Goggle lens tint -->
+  <ellipse cx="34" cy="23" rx="4" ry="3" fill="#88CCFF" opacity="0.4"/>
+  <ellipse cx="42" cy="23" rx="4" ry="3" fill="#88CCFF" opacity="0.4"/>
+  <!-- Snow spray particles behind sled -->
+  <circle cx="5" cy="80" r="3" fill="white" opacity="0.8"/>
+  <circle cx="2" cy="72" r="2" fill="white" opacity="0.7"/>
+  <circle cx="8" cy="68" r="2.5" fill="white" opacity="0.6"/>
+  <circle cx="3" cy="86" r="2" fill="white" opacity="0.5"/>
+</svg>

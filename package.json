@@ -1,0 +1,92 @@
+{
+  "name": "mx-catch",
+  "version": "1.8.0",
+  "type": "module",
+  "description": "Premium Arcade Experience",
+  "main": "electron_main.js",
+  "scripts": {
+    "start": "electron .",
+    "ng": "ng",
+    "ng:start": "ng serve --port 3000 --live-reload --poll 1000",
+    "ng:build": "ng build --base-href ./",
+    "ng:watch": "ng build --watch --configuration development",
+    "dev": "npm run ng:watch",
+    "http-server": "npx http-server . -p 3000 -o",
+    "serve:web": "http-server dist/xanezu-app/browser -p 3000 --cors -c-1",
+    "electron:start": "electron .",
+    "dev:clean": "rimraf .angular/cache && rimraf dist/",
+    "build": "npm run ng:build && electron-builder build --win && npm run build:installer",
+    "build:installer": "node scripts/build_setup.js",
+    "test": "node tests/logic.test.mjs",
+    "fix:env": "powershell -ExecutionPolicy Bypass -File scripts/fix_environment.ps1"
+  },
+  "keywords": [],
+  "author": "Xanezu Games",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.2.7",
+    "@angular/cli": "^21.2.7",
+    "@angular/compiler-cli": "^21.2.0",
+    "electron": "^34.5.8",
+    "electron-builder": "^25.1.8",
+    "fluent-ffmpeg": "^2.1.3",
+    "http-server": "^14.1.1",
+    "jsdom": "^28.0.0",
+    "prettier": "^3.8.1",
+    "sharp": "^0.34.5",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
+  },
+  "build": {
+    "appId": "com.xanezu.mxcatch",
+    "productName": "Xanezu Catch",
+    "copyright": "Copyright © 2026 Xanezu Games",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "dir"
+      ],
+      "icon": "assets/menu/favicon_frog.ico",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Xanezu Catch",
+      "installerIcon": "assets/menu/favicon_frog.ico",
+      "uninstallerIcon": "assets/menu/favicon_frog.ico",
+      "displayLanguageSelector": false,
+      "installerHeaderIcon": "assets/menu/favicon_frog.ico",
+      "installerHeader": "assets/installer/header.png",
+      "installerSidebar": "assets/installer/welcome.png",
+      "license": "build/EULA_ES.txt",
+      "installerLanguages": [
+        "es_ES"
+      ],
+      "unicode": true,
+      "artifactName": "Xanezu_Catch_Setup_v${version}.${ext}"
+    },
+    "files": [
+      "dist/xanezu-app/browser/**/*",
+      "electron_main.js",
+      "assets/**/*",
+      "package.json"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <defs>
+        <filter id="iceGlow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <linearGradient id="iceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E0F7FA"/>
+            <stop offset="50%" stop-color="#80DEEA"/>
+            <stop offset="100%" stop-color="#00ACC1"/>
+        </linearGradient>
+    </defs>
+    <g filter="url(#iceGlow)">
+        <!-- Ice cube - 3D isometric -->
+        <!-- Top face -->
+        <polygon points="50,15 80,32 50,49 20,32" fill="#B2EBF2" stroke="#00838F" stroke-width="1.5"/>
+        <!-- Left face -->
+        <polygon points="20,32 50,49 50,80 20,63" fill="url(#iceGrad)" stroke="#00838F" stroke-width="1.5"/>
+        <!-- Right face -->
+        <polygon points="80,32 50,49 50,80 80,63" fill="#4DD0E1" stroke="#00838F" stroke-width="1.5"/>
+        <!-- Frost highlights -->
+        <polygon points="50,20 72,33 50,46 28,33" fill="#FFF" opacity="0.3"/>
+        <!-- Ice crack lines -->
+        <path d="M 35,45 L 40,55 L 35,65" fill="none" stroke="#E0F7FA" stroke-width="1" opacity="0.7"/>
+        <path d="M 60,40 L 65,52 L 58,60" fill="none" stroke="#E0F7FA" stroke-width="1" opacity="0.5"/>
+        <!-- Sparkle dots -->
+        <circle cx="38" cy="35" r="2" fill="#FFF" opacity="0.8"/>
+        <circle cx="55" cy="28" r="1.5" fill="#FFF" opacity="0.6"/>
+        <circle cx="62" cy="55" r="1.5" fill="#FFF" opacity="0.5"/>
+        <!-- Frost particles -->
+        <text x="15" y="22" font-size="12" fill="#80DEEA" opacity="0.7">❄</text>
+        <text x="75" y="20" font-size="8" fill="#B2EBF2" opacity="0.5">❄</text>
+        <text x="80" y="75" font-size="10" fill="#80DEEA" opacity="0.6">❄</text>
+    </g>
+</svg>
