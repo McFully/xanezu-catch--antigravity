@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="120" height="200" viewBox="0 0 120 200">
+    <!-- Chain -->
+    <path d="M 60,0 L 60,80" fill="none" stroke="#2F4F4F" stroke-width="4" stroke-dasharray="10 4"/>
+    <ellipse cx="60" cy="15" rx="5" ry="10" fill="none" stroke="#A9A9A9" stroke-width="3"/>
+    <ellipse cx="60" cy="35" rx="5" ry="10" fill="none" stroke="#A9A9A9" stroke-width="3"/>
+    <ellipse cx="60" cy="55" rx="5" ry="10" fill="none" stroke="#A9A9A9" stroke-width="3"/>
+    <ellipse cx="60" cy="75" rx="5" ry="10" fill="none" stroke="#A9A9A9" stroke-width="3"/>
+    <!-- Lamp Cap -->
+    <path d="M 40,80 L 80,80 L 70,100 L 50,100 Z" fill="#B8860B" stroke="#8B6508" stroke-width="2"/>
+    <path d="M 50,100 L 70,100 L 80,140 L 40,140 Z" fill="#DEB887" stroke="#A0522D" stroke-width="2"/>
+    <path d="M 30,140 L 90,140 L 60,180 Z" fill="#DAA520" stroke="#8B6508" stroke-width="3"/>
+    <!-- Handles -->
+    <path d="M 40,90 Q 20,110 40,130" fill="none" stroke="#B8860B" stroke-width="4"/>
+    <path d="M 80,90 Q 100,110 80,130" fill="none" stroke="#B8860B" stroke-width="4"/>
+</svg>

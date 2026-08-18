@@ -1,0 +1,34 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <defs>
+        <filter id="crownGlow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <linearGradient id="crownGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFD54F"/>
+            <stop offset="50%" stop-color="#FFB300"/>
+            <stop offset="100%" stop-color="#FF8F00"/>
+        </linearGradient>
+    </defs>
+    <g filter="url(#crownGlow)">
+        <!-- Crown base band -->
+        <rect x="18" y="62" width="64" height="16" rx="4" fill="url(#crownGold)" stroke="#BF6900" stroke-width="1.5"/>
+        <!-- Crown points -->
+        <polygon points="18,62 10,30 28,48 38,18 50,45 62,18 72,48 90,30 82,62" 
+                 fill="url(#crownGold)" stroke="#BF6900" stroke-width="1.5" stroke-linejoin="round"/>
+        <!-- Jewels on points -->
+        <circle cx="38" cy="22" r="4" fill="#F44336"/>
+        <circle cx="50" cy="48" r="3.5" fill="#2196F3"/>
+        <circle cx="62" cy="22" r="4" fill="#F44336"/>
+        <!-- Band jewels -->
+        <circle cx="35" cy="70" r="3" fill="#E91E63"/>
+        <circle cx="50" cy="70" r="4" fill="#4CAF50"/>
+        <circle cx="65" cy="70" r="3" fill="#E91E63"/>
+        <!-- Gold highlight -->
+        <polygon points="22,62 14,35 30,50 40,24 50,46 60,24 70,50 86,35 80,62" 
+                 fill="#FFF8E1" opacity="0.3"/>
+        <!-- Cross on top center -->
+        <rect x="48" y="38" width="4" height="10" rx="1" fill="#FFD54F" stroke="#BF6900" stroke-width="0.5"/>
+        <rect x="45" y="41" width="10" height="4" rx="1" fill="#FFD54F" stroke="#BF6900" stroke-width="0.5"/>
+    </g>
+</svg>

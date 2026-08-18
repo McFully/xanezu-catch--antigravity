@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="140" height="200" viewBox="0 0 140 200">
+    <!-- Hole in ceiling -->
+    <ellipse cx="70" cy="10" rx="50" ry="20" fill="#222" stroke="#5C4033" stroke-width="4"/>
+    <!-- Web single thread -->
+    <path d="M 70,30 L 70,120" fill="none" stroke="#E0E0E0" stroke-width="2" opacity="0.8"/>
+    <!-- Spider Body -->
+    <circle cx="70" cy="140" r="18" fill="#8B4513" stroke="#5C4033" stroke-width="3"/>
+    <ellipse cx="70" cy="115" rx="10" ry="15" fill="#A0522D" stroke="#5C4033" stroke-width="2"/>
+    <!-- Eyes -->
+    <circle cx="65" cy="130" r="3" fill="#FF0000"/>
+    <circle cx="75" cy="130" r="3" fill="#FF0000"/>
+    <circle cx="60" cy="135" r="2" fill="#FF0000"/>
+    <circle cx="80" cy="135" r="2" fill="#FF0000"/>
+    <!-- Legs Left -->
+    <path d="M 50,110 Q 20,80 10,120" fill="none" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 50,120 Q 10,110 5,150" fill="none" stroke="#8B4513" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 52,130 Q 15,140 20,180" fill="none" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 55,145 Q 35,170 45,200" fill="none" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/>
+    <!-- Legs Right -->
+    <path d="M 90,110 Q 120,80 130,120" fill="none" stroke="#8B4513" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 90,120 Q 130,110 135,150" fill="none" stroke="#8B4513" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 88,130 Q 125,140 120,180" fill="none" stroke="#8B4513" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 85,145 Q 105,170 95,200" fill="none" stroke="#8B4513" stroke-width="3" stroke-linecap="round"/>
+</svg>

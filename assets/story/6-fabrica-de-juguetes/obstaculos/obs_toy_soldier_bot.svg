@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="sb1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#003A8C"/>
+      <stop offset="100%" stop-color="#0055CC"/>
+    </linearGradient>
+    <linearGradient id="sb2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#003A8C"/>
+      <stop offset="50%" stop-color="#4488FF"/>
+      <stop offset="100%" stop-color="#003A8C"/>
+    </linearGradient>
+    <linearGradient id="metal2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#888"/>
+      <stop offset="40%" stop-color="#EEE"/>
+      <stop offset="100%" stop-color="#888"/>
+    </linearGradient>
+  </defs>
+  <!-- Boots/base (on ground) -->
+  <ellipse cx="38" cy="192" rx="14" ry="7" fill="#111" stroke="#333" stroke-width="1"/>
+  <ellipse cx="62" cy="192" rx="14" ry="7" fill="#111" stroke="#333" stroke-width="1"/>
+  <!-- Legs -->
+  <rect x="30" y="145" width="14" height="52" rx="6" fill="#003A8C" stroke="#002266" stroke-width="1.5"/>
+  <rect x="56" y="145" width="14" height="52" rx="6" fill="#003A8C" stroke="#002266" stroke-width="1.5"/>
+  <!-- Belt -->
+  <rect x="28" y="142" width="44" height="8" rx="3" fill="#8B6500"/>
+  <rect x="45" y="142" width="10" height="8" rx="2" fill="#CCA000"/>
+  <!-- Body -->
+  <rect x="26" y="80" width="48" height="65" rx="8" fill="url(#sb2)" stroke="#002266" stroke-width="2"/>
+  <!-- Jacket center -->
+  <rect x="46" y="80" width="8" height="65" rx="3" fill="#002266"/>
+  <!-- Buttons (gold) -->
+  <circle cx="50" cy="93" r="3" fill="#CCA000" stroke="#8B6500" stroke-width="0.5"/>
+  <circle cx="50" cy="106" r="3" fill="#CCA000" stroke="#8B6500" stroke-width="0.5"/>
+  <circle cx="50" cy="119" r="3" fill="#CCA000" stroke="#8B6500" stroke-width="0.5"/>
+  <circle cx="50" cy="132" r="3" fill="#CCA000" stroke="#8B6500" stroke-width="0.5"/>
+  <!-- Epaulettes (gold) -->
+  <ellipse cx="26" cy="90" rx="10" ry="7" fill="#CCA000" stroke="#8B6500" stroke-width="1.5"/>
+  <ellipse cx="74" cy="90" rx="10" ry="7" fill="#CCA000" stroke="#8B6500" stroke-width="1.5"/>
+  <!-- Arms -->
+  <rect x="2" y="82" width="26" height="14" rx="7" fill="url(#sb1)" stroke="#002266" stroke-width="1.5" transform="rotate(-10,15,89)"/>
+  <rect x="72" y="82" width="26" height="14" rx="7" fill="url(#sb1)" stroke="#002266" stroke-width="1.5" transform="rotate(10,85,89)"/>
+  <!-- Rifle -->
+  <rect x="2" y="95" width="30" height="4" rx="2" fill="#5a3d00" transform="rotate(-10,17,97)"/>
+  <polygon points="3,90 6,82 9,90" fill="url(#metal2)" opacity="0.9" transform="rotate(-10,6,86)"/>
+  <!-- Head -->
+  <circle cx="50" cy="65" r="20" fill="#FFD0A0" stroke="#CC9060" stroke-width="2"/>
+  <!-- Hat (army cap) -->
+  <ellipse cx="50" cy="46" rx="20" ry="8" fill="#003A8C" stroke="#002266" stroke-width="1.5"/>
+  <ellipse cx="50" cy="47" rx="22" ry="5" fill="#003A8C" stroke="#002266" stroke-width="1.5"/>
+  <rect x="30" y="44" width="40" height="10" rx="3" fill="#003A8C"/>
+  <!-- Hat badge -->
+  <polygon points="50,45 52,50 57,50 53,53 55,58 50,55 45,58 47,53 43,50 48,50" fill="#CCA000" transform="scale(0.5) translate(50,40)"/>
+  <circle cx="50" cy="49" r="3" fill="#CCA000"/>
+  <!-- Face -->
+  <ellipse cx="42" cy="66" rx="4" ry="4" fill="#222"/>
+  <ellipse cx="58" cy="66" rx="4" ry="4" fill="#222"/>
+  <circle cx="41" cy="65" r="1.5" fill="white"/>
+  <circle cx="57" cy="65" r="1.5" fill="white"/>
+  <!-- Stern mouth -->
+  <path d="M43 74 Q50 72 57 74" stroke="#AA7050" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

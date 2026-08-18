@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="160" height="220" viewBox="0 0 160 220">
+    <defs>
+        <linearGradient id="snakeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#556B2F"/>
+            <stop offset="100%" stop-color="#2E8B57"/>
+        </linearGradient>
+    </defs>
+    <!-- Branch -->
+    <path d="M 0,20 L 160,40 L 160,60 L 0,40 Z" fill="#8B4513" stroke="#5C4033" stroke-width="3"/>
+    <!-- Snake Coils -->
+    <ellipse cx="80" cy="80" rx="50" ry="25" fill="url(#snakeGrad)" stroke="#000" stroke-width="4"/>
+    <ellipse cx="80" cy="110" rx="40" ry="20" fill="url(#snakeGrad)" stroke="#000" stroke-width="4"/>
+    <ellipse cx="80" cy="135" rx="30" ry="15" fill="url(#snakeGrad)" stroke="#000" stroke-width="4"/>
+    <!-- Snake head hanging down -->
+    <path d="M 70,140 Q 50,180 70,210 Q 90,220 95,200 Q 100,160 85,145" fill="url(#snakeGrad)" stroke="#000" stroke-width="3"/>
+    <!-- Eye -->
+    <circle cx="75" cy="195" r="5" fill="#FFD700"/>
+    <circle cx="75" cy="195" r="2" fill="#000"/>
+    <!-- Tongue -->
+    <path d="M 85,215 Q 90,230 80,240 M 87,225 Q 95,235 100,230" fill="none" stroke="#DC143C" stroke-width="2"/>
+    <!-- Spots -->
+    <circle cx="50" cy="75" r="5" fill="#32CD32"/>
+    <circle cx="90" cy="85" r="4" fill="#32CD32"/>
+    <circle cx="60" cy="110" r="3" fill="#32CD32"/>
+    <circle cx="100" cy="110" r="4" fill="#32CD32"/>
+</svg>

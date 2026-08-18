@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="luc1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6600"/>
+      <stop offset="100%" stop-color="#CC3300"/>
+    </linearGradient>
+    <linearGradient id="luc2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#AA8800"/>
+    </linearGradient>
+  </defs>
+  <!-- Luchador mask body (full head) -->
+  <!-- Neck -->
+  <rect x="42" y="80" width="16" height="14" rx="6" fill="#FF6600" stroke="#CC3300" stroke-width="1.5"/>
+  <!-- Chest/torso hint -->
+  <path d="M28 88 Q42 98 50 99 Q58 98 72 88 L75 100 Q60 100 50 100 Q40 100 25 100Z" fill="#FF6600"/>
+  <!-- Head -->
+  <circle cx="50" cy="45" r="38" fill="url(#luc1)" stroke="#CC3300" stroke-width="2"/>
+  <!-- Mask eye area (padded design) -->
+  <path d="M12 38 Q20 22 50 22 Q80 22 88 38 Q80 55 50 58 Q20 55 12 38Z" fill="#FFAA00" stroke="#CC6600" stroke-width="1.5"/>
+  <!-- Eyes (fierce) -->
+  <ellipse cx="35" cy="38" rx="10" ry="9" fill="#111" stroke="#000" stroke-width="1"/>
+  <ellipse cx="65" cy="38" rx="10" ry="9" fill="#111" stroke="#000" stroke-width="1"/>
+  <!-- Eye whites -->
+  <ellipse cx="35" cy="37" rx="6" ry="6" fill="white"/>
+  <ellipse cx="65" cy="37" rx="6" ry="6" fill="white"/>
+  <!-- Pupils -->
+  <ellipse cx="35" cy="37" rx="4" ry="4" fill="#111"/>
+  <ellipse cx="65" cy="37" rx="4" ry="4" fill="#111"/>
+  <circle cx="33" cy="35" r="1.5" fill="white"/>
+  <circle cx="63" cy="35" r="1.5" fill="white"/>
+  <!-- Mask eyebrow ridges (V angry) -->
+  <path d="M22 28 Q35 34 40 30" stroke="#CC3300" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M78 28 Q65 34 60 30" stroke="#CC3300" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Nose bridge -->
+  <path d="M44 45 Q50 52 56 45" stroke="#CC6600" stroke-width="2" fill="none"/>
+  <!-- Diamond nose -->
+  <polygon points="50,46 46,52 50,55 54,52" fill="#FF8800" stroke="#CC6600" stroke-width="1"/>
+  <!-- Mouth slot in mask -->
+  <path d="M32 62 Q50 72 68 62" stroke="#CC3300" stroke-width="2.5" fill="#8B0000" stroke-linecap="round"/>
+  <!-- Teeth showing -->
+  <rect x="38" y="63" width="6" height="6" rx="1" fill="white" stroke="#ccc" stroke-width="0.5"/>
+  <rect x="47" y="64" width="6" height="6" rx="1" fill="white" stroke="#ccc" stroke-width="0.5"/>
+  <rect x="56" y="63" width="6" height="6" rx="1" fill="white" stroke="#ccc" stroke-width="0.5"/>
+  <!-- Mask top crest / mohawk detail -->
+  <path d="M32 8 Q40 2 50 8 Q60 2 68 8 Q60 16 50 12 Q40 16 32 8Z" fill="url(#luc2)" stroke="#AA8800" stroke-width="1.5"/>
+  <!-- Stars on mask (Mexican style) -->
+  <path d="M20 45 L21.5 49 L26 50 L21.5 51 L20 55 L18.5 51 L14 50 L18.5 49 Z" fill="#FFD700" opacity="0.9"/>
+  <path d="M80 45 L81.5 49 L86 50 L81.5 51 L80 55 L78.5 51 L74 50 L78.5 49 Z" fill="#FFD700" opacity="0.9"/>
+  <!-- Chin strap (mask) -->
+  <path d="M14 55 Q26 70 50 72 Q74 70 86 55" stroke="#CC3300" stroke-width="2.5" fill="none"/>
+  <!-- Mask side details -->
+  <path d="M14 35 Q12 42 14 50" stroke="#FFAA00" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M86 35 Q88 42 86 50" stroke="#FFAA00" stroke-width="2" fill="none" opacity="0.7"/>
+</svg>

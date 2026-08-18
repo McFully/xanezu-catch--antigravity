@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="ice1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#AAEEFF"/>
+      <stop offset="100%" stop-color="#66AACC"/>
+    </linearGradient>
+    <linearGradient id="ice2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6699BB"/>
+      <stop offset="30%" stop-color="#CCEEFF"/>
+      <stop offset="100%" stop-color="#6699BB"/>
+    </linearGradient>
+    <radialGradient id="iceglow" cx="50%" cy="20%">
+      <stop offset="0%" stop-color="#88DDFF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#88DDFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="iceblur"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <!-- Glow from above -->
+  <ellipse cx="50" cy="50" rx="46" ry="55" fill="url(#iceglow)" filter="url(#iceblur)"/>
+  <!-- icicle cluster hanging from ceiling -->
+  <!-- Left large icicle -->
+  <polygon points="24,0 8,0 14,140" fill="url(#ice1)" stroke="#4488AA" stroke-width="1.5"/>
+  <!-- Inner shine left -->
+  <polygon points="20,0 13,0 15,90" fill="white" opacity="0.35"/>
+  <!-- Center huge icicle -->
+  <polygon points="62,0 38,0 50,200" fill="url(#ice2)" stroke="#4488AA" stroke-width="2"/>
+  <!-- Inner shine center -->
+  <polygon points="57,0 43,0 50,130" fill="white" opacity="0.3"/>
+  <!-- Right large icicle -->
+  <polygon points="76,0 92,0 86,140" fill="url(#ice1)" stroke="#4488AA" stroke-width="1.5"/>
+  <!-- Inner shine right -->
+  <polygon points="80,0 87,0 85,90" fill="white" opacity="0.35"/>
+  <!-- Small left icicle -->
+  <polygon points="6,0 16,0 10,80" fill="url(#ice1)" stroke="#4488AA" stroke-width="1"/>
+  <!-- Small between left-center -->
+  <polygon points="30,0 38,0 34,110" fill="url(#ice1)" stroke="#4488AA" stroke-width="1"/>
+  <!-- Small between center-right -->
+  <polygon points="62,0 70,0 66,100" fill="url(#ice1)" stroke="#4488AA" stroke-width="1"/>
+  <!-- Small right icicle -->
+  <polygon points="84,0 94,0 90,80" fill="url(#ice1)" stroke="#4488AA" stroke-width="1"/>
+  <!-- Ice texture cracks (horizontal) -->
+  <line x1="38" y1="60" x2="62" y2="58" stroke="#99CCEE" stroke-width="1" opacity="0.5"/>
+  <line x1="40" y1="90" x2="60" y2="88" stroke="#99CCEE" stroke-width="1" opacity="0.4"/>
+  <line x1="43" y1="120" x2="57" y2="118" stroke="#99CCEE" stroke-width="1" opacity="0.35"/>
+  <!-- Drip water drops -->
+  <ellipse cx="14" cy="142" rx="3" ry="4" fill="#AAEEFF" opacity="0.8"/>
+  <ellipse cx="50" cy="185" rx="4" ry="5" fill="#AAEEFF" opacity="0.9"/>
+  <ellipse cx="86" cy="142" rx="3" ry="4" fill="#AAEEFF" opacity="0.8"/>
+  <ellipse cx="34" cy="112" rx="2.5" ry="3" fill="#AAEEFF" opacity="0.7"/>
+  <ellipse cx="66" cy="102" rx="2.5" ry="3" fill="#AAEEFF" opacity="0.7"/>
+  <!-- Glitter specks -->
+  <circle cx="20" cy="40" r="2" fill="white" opacity="0.9"/>
+  <circle cx="50" cy="80" r="2.5" fill="white" opacity="0.9"/>
+  <circle cx="80" cy="50" r="2" fill="white" opacity="0.9"/>
+  <circle cx="35" cy="65" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="64" cy="75" r="1.5" fill="white" opacity="0.8"/>
+</svg>

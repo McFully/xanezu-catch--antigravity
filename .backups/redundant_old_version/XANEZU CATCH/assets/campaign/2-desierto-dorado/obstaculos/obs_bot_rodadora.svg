@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="160" height="160" viewBox="0 0 160 160">
+    <circle cx="80" cy="80" r="70" fill="none" stroke="#D2B48C" stroke-width="4" stroke-dasharray="8 6"/>
+    <circle cx="80" cy="80" r="60" fill="none" stroke="#CD853F" stroke-width="3" stroke-dasharray="10 4"/>
+    <circle cx="80" cy="80" r="50" fill="none" stroke="#8B4513" stroke-width="5" stroke-dasharray="5 5"/>
+    <!-- Random internal twigs -->
+    <path d="M 20,80 Q 40,20 80,40 T 140,80 T 100,140 T 20,80" fill="none" stroke="#A0522D" stroke-width="3"/>
+    <path d="M 40,40 Q 100,20 120,60 T 120,120 T 60,140 T 40,40" fill="none" stroke="#8B4513" stroke-width="2"/>
+    <path d="M 60,60 L 100,100 M 100,60 L 60,100" stroke="#CD853F" stroke-width="2"/>
+    <path d="M 50,80 L 110,80" stroke="#D2B48C" stroke-width="4"/>
+    <path d="M 80,50 L 80,110" stroke="#D2B48C" stroke-width="3"/>
+</svg>

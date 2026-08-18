@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="180" height="150" viewBox="0 0 180 150">
+    <defs>
+        <radialGradient id="boneGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FDF5E6"/>
+            <stop offset="70%" stop-color="#DEB887"/>
+            <stop offset="100%" stop-color="#A0522D"/>
+        </radialGradient>
+    </defs>
+    <!-- Skull Base -->
+    <path d="M 60,150 C 60,90 80,70 90,70 C 100,70 120,90 120,150 Z" fill="url(#boneGrad)" stroke="#5C4033" stroke-width="3"/>
+    <!-- Eye sockets -->
+    <ellipse cx="75" cy="110" rx="10" ry="8" fill="#5C4033"/>
+    <ellipse cx="105" cy="110" rx="10" ry="8" fill="#5C4033"/>
+    <!-- Horns -->
+    <path d="M 65,80 C 40,60 20,40 10,10 C 20,40 50,60 80,75 Z" fill="url(#boneGrad)" stroke="#5C4033" stroke-width="2"/>
+    <path d="M 115,80 C 140,60 160,40 170,10 C 160,40 130,60 100,75 Z" fill="url(#boneGrad)" stroke="#5C4033" stroke-width="2"/>
+    <!-- Nose / Bone cracks -->
+    <path d="M 85,130 L 95,130 L 90,120 Z" fill="#5C4033"/>
+    <path d="M 90,70 L 85,90 M 110,100 L 115,80" fill="none" stroke="#8B4513" stroke-width="1.5"/>
+</svg>

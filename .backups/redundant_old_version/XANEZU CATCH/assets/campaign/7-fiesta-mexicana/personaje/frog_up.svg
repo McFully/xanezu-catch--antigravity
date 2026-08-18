@@ -1,0 +1,12 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+        <defs>
+        <filter id="blurLighting">
+            <feGaussianBlur stdDeviation="6"/>
+        </filter>
+        <filter id="dropShadow">
+            <feDropShadow dx="0" dy="8" stdDeviation="4" flood-color="#000" flood-opacity="0.35"/>
+        </filter>
+    </defs>
+    <g id='rayman_ch' filter='url(#dropShadow)'><ellipse cx='30' cy='95' rx='12' ry='18' fill='#000000'/><ellipse cx='70' cy='95' rx='12' ry='18' fill='#000000'/><circle cx='20' cy='20' r='12' fill='#FFFFFF'/><circle cx='80' cy='20' r='12' fill='#FFFFFF'/><ellipse cx='50' cy='45' rx='30' ry='40' fill='#ffeb3b'/><ellipse cx='50' cy='55' rx='18' ry='22' fill='#fff59d'/><circle cx='32' cy='25' r='13' fill='#FFF'/><circle cx='68' cy='25' r='13' fill='#FFF'/><circle cx='34' cy='25' r='5' fill='#000'/><circle cx='66' cy='25' r='5' fill='#000'/><circle cx='50' cy='50' r='5' fill='#900'/><ellipse cx='50' cy='13' rx='45' ry='12' fill='#000000'/><path d='M25,13 Q50,-27 75,13 Z' fill='#000000'/><ellipse cx='50' cy='13' rx='40' ry='9' fill='none' stroke='#FF0000' stroke-width='2'/></g>
+    <circle cx='35' cy='30' r='30' fill='white' opacity='0.15' filter='url(#blurLighting)'/>
+</svg>

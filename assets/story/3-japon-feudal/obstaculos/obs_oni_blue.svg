@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#002288"/>
+      <stop offset="100%" stop-color="#1155CC"/>
+    </linearGradient>
+    <radialGradient id="bglow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#2266FF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#2266FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur2"><feGaussianBlur stdDeviation="2.5"/></filter>
+  </defs>
+  <!-- Base from floor up -->
+  <rect x="35" y="0" width="8" height="55" rx="4" fill="#221100"/>
+  <rect x="57" y="0" width="8" height="55" rx="4" fill="#221100"/>
+  <!-- Glow -->
+  <ellipse cx="50" cy="100" rx="38" ry="55" fill="url(#bglow)" filter="url(#blur2)"/>
+  <!-- Blue oni body -->
+  <ellipse cx="50" cy="120" rx="34" ry="52" fill="url(#b1)" stroke="#001155" stroke-width="2"/>
+  <!-- Ritual markings (white kanji-like strokes) -->
+  <path d="M40 95 L60 95 M50 91 L50 99" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M36 105 Q50 99 64 105" stroke="#88AAFF" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Left horn (blue) -->
+  <path d="M22 108 Q10 84 18 74 Q27 82 28 105Z" fill="#1155CC" stroke="#001155" stroke-width="1.5"/>
+  <path d="M23 106 Q12 84 19 75" stroke="#4477FF" stroke-width="1" fill="none"/>
+  <!-- Right horn -->
+  <path d="M78 108 Q90 84 82 74 Q73 82 72 105Z" fill="#1155CC" stroke="#001155" stroke-width="1.5"/>
+  <path d="M77 106 Q88 84 81 75" stroke="#4477FF" stroke-width="1" fill="none"/>
+  <!-- Third horn center -->
+  <path d="M44 92 Q50 74 56 92Z" fill="#1155CC" stroke="#001155" stroke-width="1.5"/>
+  <!-- Eyes (glowing) -->
+  <ellipse cx="36" cy="120" rx="10" ry="8" fill="#FFFFFF" stroke="#001155" stroke-width="1.5"/>
+  <ellipse cx="64" cy="120" rx="10" ry="8" fill="#FFFFFF" stroke="#001155" stroke-width="1.5"/>
+  <ellipse cx="36" cy="121" rx="6" ry="5" fill="#00CCFF"/>
+  <ellipse cx="64" cy="121" rx="6" ry="5" fill="#00CCFF"/>
+  <ellipse cx="34" cy="119" rx="2.5" ry="2.5" fill="#111"/>
+  <ellipse cx="62" cy="119" rx="2.5" ry="2.5" fill="#111"/>
+  <!-- Eye gleam -->
+  <ellipse cx="33" cy="118" rx="1" ry="1" fill="white"/>
+  <ellipse cx="61" cy="118" rx="1" ry="1" fill="white"/>
+  <!-- Eyebrows (arched) -->
+  <path d="M25 110 Q36 104 42 108" stroke="#001155" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M75 110 Q64 104 58 108" stroke="#001155" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Nose -->
+  <ellipse cx="50" cy="136" rx="7" ry="5" fill="#003399"/>
+  <circle cx="47" cy="135" r="2.5" fill="#002288"/>
+  <circle cx="53" cy="135" r="2.5" fill="#002288"/>
+  <!-- Mouth -->
+  <path d="M28 150 Q38 142 50 145 Q62 142 72 150" stroke="#001155" stroke-width="2.5" fill="#001a66" stroke-linecap="round"/>
+  <!-- Fangs -->
+  <polygon points="36,147 39,147 37.5,160" fill="white" stroke="#ccc" stroke-width="0.5"/>
+  <polygon points="64,147 61,147 62.5,160" fill="white" stroke="#ccc" stroke-width="0.5"/>
+  <!-- Chin -->
+  <ellipse cx="50" cy="175" rx="12" ry="6" fill="#0033AA"/>
+  <!-- Highlight -->
+  <ellipse cx="37" cy="108" rx="8" ry="5" fill="white" fill-opacity="0.1"/>
+</svg>

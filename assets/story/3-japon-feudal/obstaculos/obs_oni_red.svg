@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="r1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B0000"/>
+      <stop offset="100%" stop-color="#CC2200"/>
+    </linearGradient>
+    <linearGradient id="r2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a0000" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#CC2200" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#4a0000" stop-opacity="0.8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#FF4400" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF4400" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  <!-- Chain rope from top -->
+  <rect x="46" y="0" width="8" height="60" rx="4" fill="#2a1a00"/>
+  <rect x="47.5" y="0" width="5" height="60" rx="2" fill="#5c3d00"/>
+  <!-- Chain links -->
+  <ellipse cx="50" cy="10" rx="6" ry="4" fill="none" stroke="#8a6500" stroke-width="2"/>
+  <ellipse cx="50" cy="22" rx="6" ry="4" fill="none" stroke="#8a6500" stroke-width="2"/>
+  <ellipse cx="50" cy="34" rx="6" ry="4" fill="none" stroke="#8a6500" stroke-width="2"/>
+  <ellipse cx="50" cy="46" rx="6" ry="4" fill="none" stroke="#8a6500" stroke-width="2"/>
+  <!-- Glow aura -->
+  <ellipse cx="50" cy="130" rx="38" ry="55" fill="url(#glow)" filter="url(#blur1)"/>
+  <!-- Mask body -->
+  <ellipse cx="50" cy="130" rx="34" ry="52" fill="url(#r1)" stroke="#3d0000" stroke-width="2"/>
+  <!-- Forehead markings -->
+  <path d="M30 100 Q50 93 70 100" stroke="#FFD700" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M35 107 Q50 100 65 107" stroke="#FFD700" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Left horn -->
+  <path d="M24 105 Q12 82 20 72 Q28 80 30 100Z" fill="#CC2200" stroke="#3d0000" stroke-width="1.5"/>
+  <path d="M26 103 Q15 83 21 74" stroke="#FF6644" stroke-width="1" fill="none"/>
+  <!-- Right horn -->
+  <path d="M76 105 Q88 82 80 72 Q72 80 70 100Z" fill="#CC2200" stroke="#3d0000" stroke-width="1.5"/>
+  <path d="M74 103 Q85 83 79 74" stroke="#FF6644" stroke-width="1" fill="none"/>
+  <!-- Eyes (angry oni) -->
+  <ellipse cx="36" cy="122" rx="10" ry="8" fill="#FFD700" stroke="#3d0000" stroke-width="1.5"/>
+  <ellipse cx="64" cy="122" rx="10" ry="8" fill="#FFD700" stroke="#3d0000" stroke-width="1.5"/>
+  <ellipse cx="36" cy="123" rx="6" ry="6" fill="#FF2200"/>
+  <ellipse cx="64" cy="123" rx="6" ry="6" fill="#FF2200"/>
+  <ellipse cx="34" cy="121" rx="2" ry="2" fill="#111"/>
+  <ellipse cx="62" cy="121" rx="2" ry="2" fill="#111"/>
+  <!-- Eyebrows (angry V shape) -->
+  <path d="M25 110 Q36 116 40 112" stroke="#3d0000" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M75 110 Q64 116 60 112" stroke="#3d0000" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Nose -->
+  <ellipse cx="50" cy="138" rx="7" ry="5" fill="#8B0000"/>
+  <circle cx="47" cy="137" r="2.5" fill="#6B0000"/>
+  <circle cx="53" cy="137" r="2.5" fill="#6B0000"/>
+  <!-- Mouth (evil grin) -->
+  <path d="M26 152 Q38 162 50 158 Q62 162 74 152" stroke="#3d0000" stroke-width="2.5" fill="#5a0000" stroke-linecap="round"/>
+  <!-- Fangs -->
+  <polygon points="35,155 38,155 36.5,167" fill="white" stroke="#ccc" stroke-width="0.5"/>
+  <polygon points="63,155 60,155 61.5,167" fill="white" stroke="#ccc" stroke-width="0.5"/>
+  <!-- Chin tip -->
+  <ellipse cx="50" cy="178" rx="12" ry="6" fill="#A01500"/>
+  <!-- Highlight -->
+  <ellipse cx="38" cy="110" rx="8" ry="5" fill="white" fill-opacity="0.12"/>
+</svg>

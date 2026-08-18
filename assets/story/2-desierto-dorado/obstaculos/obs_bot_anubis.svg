@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="140" height="220" viewBox="0 0 140 220">
+    <defs>
+        <linearGradient id="anubGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#2C3E50"/>
+            <stop offset="50%" stop-color="#34495E"/>
+            <stop offset="100%" stop-color="#1A252F"/>
+        </linearGradient>
+    </defs>
+    <!-- Base block -->
+    <polygon points="20,220 120,220 100,160 40,160" fill="url(#anubGrad)" stroke="#E67E22" stroke-width="3"/>
+    <!-- Scepter part -->
+    <rect x="65" y="80" width="10" height="80" fill="#FFD700" stroke="#B8860B" stroke-width="2"/>
+    <circle cx="70" cy="70" r="15" fill="#E67E22" stroke="#D35400" stroke-width="3"/>
+    <path d="M 70,55 L 70,30 M 55,70 L 30,70 M 85,70 L 110,70" fill="none" stroke="#FFD700" stroke-width="4"/>
+    <!-- Broken ear / head of anubis -->
+    <polygon points="50,160 90,160 70,80" fill="url(#anubGrad)" stroke="#B8860B" stroke-width="2"/>
+    <!-- Glowing eye gem -->
+    <path d="M 65,110 L 75,105 L 80,115 L 70,120 Z" fill="#E74C3C" stroke="#C0392B"/>
+</svg>

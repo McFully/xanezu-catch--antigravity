@@ -1,0 +1,10 @@
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <!-- Engranaje -->
+    <circle cx="30" cy="30" r="10" fill="#B0BEC5" stroke="#4B2E0B" stroke-width="3"/>
+    <path d="M30,12 L30,18 M30,42 L30,48 M12,30 L18,30 M42,30 L48,30 M17,17 L22,22 M38,38 L43,43 M17,43 L22,38 M43,17 L38,22" stroke="#4B2E0B" stroke-width="5" stroke-linecap="round"/>
+    <!-- Llave inglesa centrada -->
+    <path d="M25,35 L35,25 M22,38 L25,35 M35,25 L38,22" stroke="#4B2E0B" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="22" cy="38" r="3" fill="#90A4AE" stroke="#4B2E0B" stroke-width="2"/>
+  </g>
+</svg>

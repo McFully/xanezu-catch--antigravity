@@ -1,0 +1,283 @@
+/* ================================================================
+   XANEZU CATCH — HUD REDESIGN "AAA PREMIUM"
+   (Sincronizado con index.html y UIManager.js)
+   ================================================================ */
+
+:root {
+  --hud-bg: rgba(7, 8, 21, 0.85);
+  --hud-stroke: rgba(255, 255, 255, 0.15);
+  --hud-accent: #00f2ff;
+  --hud-gold: #ffd700;
+  --hud-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Animaciones Premium --- */
+@keyframes score-punch {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.15) rotate(1deg); filter: brightness(1.5); }
+  100% { transform: scale(1) rotate(0); filter: brightness(1); }
+}
+
+@keyframes nexus-pulse {
+  0% { box-shadow: 0 0 10px var(--hud-accent), inset 0 0 5px var(--hud-accent); }
+  50% { box-shadow: 0 0 25px var(--hud-accent), inset 0 0 15px var(--hud-accent); }
+  100% { box-shadow: 0 0 10px var(--hud-accent), inset 0 0 5px var(--hud-accent); }
+}
+
+/* --- Layout Principal --- */
+.game-hud-premium {
+  position: absolute;
+  top: 0; left: 0; width: 100%;
+  pointer-events: none;
+  display: flex;
+  padding: 20px 40px;
+  z-index: 100;
+  font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+.hud-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  width: 100%;
+  gap: 30px;
+}
+
+/* --- Columna Izquierda: Combos --- */
+.hud-col-left { display: flex; flex-direction: column; gap: 15px; }
+
+.hud-combo-card-premium {
+  background: var(--hud-bg);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--hud-stroke);
+  border-radius: 12px;
+  padding: 10px 15px;
+  box-shadow: var(--hud-shadow);
+  transition: transform 0.3s ease;
+}
+
+.combo-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.combo-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.combo-slots-row {
+  display: flex;
+  gap: 6px;
+}
+
+.hud-slot {
+  width: 25px; height: 8px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.banana-slot.active { background: #ffeb3b; box-shadow: 0 0 10px #ffeb3b; border-color: #fff; }
+.bomb-slot.active { background: #ff5252; box-shadow: 0 0 10px #ff5252; border-color: #fff; }
+
+/* --- Columna Central: Score "Triple Stroke" --- */
+.hud-col-center {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.score-display-premium {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+
+.score-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #fff;
+  opacity: 0.5;
+  margin-bottom: -5px;
+}
+
+/* EL EFECTO TRIPLE STROKE (Negro - Oro - Negro) */
+.score-value {
+  font-size: 4rem;
+  font-weight: 950;
+  color: #fff;
+  line-height: 1;
+  font-family: 'Outfit', sans-serif;
+  text-shadow: 
+    /* 1st Stroke: Negro (Fino) */
+    -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000,
+    /* 2nd Stroke: Oro (Medio) */
+    -3px -3px 0 var(--hud-gold), 3px -3px 0 var(--hud-gold), -3px 3px 0 var(--hud-gold), 3px 3px 0 var(--hud-gold),
+    /* 3rd Stroke: Negro (Ancho) */
+    -5px -5px 0 #000, 5px -5px 0 #000, -5px 5px 0 #000, 5px 5px 0 #000,
+    /* Glow de fondo */
+    0 10px 20px rgba(0,0,0,0.8);
+}
+
+.score-punch {
+  animation: score-punch 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.progress-percent-container {
+  margin-top: 10px;
+  color: var(--hud-gold);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* --- Columna Derecha: Health --- */
+.hud-col-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.main-hearts-hud {
+  background: var(--hud-bg);
+  padding: 10px 15px;
+  border-radius: 15px;
+  border: 1px solid var(--hud-stroke);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-hearts-panel {
+  display: flex;
+  gap: 8px;
+}
+
+.heart {
+  width: 24px; height: 24px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+  background-size: contain;
+  filter: grayscale(1);
+  transition: all 0.3s ease;
+}
+
+.heart.active {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+  filter: grayscale(0) drop-shadow(0 0 5px rgba(255,0,0,0.5));
+}
+
+.lives-label { font-size: 0.6rem; margin-top: 5px; opacity: 0.6; }
+
+/* --- Barra de Progreso Vertical (Track Izquierdo) --- */
+.hud-vp-track {
+  position: absolute;
+  left: 20px; top: 100px;
+  width: 8px; height: 250px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: visible;
+}
+
+.hud-vp-fill {
+  position: absolute;
+  bottom: 0; width: 100%;
+  border-radius: 10px;
+  background: linear-gradient(0deg, #ffd700, #ffeb3b);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  transition: height 0.5s var(--ease-main);
+}
+
+.hud-vp-badge {
+  position: absolute;
+  bottom: -35px; left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  white-space: nowrap;
+  border: 1px solid var(--hud-gold);
+}
+
+/* --- Dash Bar (Bottom) --- */
+#dash-bar-container {
+  position: absolute;
+  bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  width: 300px; height: 12px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+#dash-bar-fill {
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, #00f2ff, #0072ff);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+  transition: width 0.1s linear;
+}
+
+#dash-bar-container.ready {
+  animation: nexus-pulse 1s infinite;
+  border-color: var(--hud-accent);
+}
+
+#dash-bar-container.ready::after {
+  content: 'DASH READY';
+  position: absolute;
+  top: -20px; left: 0; width: 100%;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--hud-accent);
+}
+
+/* --- Multiplier Floating --- */
+.multiplier-badge-premium {
+  position: absolute;
+  top: 100px; right: 20px;
+  background: var(--hud-bg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  padding: 8px 15px;
+  border-radius: 15px;
+  border: 2px solid var(--hud-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.mult-label { font-size: 0.6rem; color: #fff; opacity: 0.5; font-weight: 800; letter-spacing: 1px; }
+.mult-value { font-size: 1.5rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px var(--hud-accent); }
+
+.currency-hud-premium {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: 1px solid var(--hud-gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--hud-gold);
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="160" height="200" viewBox="0 0 160 200">
+    <!-- Aztec steps going up to a sharp top -->
+    <!-- Base step -->
+    <path d="M 10,200 L 150,200 L 130,160 L 30,160 Z" fill="#7F8C8D" stroke="#2C3E50" stroke-width="3"/>
+    <path d="M 30,160 L 130,160 L 110,120 L 50,120 Z" fill="#95A5A6" stroke="#2C3E50" stroke-width="3"/>
+    <path d="M 50,120 L 110,120 L 90,80 L 70,80 Z" fill="#BDC3C7" stroke="#2C3E50" stroke-width="3"/>
+    <!-- Sharp crystal/spear at the top -->
+    <path d="M 70,80 L 90,80 L 80,10 Z" fill="#3498DB" stroke="#2980B9" stroke-width="3"/>
+    <!-- Moss details -->
+    <path d="M 20,200 L 40,160 L 60,160" fill="none" stroke="#27AE60" stroke-width="4"/>
+    <path d="M 140,200 L 120,160" fill="none" stroke="#2ecc71" stroke-width="3"/>
+    <path d="M 120,160 L 100,120" fill="none" stroke="#27AE60" stroke-width="5"/>
+</svg>

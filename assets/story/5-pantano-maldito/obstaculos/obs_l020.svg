@@ -1,0 +1,22 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+        <filter id="texNoise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
+            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.3 0" in="noise" result="coloredNoise"/>
+            <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply"/>
+        </filter>
+        <filter id="glowLight">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+            </feMerge>
+        </filter>
+        <linearGradient id="mainGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1b5e20"/>
+            <stop offset="50%" stop-color="#33691e"/>
+            <stop offset="100%" stop-color="#827717"/>
+        </linearGradient>
+    </defs>
+    <rect x='0' y='0' width='100' height='100' fill='none' /><path d='M10,100 Q10,40 30,20 Q40,0 50,30 Q60,0 70,20 Q90,40 90,100 Z' fill='url(#mainGrad)' filter='url(#texNoise)'/><circle cx='50' cy='30' r='8' fill='#32CD32' filter='url(#glowLight)'/><polygon points='0,100 10,80 20,100' fill='#33691e'/><polygon points='80,100 90,80 100,100' fill='#33691e'/><polygon points='40,100 50,0 60,100' fill='#1b5e20' opacity='0.8'/>
+</svg>

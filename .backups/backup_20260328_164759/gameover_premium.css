@@ -1,0 +1,160 @@
+/* ================================================================
+   XANEZU CATCH — GAME OVER "ULTRA PREMIUM"
+   ================================================================ */
+
+:root {
+  --go-bg: rgba(5, 6, 15, 0.95);
+  --go-accent: #ff2d55; /* Electric Pink/Red for Game Over */
+  --go-gold: #ffd700;
+  --go-cyan: #00f2ff;
+}
+
+.gameover-screen {
+  background: radial-gradient(circle at center, rgba(255, 45, 85, 0.15) 0%, transparent 70%),
+              var(--go-bg) !important;
+  border: 1px solid rgba(255, 45, 85, 0.3) !important;
+  display: flex !important;
+  flex-direction: column;
+  padding: 40px !important;
+  animation: go-entry 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes go-entry {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); filter: blur(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+/* --- Main Layout --- */
+.gameover-content-premium {
+  display: grid;
+  grid-template-columns: 280px 1fr 300px;
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+}
+
+/* --- Center Section: The Score --- */
+.go-center-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.go-score-label {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--go-accent);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.go-big-num {
+  font-size: 8rem;
+  font-weight: 950;
+  line-height: 1;
+  background: linear-gradient(to bottom, #fff 30%, var(--go-accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 30px rgba(255, 45, 85, 0.4));
+  margin-bottom: 20px;
+}
+
+/* --- Right Panel: Session Stats --- */
+.go-right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stat-box-premium {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--go-cyan);
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
+}
+
+.stat-box-premium:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.stat-box-premium .stat-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.stat-box-premium .stat-value {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+/* --- Buttons --- */
+.go-actions-premium {
+  display: flex;
+  gap: 20px;
+  margin-top: auto;
+  padding-top: 30px;
+}
+
+.btn-go-primary {
+  flex: 2;
+  background: linear-gradient(135deg, var(--go-accent), #8e2de2);
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 900;
+  padding: 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
+  transition: 0.3s;
+}
+
+.btn-go-primary:hover {
+  transform: translateY(-5px);
+  filter: brightness(1.2);
+  box-shadow: 0 15px 40px rgba(255, 45, 85, 0.5);
+}
+
+.btn-go-secondary {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.btn-go-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Left Panel Adjustments --- */
+.scroll-premium {
+  scrollbar-width: thin;
+  scrollbar-color: var(--go-accent) rgba(255,255,255,0.05);
+}

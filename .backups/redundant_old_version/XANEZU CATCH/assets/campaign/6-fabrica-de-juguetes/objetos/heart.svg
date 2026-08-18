@@ -1,0 +1,46 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradiente radial para el volumen 2.5D -->
+    <radialGradient id="heartGradient" cx="35%" cy="35%" r="65%" fx="35%" fy="35%">
+      <stop offset="0%" style="stop-color:#FF5E5E;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FF2A2A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B31D1D;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Filtro de glow suave -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Sombra inferior sutil -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#800000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Brillo exterior muy leve -->
+  <path d="M50 88 C50 88 15 65 15 38 C15 22 28 12 40 12 C46 12 50 16 50 16 C50 16 54 12 60 12 C72 12 85 22 85 38 C85 65 50 88 50 88 Z" 
+        fill="none" stroke="#FF2A2A" stroke-width="4" opacity="0.2" filter="url(#glow)"/>
+
+  <!-- El Corazón Principal -->
+  <path d="M50 85 C50 85 18 63 18 38 C18 24 29 15 40 15 C45 15 50 19 50 19 C50 19 55 15 60 15 C71 15 82 24 82 38 C82 63 50 85 50 85 Z" 
+        fill="url(#heartGradient)" 
+        stroke="#8B0000" 
+        stroke-width="1.5"
+        filter="url(#shadow)"/>
+
+  <!-- Brillo / Highlight superior izquierdo (estilo Rayman) -->
+  <path d="M32 25 C25 25 22 35 22 40 C22 45 25 48 28 48 C31 48 35 40 35 35 C35 30 38 25 32 25 Z" 
+        fill="white" 
+        fill-opacity="0.35" 
+        filter="blur(1px)"/>
+        
+  <!-- Segundo highlight más pequeño y nítido -->
+  <circle cx="34" cy="30" r="3" fill="white" fill-opacity="0.5" />
+
+  <!-- Sombra interna inferior suave -->
+  <path d="M30 70 C40 78 60 78 70 70 C60 75 40 75 30 70 Z" 
+        fill="#800000" 
+        fill-opacity="0.2"/>
+</svg>

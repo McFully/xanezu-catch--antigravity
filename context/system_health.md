@@ -1,0 +1,26 @@
+# System Health (Estado de Salud)
+
+- **Estado Actual**: Estable (v1.8.2-STABLE)
+- **Última Verificación**: 19/04/2026
+- **Problemas Detectados**:
+  - [x] Regresiones en `GameEngine.ts` (Score/XP reiniciando a 0) - (VERIFICADO).
+  - [x] Vibración excesiva de cámara en modo ABLIA - (Corregido).
+  - [x] Error de sintaxis y codificación en `GameOverComponent` - (Corregido).
+  - [x] Desajuste de clases CSS en `LoadingScreen` - (Resuelto).
+  - [x] Inconsistencia en navegación de `GameOver` - (Corregido).
+  - [x] Refs obsoletas al DOM en `Game.js` (Corregido).
+  - [x] Crash en `ChapterManager` por falta de `isChapterCompleted` (Resuelto).
+  - [x] Errores 404 masivos en carga de fondos de historia (Mitigado/Limpio).
+  - [x] ReferenceError: `activeBiome` en `Game.js` (Resuelto).
+  - [x] Eliminación de `main_skeleton.js` y dependencias DOM (Completado - Fase 1).
+  - [x] Eliminación de etiqueta `theme-color` en `index.html` (Reducido/Unificado).
+  - [x] Errores de formato Markdown en `scratchpad_s2j5p3oy.md` (Corregido).
+  - [x] Errores de formato Markdown en `task.md` y `walkthrough.md` (Corregido).
+  - [x] Migración masiva de nomenclatura ABLIA -> TALK (Revertido a ABLIA por error de diseño).
+  - [x] Normalización de 48 capítulos con IDs string únicos (Completado).
+  - [x] Reorganización física de assets en `/assets/ablia/` (Restaurado).
+  - [x] Imágenes de fondo faltantes en Nivel 1 Historia (Corregido: Pathing fix).
+  - [x] Texto sobre la cabeza del jugador (Eliminado: FloatingText disabled).
+- **Métricas de Rendimiento**:
+  - FPS: N/A (Esperado 60fps)
+  - Latencia de Input: N/A
