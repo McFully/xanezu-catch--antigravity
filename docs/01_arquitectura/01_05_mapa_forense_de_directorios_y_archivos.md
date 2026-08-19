@@ -1,0 +1,156 @@
+# MAPA FORENSE DE DIRECTORIOS Y ARCHIVOS
+
+## 1. INVENTARIO COMPLETO DE ARCHIVOS
+Total de archivos auditados: **10443**
+
+- `.gitignore`
+- `angular.json`
+- `electron_main.js`
+- `favicon.ico`
+- `GUIA_DE_INSTALACION.md`
+- `implementation_plan.md`
+- `index.css`
+- `index.html`
+- `INICIO.bat`
+- `INICIO_DESKTOP.bat`
+- `INICIO_WEB.bat`
+- `LICENSE`
+- `MODO_DESARROLLADOR.bat`
+- `package-lock.json`
+- `package.json`
+- `preload.js`
+- `README.md`
+- `task.md`
+- `tsconfig.app.json`
+- `tsconfig.json`
+- `tsconfig.spec.json`
+- `walkthrough.md`
+- `.agents/rules/3_hub_y_audio.md`
+- `.agents/rules/critical_files.md`
+- `.agents/rules/dom_superior.md`
+- `.agents/rules/fondos.md`
+- `.agents/rules/modos_de_juego.md`
+- `.agents/rules/navigation_tree.md`
+- `.agents/rules/norefrescar.md`
+- `.agents/rules/plan_maestro.md`
+- `.agents/rules/protocolos.md`
+- `.agents/rules/sistema-progresion-xp.md`
+- `.angular/cache/21.2.18/xanezu-app/.tsbuildinfo`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/@angular_common.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/@angular_common.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/@angular_core.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/@angular_core.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/@angular_platform-browser.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/@angular_platform-browser.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/@angular_router.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/@angular_router.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/chunk-66JEQISA.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/chunk-66JEQISA.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/chunk-B5GJ42UP.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/chunk-B5GJ42UP.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/chunk-KH7DKL2N.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/chunk-KH7DKL2N.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/chunk-PJVWDKLX.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/chunk-PJVWDKLX.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/package.json`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/rxjs.js`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/rxjs.js.map`
+- `.angular/cache/21.2.18/xanezu-app/vite/deps/_metadata.json`
+- `.backups/backup_20260328_164759/asset_optimizer.js`
+- `.backups/backup_20260328_164759/audio_optimizer.js`
+- `.backups/backup_20260328_164759/chapters_premium.css`
+- `.backups/backup_20260328_164759/electron_main.js`
+- `.backups/backup_20260328_164759/Fixing Game Start Menu.md`
+- `.backups/backup_20260328_164759/gameover_premium.css`
+- `.backups/backup_20260328_164759/GUIA_DE_INSTALACION.md`
+- `.backups/backup_20260328_164759/hud_redesign.css`
+- `.backups/backup_20260328_164759/IMPLEMENTATION_PLAN.md`
+- `.backups/backup_20260328_164759/index.css`
+- `.backups/backup_20260328_164759/index.html`
+- `.backups/backup_20260328_164759/navigation_tree.md`
+- `.backups/backup_20260328_164759/nexus.css`
+- `.backups/backup_20260328_164759/nexus.js`
+- `.backups/backup_20260328_164759/optimization_report.md`
+- `.backups/backup_20260328_164759/package-lock.json`
+- `.backups/backup_20260328_164759/package.json`
+- `.backups/backup_20260328_164759/shop_premium.css`
+- `.backups/backup_20260328_164759/style.css`
+- `.backups/backup_20260328_164759/js/constants.js`
+- `.backups/backup_20260328_164759/js/main.js`
+- `.backups/backup_20260328_164759/js/main_skeleton.js`
+- `.backups/backup_20260328_164759/js/core/ABLChapterRegistry.js`
+- `.backups/backup_20260328_164759/js/core/ArcadeChapterRegistry.js`
+- `.backups/backup_20260328_164759/js/core/AssetLoader.js`
+- `.backups/backup_20260328_164759/js/core/BiomeRenderer.js`
+- `.backups/backup_20260328_164759/js/core/ChapterRegistry.js`
+- `.backups/backup_20260328_164759/js/core/ErrorLogger.js`
+- `.backups/backup_20260328_164759/js/core/Game.js`
+- `.backups/backup_20260328_164759/js/core/LevelPainter.js`
+- `.backups/backup_20260328_164759/js/core/MusicSynth.js`
+- `.backups/backup_20260328_164759/js/core/N64UIRenderer.js`
+- `.backups/backup_20260328_164759/js/core/ProceduralMusicEngine.js`
+- `.backups/backup_20260328_164759/js/core/SkinRegistry.js`
+- `.backups/backup_20260328_164759/js/core/UIManager.js`
+- `.backups/backup_20260328_164759/js/entities/BaseEntity.js`
+- `.backups/backup_20260328_164759/js/entities/Boss.js`
+- `.backups/backup_20260328_164759/js/entities/BossProjectile.js`
+- `.backups/backup_20260328_164759/js/entities/Companion.js`
+- `.backups/backup_20260328_164759/js/entities/Effects.js`
+- `.backups/backup_20260328_164759/js/entities/Fly.js`
+- `.backups/backup_20260328_164759/js/entities/Items.js`
+- `.backups/backup_20260328_164759/js/entities/Obstacle.js`
+- `.backups/backup_20260328_164759/js/entities/Player.js`
+- `.backups/backup_20260328_164759/js/managers/AchievementManager.js`
+- `.backups/backup_20260328_164759/js/managers/ChapterManager.js`
+- `.backups/backup_20260328_164759/js/managers/CharacterFactory.js`
+- `.backups/backup_20260328_164759/js/managers/GameStateManager.js`
+- `.backups/backup_20260328_164759/js/managers/LevelManager.js`
+- `.backups/backup_20260328_164759/js/managers/MilestoneManager.js`
+- `.backups/backup_20260328_164759/js/managers/RankManager.js`
+- `.backups/backup_20260328_164759/js/managers/SaveSystem.js`
+- `.backups/backup_20260328_164759/js/managers/ScoreSystem.js`
+- `.backups/backup_20260328_164759/js/managers/ShopManager.js`
+- `.backups/backup_20260328_164759/js/managers/SpawnManager.js`
+- `.backups/backup_20260328_164759/js/managers/UnlockSystem.js`
+- `.backups/backup_20260328_164759/js/managers/WeatherManager.js`
+- `.backups/redundant_old_version/N64UIRenderer.js`
+- `.backups/redundant_old_version/XANEZU CATCH/asset_optimizer.js`
+- `.backups/redundant_old_version/XANEZU CATCH/audio_optimizer.js`
+- `.backups/redundant_old_version/XANEZU CATCH/convert_png_to_webp.py`
+- `.backups/redundant_old_version/XANEZU CATCH/electron_main.js`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_aaa_bgs.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_aaa_items.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_aaa_obstacles.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_backgrounds.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_chapter_bgs.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_chars_items.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_desert_obs.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_frog_heroes.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_heroes.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_level_bgs.mjs`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_level_bgs.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_level_obs.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_rayman_all.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/generate_rayman_desert.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/GUIA_DE_INSTALACION.md`
+- `.backups/redundant_old_version/XANEZU CATCH/IMPLEMENTATION_PLAN.md`
+- `.backups/redundant_old_version/XANEZU CATCH/index.html`
+- `.backups/redundant_old_version/XANEZU CATCH/optimization_report.md`
+- `.backups/redundant_old_version/XANEZU CATCH/package.json`
+- `.backups/redundant_old_version/XANEZU CATCH/REDISEÑO_ARTISTICO.md`
+- `.backups/redundant_old_version/XANEZU CATCH/style.css`
+- `.backups/redundant_old_version/XANEZU CATCH/update_candies.ps1`
+- `.backups/redundant_old_version/XANEZU CATCH/WALKTHROUGH.md`
+- `.backups/redundant_old_version/XANEZU CATCH/.backup_png/assets/1-selva-tropical/fondos/nivel_2/nubes.png`
+- `.backups/redundant_old_version/XANEZU CATCH/.backup_png/assets/1-selva-tropical/fondos/nivel_2/primer_plano.png`
+- `.backups/redundant_old_version/XANEZU CATCH/.backup_png/assets/1-selva-tropical/fondos/nivel_3/nubes.png`
+- `.backups/redundant_old_version/XANEZU CATCH/.backup_png/assets/1-selva-tropical/fondos/nivel_3/primer_plano.png`
+- `.backups/redundant_old_version/XANEZU CATCH/.backup_png/assets/1-selva-tropical/fondos/nivel_4/fondo_lejano.png`
+- `.backups/redundant_old_version/XANEZU CATCH/.backup_png/assets/1-selva-tropical/fondos/nivel_4/nubes.png`
+- `.backups/redundant_old_version/XANEZU CATCH/.backup_png/assets/menu/fondo/mainmenu-image.png`
+- `.backups/redundant_old_version/XANEZU CATCH/arcade-phaser/index.html`
+- `.backups/redundant_old_version/XANEZU CATCH/arcade-phaser/manifest.json`
+- `.backups/redundant_old_version/XANEZU CATCH/arcade-phaser/service-worker.js`
+- `.backups/redundant_old_version/XANEZU CATCH/arcade-phaser/src/gameConfig.js`
+- `.backups/redundant_old_version/XANEZU CATCH/arcade-phaser/src/main.js`
+- ... y 10293 archivos adicionales registrados en inventario.
