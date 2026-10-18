@@ -17,16 +17,19 @@ XANEZU CATCH ANTIGRAVITY/
 │   │   ├── app.ts              # Componente raíz del juego
 │   │   ├── app.config.ts       # Configuración global de Angular
 │   │   ├── app.routes.ts       # Rutas de la aplicación
-│   │   ├── canvas/             # Componente envoltorio de HTML5 Canvas
+│   │   ├── canvas/             # Componente envoltorio de HTML5 Canvas y puente con el DOM
 │   │   ├── core/               # Lógica global, servicios, modelos y constantes
-│   │   │   ├── services/       # Servicios de datos, progresión y estado
-│   │   │   └── audio.service.ts# Gestor de efectos sonoros y música
-│   │   ├── game/               # Motor de juego, físicas, colisiones y niveles
-│   │   │   ├── engine/         # Lógica central del motor (GameEngine, AssetLoader, etc.)
-│   │   │   └── entities/       # Definición de entidades (jugador, obstáculos, premios)
-│   │   └── ui/                 # Componentes UI de Angular (menús, HUD, pantallas)
+│   │   │   ├── constants/      # Progresión determinista XP y 48 capítulos
+│   │   │   ├── models/         # Interfaces de estado, capítulos y entidades
+│   │   │   ├── services/       # GameStateService, ProgressionService, ChapterService, GameDataService
+│   │   │   └── audio.service.ts# Gestor unificado de efectos sonoros y música
+│   │   ├── game/               # Motor de juego, físicas, colisiones y renderizadores
+│   │   │   ├── engine/         # GameEngine, AssetLoader, InputController, Director, Physics, ItemEffects
+│   │   │   ├── entities/       # Definición de entidades (Player, Obstacle, Item)
+│   │   │   └── renderer/       # SceneRenderer, BiomeRenderer, AbliaRenderer, AbliaPrimitives, LoadingRenderer
+│   │   └── ui/                 # Componentes UI de Angular (HUD, menús, pantallas con HTML/CSS desacoplados)
 │   ├── index.html              # Plantilla HTML principal
 │   ├── main.ts                 # Punto de entrada de Angular
 │   └── styles.css              # Estilos globales de la aplicación
-└── tests/                      # Scripts y suites de pruebas unitarias
+└── tests/                      # Suites de pruebas unitarias y de arquitectura (logic.test.mjs)
 ```\n

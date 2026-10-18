@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { GameStateService } from '../../core/services/game-state.service';
 import { GameState } from '../../core/models/game-state.enum';
 import { AudioService } from '../../core/audio.service';
-
-import { GameItem, Skin, GameDataService } from '../../core/services/game-data.service';
+import { Skin, GameDataService } from '../../core/services/game-data.service';
+import { ProgressionService } from '../../core/services/progression.service';
 
 @Component({
   selector: 'app-skin-selector',
@@ -16,12 +16,12 @@ import { GameItem, Skin, GameDataService } from '../../core/services/game-data.s
       
       <header class="skin-header">
         <button class="btn-back" (click)="goBack()">
-          <span class="icon">BACK</span>
+          <span class="icon">VOLVER</span>
         </button>
-        <h1 class="title">SKINS & <span>AVATAR</span></h1>
+        <h1 class="title">SKINS Y <span>AVATAR</span></h1>
         <div class="coin-display">
           <span class="coin-icon">🟡</span>
-          <span class="coin-val">{{ coins }}</span>
+          <span class="coin-val">{{ progression.totalCoins() }}</span>
         </div>
       </header>
     
@@ -45,7 +45,7 @@ import { GameItem, Skin, GameDataService } from '../../core/services/game-data.s
             <button 
               *ngIf="!selectedSkin()?.unlocked" 
               class="btn-unlock-premium" 
-              [disabled]="coins < (selectedSkin()?.price || 0)"
+              [disabled]="progression.totalCoins() < (selectedSkin()?.price || 0)"
               (click)="unlockSkin()">
               <span>DESBLOQUEAR · {{ selectedSkin()?.price }}</span>
             </button>
@@ -180,29 +180,22 @@ import { GameItem, Skin, GameDataService } from '../../core/services/game-data.s
 export class SkinSelectorComponent {
   private gameStateService = inject(GameStateService);
   private audioService = inject(AudioService);
-
+  public progression = inject(ProgressionService);
+  protected gameData = inject(GameDataService);
 
   public selectedSkin = signal<Skin | null>(null);
-  protected gameData = inject(GameDataService);
-  public coins: number = 0;
 
   constructor() {
     this.loadState();
   }
 
   loadState() {
-    const savedCoins = localStorage.getItem('mx_total_coins');
-    this.coins = savedCoins ? parseInt(savedCoins) : 0;
-
     const currentSkinId = localStorage.getItem('mx_active_skin') || 'frog_og';
-    
-    // Cargar estados de desbloqueo desde persistencia local al catálogo central para esta sesión
     this.gameData.skins.forEach(s => {
       if (s.id !== 'frog_og') {
         s.unlocked = localStorage.getItem(`skin_unlocked_${s.id}`) === 'true';
       }
     });
-
     this.selectedSkin.set(this.gameData.skins.find(s => s.id === currentSkinId) || this.gameData.skins[0]);
   }
 
@@ -216,13 +209,11 @@ export class SkinSelectorComponent {
 
   unlockSkin() {
     const skin = this.selectedSkin();
-    if (!skin || skin.unlocked || this.coins < (skin.price || 0)) return;
+    if (!skin || skin.unlocked) return;
+    if (!this.progression.spendCoins(skin.price || 0)) return;
 
     this.audioService.playCollect(2);
-    this.coins -= (skin.price || 0);
     skin.unlocked = true;
-
-    localStorage.setItem('mx_total_coins', this.coins.toString());
     localStorage.setItem(`skin_unlocked_${skin.id}`, 'true');
     localStorage.setItem('mx_active_skin', skin.id);
   }

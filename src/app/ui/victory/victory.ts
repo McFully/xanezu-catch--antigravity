@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GameStateService } from '../../core/services/game-state.service';
 import { GameState } from '../../core/models/game-state.enum';
 import { GameDataService } from '../../core/services/game-data.service';
+import { ChapterService } from '../../core/services/chapter.service';
 import { AudioService } from '../../core/audio.service';
 
 @Component({
@@ -13,14 +14,13 @@ import { AudioService } from '../../core/audio.service';
     <div class="overlay" [class]="gameStateService.currentMode()">
       <div class="victory-card">
         <div class="badge">
-          @if (gameStateService.currentMode() === 'story') { MISSION COMPLETE }
-          @else if (gameStateService.currentMode() === 'arcade') { NUEVO RÉCORD }
+          @if (gameStateService.currentMode() === 'story') { MISIÓN COMPLETADA }
+          @else if (gameStateService.currentMode() === 'arcade') { RÉCORD SUPERADO }
           @else { MODO <span>ABLIA</span> }
         </div>
         
         <div class="stats-grid">
           @if (gameStateService.currentMode() === 'story') {
-            <!-- MODO HISTORIA: 4 HUBS -->
             <div class="column">
               <div class="hub">
                 <span class="label">RECOMPENSAS</span>
@@ -29,7 +29,7 @@ import { AudioService } from '../../core/audio.service';
                     <div class="item-entry">
                       <span class="icon">{{ item.icon }}</span>
                       <span class="name">{{ item.name }}</span>
-                      <span class="count">x{{ getRandomCount() }}</span>
+                      <span class="count">x{{ getItemCount(item.id) }}</span>
                     </div>
                   }
                 </div>
@@ -41,7 +41,7 @@ import { AudioService } from '../../core/audio.service';
                     <div class="item-entry">
                       <span class="icon">{{ item.icon }}</span>
                       <span class="name">{{ item.name }}</span>
-                      <span class="count">x{{ getRandomCount() }}</span>
+                      <span class="count">x{{ getItemCount(item.id) }}</span>
                     </div>
                   }
                 </div>
@@ -55,7 +55,7 @@ import { AudioService } from '../../core/audio.service';
                     <div class="item-entry">
                       <span class="icon">{{ item.icon }}</span>
                       <span class="name">{{ item.name }}</span>
-                      <span class="status">MAX LEVEL</span>
+                      <span class="status">ACTIVO</span>
                     </div>
                   }
                 </div>
@@ -67,21 +67,20 @@ import { AudioService } from '../../core/audio.service';
                     <div class="item-entry">
                       <span class="icon">{{ item.icon }}</span>
                       <span class="name">{{ item.name }}</span>
-                      <span class="found">UNLOCKED</span>
+                      <span class="found">DESBLOQUEADO</span>
                     </div>
                   }
                 </div>
               </div>
             </div>
           } @else if (gameStateService.currentMode() === 'arcade') {
-            <!-- MODO ARCADE: RÉCORDS -->
             <div class="column">
               <div class="hub arcade-highlight">
                 <span class="label">LOGROS ARCADE</span>
                 <div class="arcade-stats">
-                  <div class="stat-row"><span>PUNTOS TOTALES</span> <span class="v">450K</span></div>
-                  <div class="stat-row"><span>MULTIPLICADOR MAX</span> <span class="v">x8.0</span></div>
-                  <div class="stat-row"><span>BONO VELOCIDAD</span> <span class="v">+15%</span></div>
+                  <div class="stat-row"><span>PUNTOS TOTALES</span> <span class="v">{{ (gameData.lastGameStats.score || 0) | number }}</span></div>
+                  <div class="stat-row"><span>MULTIPLICADOR MÁX</span> <span class="v">x{{ gameData.lastGameStats.maxMultiplier || 1 }}</span></div>
+                  <div class="stat-row"><span>NIVEL ALCANZADO</span> <span class="v">NIV. {{ gameData.lastGameStats.level || 0 }}</span></div>
                 </div>
               </div>
             </div>
@@ -93,14 +92,13 @@ import { AudioService } from '../../core/audio.service';
                     <div class="item-entry">
                       <span class="icon">{{ item.icon }}</span>
                       <span class="name">{{ item.name }}</span>
-                      <span class="count">x{{ getRandomCount() }}</span>
+                      <span class="count">x{{ getItemCount(item.id) }}</span>
                     </div>
                   }
                 </div>
               </div>
             </div>
           } @else {
-            <!-- MODO ABLIA: ADAPTIVIDAD -->
             <div class="column">
               <div class="hub ia-focus">
                 <span class="label">ANALÍTICA ABLIA</span>
@@ -112,7 +110,7 @@ import { AudioService } from '../../core/audio.service';
                   </div>
                   <div class="metric">
                     <span>NIVEL ADAPTATIVO</span>
-                    <span class="val" style="font-size: 1.5rem">ALPHA-9</span>
+                    <span class="val" style="font-size: 1.5rem">NIV. {{ gameData.lastGameStats.level || 1 }}</span>
                   </div>
                 </div>
               </div>
@@ -127,14 +125,14 @@ import { AudioService } from '../../core/audio.service';
         </div>
 
         <div class="score-summary">
-          <div class="stat"><span>Total Puntos:</span> <span class="val">350,000+</span></div>
-          <div class="stat highlight"><span>Monedas Xanezu:</span> <span class="val">+2,500</span></div>
+          <div class="stat"><span>Total Puntos:</span> <span class="val">{{ (gameData.lastGameStats.score || 0) | number }}</span></div>
+          <div class="stat highlight"><span>Monedas Xanezu:</span> <span class="val">+{{ (gameData.lastGameStats.coinsEarned || 0) | number }}</span></div>
         </div>
 
         <div class="actions">
           <button class="btn-primary" (click)="nextChapter()">SIGUIENTE CAPÍTULO</button>
           <div class="btn-group">
-            <button class="btn-secondary" (click)="navigate(GameState.MODE_SELECT)">CAPÍTULOS</button>
+            <button class="btn-secondary" (click)="goToChapters()">CAPÍTULOS</button>
             <button class="btn-secondary" (click)="navigate(GameState.MAIN_MENU)">INICIO</button>
           </div>
         </div>
@@ -150,7 +148,6 @@ import { AudioService } from '../../core/audio.service';
       --theme-color: #A6F616; --theme-glow: rgba(166, 246, 22, 0.4);
     }
 
-    /* Temas Dinámicos */
     .overlay.story { --theme-color: #00f2ff; --theme-glow: rgba(0, 242, 255, 0.4); }
     .overlay.arcade { --theme-color: #A6F616; --theme-glow: rgba(166, 246, 22, 0.4); }
     .overlay.ablia { --theme-color: #FFD700; --theme-glow: rgba(255, 215, 0, 0.4); }
@@ -167,8 +164,6 @@ import { AudioService } from '../../core/audio.service';
       font-weight: 900; font-size: 0.75rem; letter-spacing: 2px;
       box-shadow: 0 0 20px var(--theme-glow);
     }
-    .title { font-size: 3.5rem; margin-bottom: 2rem; letter-spacing: -2px; font-weight: 900; text-transform: uppercase; }
-    .title span { color: var(--theme-color); text-shadow: 0 0 25px var(--theme-glow); }
     
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: 350px; margin-bottom: 2rem; }
     .column { display: flex; flex-direction: column; gap: 1rem; }
@@ -183,12 +178,10 @@ import { AudioService } from '../../core/audio.service';
     .item-entry { display: flex; align-items: center; gap: 0.8rem; background: rgba(255,255,255,0.02); padding: 0.5rem; border-radius: 12px; font-size: 0.8rem; }
     .count, .status, .found { margin-left: auto; font-weight: 800; color: var(--theme-color); font-size: 0.7rem; }
 
-    /* Arcade Stats */
     .arcade-stats { display: flex; flex-direction: column; gap: 1.2rem; justify-content: center; height: 100%; }
     .stat-row { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; }
     .stat-row .v { color: var(--theme-color); }
 
-    /* IA Metrics */
     .ia-metrics { display: flex; flex-direction: column; gap: 1.5rem; justify-content: center; height: 100%; }
     .metric { margin-bottom: 0.5rem; }
     .metric span:not(.val) { font-size: 0.7rem; opacity: 0.6; display: block; margin-bottom: 0.4rem; }
@@ -214,13 +207,37 @@ export class VictoryComponent {
   public gameStateService = inject(GameStateService);
   private audioService = inject(AudioService);
   public gameData = inject(GameDataService);
+  private chapterService = inject(ChapterService);
   public GameState = GameState;
 
-  getRandomCount() { return Math.floor(Math.random() * 5) + 1; }
-  
+  getItemCount(id: string): number {
+    return this.gameData.lastGameStats.itemsBySprite?.[id] || 0;
+  }
+
   nextChapter() {
     this.audioService.playClick();
-    this.gameStateService.navigate(GameState.MODE_SELECT);
+    const current = this.gameStateService.currentChapter();
+    if (current) {
+      const next = this.chapterService.unlockNextChapter(current.id) || this.chapterService.getNextChapter(current.id);
+      if (next) {
+        this.gameStateService.setChapter(next.id);
+        this.gameStateService.navigate(GameState.LOADING_SCREEN);
+        return;
+      }
+    }
+    this.goToChapters();
+  }
+
+  goToChapters() {
+    this.audioService.playClick();
+    const mode = this.gameStateService.currentMode();
+    if (mode === 'arcade') {
+      this.gameStateService.navigate(GameState.ARCADE_CHAPTER_SELECT);
+    } else if (mode === 'ablia') {
+      this.gameStateService.navigate(GameState.ABLIA_CHAPTER_SELECT);
+    } else {
+      this.gameStateService.navigate(GameState.STORY_CHAPTER_SELECT);
+    }
   }
 
   navigate(state: GameState) {

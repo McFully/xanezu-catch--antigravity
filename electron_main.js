@@ -50,10 +50,8 @@ function createWindow() {
     if (fs.existsSync(indexPath)) {
         mainWindow.loadFile(indexPath);
     } else {
-        mainWindow.loadURL('http://localhost:4200').catch(() => {
-            writeLog('error', { event: 'critical_failure', msg: 'Angular build not found and dev server inactive.' });
-            // Instead of falling back to legacy, we show a professional error if possible or just log it.
-            // For now, we strictly disable the legacy fallback to enforce plan_maestro.md
+        mainWindow.loadURL('http://localhost:3000').catch(() => {
+            writeLog('error', { event: 'critical_failure', msg: 'Angular build not found and dev server inactive on port 3000.' });
         });
     }
 

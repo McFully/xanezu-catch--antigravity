@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 export interface GameItem {
   id: string;
@@ -19,17 +19,26 @@ export interface Skin {
   price?: number;
 }
 
+export interface LastGameStats {
+  score: number;
+  time: string;
+  level: number;
+  maxMultiplier: number;
+  xp: number;
+  coinsEarned: number;
+  gemsEarned: number;
+  itemsBySprite: { [key: string]: number };
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class GameDataService {
-  // --- CATALOGS ---
-  
   public rewards: GameItem[] = [
     { id: 'banana', name: 'Banana', icon: '🍌', category: 'REWARD' },
     { id: 'candy', name: 'Caramelo', icon: '🍬', category: 'REWARD' },
     { id: 'star', name: 'Estrella', icon: '⭐', category: 'REWARD' },
-    { id: 'banana', name: 'Manzana', icon: '🍎', category: 'REWARD' },
+    { id: 'apple', name: 'Manzana', icon: '🍎', category: 'REWARD' },
     { id: 'grape', name: 'Uva', icon: '🍇', category: 'REWARD' },
     { id: 'cherry', name: 'Cereza', icon: '🍒', category: 'REWARD' },
     { id: 'watermelon', name: 'Sandía', icon: '🍉', category: 'REWARD' },
@@ -70,11 +79,11 @@ export class GameDataService {
   ];
 
   public shopItems: GameItem[] = [
-    { id: 'shield_up', name: 'Escudo Reforzado', description: 'Aguanta un golpe adicional sin recibir trauma.', price: 500, icon: '🛡️', category: 'UPGRADE' },
-    { id: 'magnet_up', name: 'Súper Imán', description: 'Duplica el rango de atracción de monedas.', price: 750, icon: '🧲', category: 'UPGRADE' },
-    { id: 'speed_boost', name: 'Turbo Propulsor', description: 'Aumenta la velocidad base de la nave.', price: 1000, icon: 'POWERUP', category: 'UPGRADE' }, // Re-categorized for consistency
-    { id: 'revive', name: 'Pack de Reanimación', description: 'Permite continuar tras un Game Over.', price: 200, icon: '💉', category: 'CONSUMABLE' },
-    { id: 'gem_finder', name: 'Radar de Gemas', description: 'Aumenta la frecuencia de aparición de gemas.', price: 1200, icon: '💎', category: 'UPGRADE' }
+    { id: 'shield_up', name: 'Escudo Reforzado', description: 'Inicia cada partida con un escudo protector activo.', price: 500, icon: '🛡️', category: 'UPGRADE' },
+    { id: 'magnet_up', name: 'Súper Imán', description: 'Activa atracción magnética permanente de coleccionables.', price: 750, icon: '🧲', category: 'UPGRADE' },
+    { id: 'gem_finder', name: 'Radar de Gemas', description: 'Duplica la frecuencia de aparición de gemas raras.', price: 1200, icon: '💎', category: 'UPGRADE' },
+    { id: 'speed_boost', name: 'Turbo Propulsor', description: 'Aumenta la agilidad de salto y bonificación de velocidad.', price: 1000, icon: '🚀', category: 'POWERUP' },
+    { id: 'revive', name: 'Pack de Reanimación', description: 'Otorga +1 vida adicional al iniciar o continuar partida.', price: 200, icon: '💉', category: 'CONSUMABLE' }
   ];
 
   public skins: Skin[] = [
@@ -83,24 +92,26 @@ export class GameDataService {
     { id: 'frog_fire', name: 'Inferno Frog', color: '#FF4D4D', emoji: '🔥', unlocked: false, price: 1500 },
     { id: 'frog_ninja', name: 'Shadow Ninja', color: '#ffffff', emoji: '🥷', unlocked: false, price: 2000 },
     { id: 'frog_alien', name: 'Zanezu Invader', color: '#FF00FF', emoji: '👽', unlocked: false, price: 3000 },
-    { id: 'frog_king', name: 'Royal Majesty', color: '#FFD700', emoji: '👑', unlocked: false, price: 5000 },
+    { id: 'frog_king', name: 'Royal Majesty', color: '#FFD700', emoji: '👑', unlocked: false, price: 5000 }
   ];
 
-  // --- TIPS ---
   public tips: string[] = [
-    "TIP: Explora todos los caminos para encontrar secretos.",
-    "TIP: Algunos obstáculos se pueden evitar saltando en el momento justo.",
-    "TIP: Cada capítulo tiene rutas ocultas.",
-    "TIP: El imán es vital para conseguir gemas lejanas.",
-    "TIP: ¡No olvides visitar la tienda Xanezu para mejorar tu nave!"
+    'TIP: Explora todos los caminos para encontrar secretos.',
+    'TIP: Algunos obstáculos se pueden evitar saltando en el momento justo.',
+    'TIP: Recoge 5 bananas para detonar todos los obstáculos en pantalla.',
+    'TIP: El imán es vital para conseguir gemas lejanas.',
+    'TIP: Visita la tienda Xanezu para equipar mejoras permanentes.'
   ];
 
-  public lastGameStats = {
+  public lastGameStats: LastGameStats = {
     score: 0,
-    time: '0:00',
-    level: 1,
+    time: '00:00',
+    level: 0,
     maxMultiplier: 1,
-    xp: 0
+    xp: 0,
+    coinsEarned: 0,
+    gemsEarned: 0,
+    itemsBySprite: {}
   };
 
   getRandomTip(): string {

@@ -21,8 +21,8 @@
     "fix:env": "powershell -ExecutionPolicy Bypass -File scripts/fix_environment.ps1"
   },
   "keywords": [],
-  "author": "Xanezu Games",
-  "license": "ISC",
+  "author": "Aritz Bahamonde Larxé",
+  "license": "UNLICENSED",
   "dependencies": {
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
@@ -48,9 +48,9 @@
     "vitest": "^4.0.8"
   },
   "build": {
-    "appId": "com.xanezu.mxcatch",
+    "appId": "com.aritzbahamonde.xanezucatch",
     "productName": "Xanezu Catch",
-    "copyright": "Copyright © 2026 Xanezu Games",
+    "copyright": "© 2026 Aritz Bahamonde Larxé. Todos los derechos reservados.",
     "directories": {
       "output": "dist"
     },

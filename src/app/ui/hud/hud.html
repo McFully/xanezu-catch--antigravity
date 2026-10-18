@@ -1,0 +1,119 @@
+<div class="hud-container" *ngIf="engine">
+  <!-- TOP HUD: 7 PREMIUM BLOCKS (dom_superior.md) -->
+  <div class="top-hud-bar" *ngIf="showTop">
+    <!-- 1. NIVEL -->
+    <div class="hud-block level-block">
+      <div class="label">NIVEL</div>
+      <div class="value large">{{ displayLevel }}</div>
+    </div>
+
+    <!-- 2. PROGRESO -->
+    <div class="hud-block progress-block extended-progress">
+      <div class="label">PROGRESO</div>
+      <div class="progress-container">
+        <div class="progress-bar-track">
+          <div class="progress-bar" [style.width.%]="displayProgressPercent"></div>
+        </div>
+        <div class="progress-text-row">
+          <span class="pts-current">Actual: {{ currentPoints | number:'1.0-0' }}</span>
+          <span class="pts-needed">Meta: {{ neededPoints | number:'1.0-0' }}</span>
+          <span class="pts-remaining">Faltan {{ remainingPoints | number:'1.0-0' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. BANANAS COMBO -->
+    <div class="hud-block combo-block bananas">
+      <div class="label">BANANAS COMBO</div>
+      <div class="combo-slots">
+        @for (i of [0,1,2,3,4]; track i) {
+          <div class="slot" [class.active]="engine.player.bananasCollected > i">🍌</div>
+        }
+      </div>
+    </div>
+
+    <!-- 4. CHUCHES COMBO -->
+    <div class="hud-block combo-block bombs">
+      <div class="label">CHUCHES COMBO</div>
+      <div class="combo-grid">
+        @for (i of [0,1,2,3,4,5,6,7,8,9]; track i) {
+          <div class="slot" [class.active]="engine.player.bombsCollected > i">🍬</div>
+        }
+      </div>
+    </div>
+
+    <!-- 5. VIDA EXTRA -->
+    <div class="hud-block life-grid-block">
+      <div class="label">VIDA EXTRA</div>
+      <div class="combo-grid">
+        @for (i of [0,1,2,3,4,5,6,7,8,9]; track i) {
+          <div class="heart-mini" [class.filled]="engine.player.extraLifeProgress > i">❤️</div>
+        }
+      </div>
+    </div>
+
+    <!-- 6. VIDAS -->
+    <div class="hud-block lives-block">
+      <div class="label">VIDAS</div>
+      <div class="lives-row">
+        @for (i of [0,1,2]; track i) {
+          <div class="heart" [class.active]="engine.player.lives > i">❤️</div>
+        }
+      </div>
+    </div>
+
+    <!-- 7. MULTIPLICADOR -->
+    <div class="hud-block multiplier-block shine">
+      <div class="label">MULTIPLICADOR</div>
+      <div class="value">x{{ engine.multiplier }}</div>
+      <div class="multiplier-timer">
+        <div class="timer-fill" [style.width.%]="engine.multiplierTimer"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM HUD: 3 SECTIONS -->
+  <div class="bottom-hud-bar" *ngIf="showBottom">
+    <div class="section left-section">
+      <div class="frog-icon-container">
+         <div class="frog-bg"></div>
+         <span class="emoji">🐸</span>
+      </div>
+      <div class="score-pill">
+        {{ engine.score | number:'1.0-0' }}
+      </div>
+    </div>
+
+    <div class="section center-section">
+      <div class="powerup-slot" [class.active]="engine.player.shieldActive" title="ESCUDO">
+         <span class="icon">🛡️</span>
+         <span class="status">{{ engine.player.shieldActive ? 'ACTIVO' : 'LISTO' }}</span>
+      </div>
+      <div class="powerup-slot" [class.active]="engine.player.magnetT > 0" title="IMÁN">
+         <span class="icon">🧲</span>
+         <span class="status">{{ engine.player.magnetT > 0 ? 'ACTIVO' : 'LISTO' }}</span>
+      </div>
+      <div class="powerup-slot" [class.active]="engine.hasSpeedBoost" title="VELOCIDAD">
+         <span class="icon">⚡</span>
+         <span class="status">{{ engine.hasSpeedBoost ? 'ACTIVO' : 'LISTO' }}</span>
+      </div>
+    </div>
+
+    <div class="section right-section">
+      <button class="trophy-btn" (click)="openTrophies()" aria-label="Trofeos" title="Ver Trofeos">🏆</button>
+      <div class="dev-tag">
+         <div class="dot"></div>
+         ABL ENGINE v1.8.2
+      </div>
+    </div>
+  </div>
+  
+  <!-- PAUSE OVERLAY -->
+  <div class="pause-overlay" *ngIf="engine.state === EngineState.PAUSED">
+     <div class="pause-content">
+        <h1>PAUSADO</h1>
+        <p>Pulsa ESC o ESPACIO para continuar</p>
+        <button class="exit-btn" (click)="exitGame()">SALIR AL MENÚ</button>
+     </div>
+  </div>
+</div>

@@ -1,10 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameStateService } from '../../core/services/game-state.service';
 import { GameState } from '../../core/models/game-state.enum';
 import { AudioService } from '../../core/audio.service';
-
 import { GameItem, GameDataService } from '../../core/services/game-data.service';
+import { ProgressionService } from '../../core/services/progression.service';
 
 @Component({
   selector: 'app-shop',
@@ -22,7 +22,7 @@ import { GameItem, GameDataService } from '../../core/services/game-data.service
           <h1 class="title">TIENDA <span>XANEZU</span></h1>
           <div class="wallet-premium">
             <span class="wallet-icon">🟡</span>
-            <span class="wallet-amount">{{ coins() }}</span>
+            <span class="wallet-amount">{{ progression.totalCoins() }}</span>
           </div>
         </div>
       </header>
@@ -53,7 +53,7 @@ import { GameItem, GameDataService } from '../../core/services/game-data.service
                 <button 
                   class="btn-action-premium"
                   [class.owned]="item.owned"
-                  [disabled]="!item.owned && coins() < (item.price || 0)"
+                  [disabled]="!item.owned && progression.totalCoins() < (item.price || 0)"
                   (click)="buyItem(item)">
                   @if (!item.owned) {
                     <span class="price">🛒 {{ item.price }}</span>
@@ -171,8 +171,9 @@ import { GameItem, GameDataService } from '../../core/services/game-data.service
 export class ShopComponent {
   private gameStateService = inject(GameStateService);
   private audioService = inject(AudioService);
+  public progression = inject(ProgressionService);
+  protected gameData = inject(GameDataService);
 
-  public coins = signal(0);
   public activeCategory = 'UPGRADE';
   public categories = [
     { id: 'UPGRADE', label: 'MEJORAS' },
@@ -180,17 +181,11 @@ export class ShopComponent {
     { id: 'CONSUMABLE', label: 'CONSUMIBLES' }
   ];
 
-
-  protected gameData = inject(GameDataService);
-
   constructor() {
     this.loadState();
   }
 
   loadState() {
-    const savedCoins = localStorage.getItem('mx_total_coins');
-    if (savedCoins) this.coins.set(parseInt(savedCoins));
-
     this.gameData.shopItems.forEach(item => {
       item.owned = localStorage.getItem(`shop_item_${item.id}`) === 'true';
     });
@@ -201,13 +196,11 @@ export class ShopComponent {
   }
 
   buyItem(item: GameItem) {
-    if (item.owned || this.coins() < (item.price || 0)) return;
+    if (item.owned) return;
+    if (!this.progression.spendCoins(item.price || 0)) return;
 
-    this.audioService.playCollect(3); // Sonido de compra
-    this.coins.update(c => c - (item.price || 0));
+    this.audioService.playCollect(3);
     item.owned = true;
-
-    localStorage.setItem('mx_total_coins', this.coins().toString());
     localStorage.setItem(`shop_item_${item.id}`, 'true');
   }
 

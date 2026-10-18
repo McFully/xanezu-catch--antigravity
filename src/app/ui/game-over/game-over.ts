@@ -102,7 +102,7 @@ import { GameState } from '../../core/models/game-state.enum';
               </div>
               <div class="go-stat-premium">
                 <span class="label">NIVEL ALCANZADO</span>
-                <span class="value">NIVEL {{ gameData.lastGameStats.level || 1 }}</span>
+                <span class="value">NIVEL {{ gameData.lastGameStats.level || 0 }}</span>
               </div>
               <div class="go-stat-premium">
                 <span class="label">MULTI. MÁXIMO</span>
@@ -233,7 +233,14 @@ export class GameOverComponent {
   }
 
   goToChapters() {
-    this.gameStateService.navigate(GameState.STORY_CHAPTER_SELECT);
+    const mode = this.gameStateService.currentMode();
+    if (mode === 'arcade') {
+      this.gameStateService.navigate(GameState.ARCADE_CHAPTER_SELECT);
+    } else if (mode === 'ablia') {
+      this.gameStateService.navigate(GameState.ABLIA_CHAPTER_SELECT);
+    } else {
+      this.gameStateService.navigate(GameState.STORY_CHAPTER_SELECT);
+    }
   }
 
   goToMenu() {

@@ -20,13 +20,12 @@ import { AudioService } from '../../core/audio.service';
         <div class="eula-card">
           <h2>CONTRATO DE LICENCIA (EULA)</h2>
           <div class="eula-content">
-            <p>Al utilizar este software, usted acepta los términos y condiciones de <strong>Xanezu Games</strong>.</p>
+            <p>Al utilizar este software, usted acepta los términos y condiciones de <strong>Aritz Bahamonde Larxé</strong>.</p>
             <ul>
-              <li>Uso no comercial exclusivamente.</li>
-              <li>Prohibida la ingeniería inversa.</li>
+              <li>Licencia privativa de uso personal exclusivamente.</li>
+              <li>Prohibida la ingeniería inversa y redistribución.</li>
               <li>Los activos del juego son propiedad intelectual registrada.</li>
               <li>Sistema de guardado local (partidas persistentes).</li>
-              <li>Uso de Cookies técnicas para el estado del juego.</li>
             </ul>
             <p>Esta experiencia utiliza aceleración por hardware (Canvas API) y sistemas de síntesis de audio avanzados.</p>
           </div>
@@ -42,7 +41,10 @@ import { AudioService } from '../../core/audio.service';
           <span class="icon">🛒</span> TIENDA XANEZU
         </button>
         <button class="btn-glass" (click)="navigate(GameState.SKIN_SELECTOR)">
-          <span class="icon">👕</span> SKINS & AVATAR
+          <span class="icon">👕</span> SKINS Y AVATAR
+        </button>
+        <button class="btn-glass" (click)="navigate(GameState.TROPHIES)">
+          <span class="icon">🏆</span> GALERÍA DE TROFEOS
         </button>
         <button class="btn-glass" (click)="navigate(GameState.SETTINGS)">
           <span class="icon">⚙️</span> AJUSTES
@@ -63,7 +65,6 @@ import { AudioService } from '../../core/audio.service';
              {{ audioService.isInitialized() ? (audioService.isMuted() ? 'SONIDO: OFF' : 'SONIDO: ON') : 'AUDIO BLOQUEADO' }}
            </div>
 
-           <!-- Mini Tooltip -->
            @if (showAudioTooltip) {
              <div class="audio-tooltip">¡Audio Desbloqueado!</div>
            }
@@ -74,10 +75,10 @@ import { AudioService } from '../../core/audio.service';
         SISTEMA ACTUALIZADO (v1.8.0)
       </div>
 
-      <div class="footer">
+      <footer class="footer">
         <span class="version">v1.8.0 - PREMIUM</span>
-        <span class="creator">BY XANEZU GAMES</span>
-      </div>
+        <span class="creator">© 2026 Aritz Bahamonde Larxé. Todos los derechos reservados.</span>
+      </footer>
     </div>
   `,
   styles: [`
@@ -91,7 +92,7 @@ import { AudioService } from '../../core/audio.service';
       font-family: 'Outfit', sans-serif; overflow: hidden;
     }
 
-    .logo-area { text-align: center; margin-bottom: 4rem; animation: fadeInDown 1s ease-out; }
+    .logo-area { text-align: center; margin-bottom: 2.5rem; animation: fadeInDown 1s ease-out; }
     .game-logo {
       font-size: 5rem; letter-spacing: -2px; margin: 0; color: #fff;
       text-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
@@ -102,13 +103,13 @@ import { AudioService } from '../../core/audio.service';
     }
     .tagline {
       font-size: 1.2rem; color: rgba(255, 255, 255, 0.5);
-      margin-top: 1rem; letter-spacing: 4px; text-transform: uppercase;
+      margin-top: 0.8rem; letter-spacing: 4px; text-transform: uppercase;
     }
 
-    .button-group { display: flex; flex-direction: column; gap: 1.2rem; width: 340px; }
+    .button-group { display: flex; flex-direction: column; gap: 0.9rem; width: 340px; }
 
     .btn-premium, .btn-glass {
-      border: none; padding: 1.2rem 2rem; font-size: 1.1rem; font-weight: 800;
+      border: none; padding: 1rem 2rem; font-size: 1.05rem; font-weight: 800;
       border-radius: 16px; cursor: pointer; display: flex; align-items: center;
       gap: 1.2rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       text-transform: uppercase; letter-spacing: 1px;
@@ -162,11 +163,10 @@ import { AudioService } from '../../core/audio.service';
     @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.5); } 100% { opacity: 1; transform: scale(1); } }
 
     .footer {
-      position: absolute; bottom: 2rem; display: flex; gap: 3rem;
-      color: rgba(255, 255, 255, 0.2); font-size: 10px; font-weight: 800; letter-spacing: 3px;
+      position: absolute; bottom: 1.5rem; display: flex; gap: 2rem;
+      color: rgba(255, 255, 255, 0.35); font-size: 10px; font-weight: 800; letter-spacing: 2px;
     }
 
-    /* EULA Overlay */
     .eula-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
       z-index: 5000; display: flex; align-items: center; justify-content: center;
@@ -192,8 +192,6 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit() {
     this.checkEula();
-    // El AudioContext ya fue desbloqueado en el Boot Screen.
-    // Reproducir música de menú — ya estará en caché, empieza instantáneamente.
     this.audioService.playMenuMusic();
   }
 

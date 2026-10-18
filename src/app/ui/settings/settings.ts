@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameStateService } from '../../core/services/game-state.service';
 import { AudioService } from '../../core/audio.service';
 import { GameState } from '../../core/models/game-state.enum';
+import { ProgressionService } from '../../core/services/progression.service';
 
 @Component({
   selector: 'app-settings',
@@ -26,18 +27,30 @@ import { GameState } from '../../core/models/game-state.enum';
           <div class="setting-item">
             <span class="label">DIFICULTAD</span>
             <div class="selector">
-              <button class="btn-sel" [class.active]="true">NORMAL</button>
-              <button class="btn-sel">DIFÍCIL</button>
+              <button 
+                class="btn-sel" 
+                [class.active]="progression.difficulty() === 'NORMAL'"
+                (click)="setDifficulty('NORMAL')">
+                NORMAL
+              </button>
+              <button 
+                class="btn-sel" 
+                [class.active]="progression.difficulty() === 'DIFÍCIL'"
+                (click)="setDifficulty('DIFÍCIL')">
+                DIFÍCIL
+              </button>
             </div>
           </div>
           <div class="setting-item">
             <span class="label">EXPORTAR PARTIDA</span>
-            <button class="btn-action">GENERAR BACKUP</button>
+            <button class="btn-action" (click)="exportBackup()">
+              {{ backupSaved() ? '✓ BACKUP DESCARGADO' : 'GENERAR BACKUP' }}
+            </button>
           </div>
         </div>
 
         <div class="footer">
-          <p>XANEZU CATCH - SISTEMA DE PERSISTENCIA ACTIVO</p>
+          <p>© 2026 Aritz Bahamonde Larxé. Todos los derechos reservados.</p>
         </div>
       </div>
     </div>
@@ -63,15 +76,18 @@ import { GameState } from '../../core/models/game-state.enum';
     }
     .btn-toggle.active { background: #00f2ff; color: #000; border-color: #00f2ff; box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
     .selector { display: flex; gap: 0.5rem; }
-    .btn-sel { background: none; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
-    .btn-sel.active { background: rgba(255,255,255,0.1); border-color: white; }
-    .btn-action { background: #ff00ff; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
-    .footer { margin-top: 3rem; font-size: 0.7rem; color: rgba(255,255,255,0.25); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem; }
+    .btn-sel { background: none; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+    .btn-sel.active { background: rgba(0, 242, 255, 0.2); border-color: #00f2ff; color: #00f2ff; font-weight: 800; }
+    .btn-action { background: #ff00ff; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; cursor: pointer; transition: transform 0.2s; }
+    .btn-action:hover { transform: scale(1.04); }
+    .footer { margin-top: 3rem; font-size: 0.7rem; color: rgba(255,255,255,0.35); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem; }
   `]
 })
 export class SettingsComponent {
   private stateService = inject(GameStateService);
   public audioService = inject(AudioService);
+  public progression = inject(ProgressionService);
+  public backupSaved = signal(false);
 
   async toggleAudio() {
     if (!this.audioService.isInitialized()) {
@@ -79,6 +95,25 @@ export class SettingsComponent {
     }
     this.audioService.toggleMute();
     this.audioService.playClick();
+  }
+
+  setDifficulty(diff: 'NORMAL' | 'DIFÍCIL') {
+    this.audioService.playClick();
+    this.progression.setDifficulty(diff);
+  }
+
+  exportBackup() {
+    this.audioService.playClick();
+    const json = this.progression.exportBackupJson();
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `xanezu-catch-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    this.backupSaved.set(true);
+    setTimeout(() => this.backupSaved.set(false), 3000);
   }
 
   close() {

@@ -5,6 +5,8 @@ import { GameState } from '../core/models/game-state.enum';
 import { GameEngine } from '../game/engine/game-engine';
 import { AudioService } from '../core/audio.service';
 import { GameDataService } from '../core/services/game-data.service';
+import { ProgressionService } from '../core/services/progression.service';
+import { ChapterService } from '../core/services/chapter.service';
 import { HUDComponent } from '../ui/hud/hud';
 
 @Component({
@@ -42,19 +44,7 @@ import { HUDComponent } from '../ui/hud/hud';
       height: 100vh;
       background: #000;
     }
-    .hub-slot.top {
-      flex: 1; 
-      height: 92px;
-      max-height: 92px;
-      display: flex;
-      align-items: center;
-      justify-content: stretch;
-      background: #050505;
-      position: relative;
-      z-index: 5;
-      box-sizing: border-box;
-      width: 100%;
-    }
+    .hub-slot.top,
     .hub-slot.bottom {
       flex: 1;
       height: 92px;
@@ -70,14 +60,14 @@ import { HUDComponent } from '../ui/hud/hud';
     }
     .canvas-container {
       width: 100vw;
-      height: auto; /* Altura dinámica */
-      aspect-ratio: 30 / 9; /* Mantener la proporción ultrawide core */
-      max-height: 80vh; /* Seguridad para no tapar los hubs del todo */
+      height: auto;
+      aspect-ratio: 30 / 9;
+      max-height: 80vh;
       position: relative;
       background: #000;
       box-shadow: 0 0 100px rgba(0,0,0,1);
       z-index: 10;
-      flex: 0 0 auto; /* El canvas manda en su altura según el aspect-ratio */
+      flex: 0 0 auto;
     }
     canvas {
       width: 100%;
@@ -93,30 +83,16 @@ export class GameCanvasComponent implements AfterViewInit, OnDestroy {
   private gameStateService = inject(GameStateService);
   private audioService = inject(AudioService);
   private gameData = inject(GameDataService);
+  private progressionService = inject(ProgressionService);
+  private chapterService = inject(ChapterService);
   private cdr = inject(ChangeDetectorRef);
   public engine: GameEngine | null = null;
-  private updateActive = true;
-
-  private tickHUD = () => {
-    if (this.engine) {
-      this.cdr.detectChanges();
-    }
-    if (this.updateActive) {
-      requestAnimationFrame(this.tickHUD);
-    }
-  };
 
   async ngAfterViewInit() {
-    console.log('[GameCanvas] 🎬 Initializing Ultrawide 30:9 Engine...');
     const canvas = this.canvasRef.nativeElement;
-    
-    // Fuerza inicial a dimensiones de contenedor
     this.updateCanvasSize();
-    
-    // Inicializar audio
     await this.audioService.init();
 
-    // Obtener capítulo activo
     const activeChapter = this.gameStateService.currentChapter();
     const activeMode = this.gameStateService.currentMode();
 
@@ -125,7 +101,27 @@ export class GameCanvasComponent implements AfterViewInit, OnDestroy {
       this.engine.mode = activeMode;
       this.cdr.detectChanges();
       
-      // Escuchar cambios de estado del motor para navegar en Angular
+      this.engine.onHudChange = () => {
+        this.cdr.detectChanges();
+      };
+
+      this.engine.onSessionEnd = (isVictory) => {
+        if (!this.engine) return;
+        this.progressionService.recordSessionEnd({
+          score: this.engine.score,
+          level: this.engine.level,
+          coinsTotal: this.engine.coins,
+          sessionCoins: this.engine.sessionCoins,
+          sessionGems: this.engine.sessionGems,
+          sessionJumps: this.engine.sessionJumps,
+          durationSeconds: this.engine.timer,
+          isDeath: !isVictory
+        });
+        if (isVictory && activeChapter) {
+          this.chapterService.unlockNextChapter(activeChapter.id);
+        }
+      };
+
       this.engine.onStateChange = (newState) => {
         if (newState === 'GAMEOVER') {
           this.gameStateService.navigate(GameState.GAME_OVER);
@@ -134,7 +130,6 @@ export class GameCanvasComponent implements AfterViewInit, OnDestroy {
         }
       };
 
-      // Sincronización de carga real
       this.engine.onProgressChange = (progress) => {
         this.gameStateService.loadingProgress.set(progress);
       };
@@ -143,26 +138,18 @@ export class GameCanvasComponent implements AfterViewInit, OnDestroy {
         this.gameStateService.engineReady.set(true);
       };
       
-      // Iniciar con tips del GameDataService
       const tips = [this.gameData.getRandomTip(), this.gameData.getRandomTip()];
       await this.engine.init(tips);
-      
       this.engine.start();
-      
-      // Iniciar el loop de actualización del HUD DOM
-      this.updateActive = true;
-      this.tickHUD();
+      this.cdr.detectChanges();
     });
 
-    // Listener para redimensionado fluído
     window.addEventListener('resize', this.handleResize);
   }
 
   private updateCanvasSize() {
     const canvas = this.canvasRef.nativeElement;
     const container = this.containerRef.nativeElement;
-    
-    // Usamos el tamaño real del contenedor DOM (30vw)
     const rect = container.getBoundingClientRect();
     canvas.width = rect.width;
     canvas.height = rect.height;
@@ -173,17 +160,13 @@ export class GameCanvasComponent implements AfterViewInit, OnDestroy {
     if (this.engine) {
       const rect = this.containerRef.nativeElement.getBoundingClientRect();
       this.engine.resize(rect.width, rect.height);
-      console.log(`[GameCanvas] ↔️ Container Resized: ${rect.width}x${rect.height}`);
     }
   };
 
   ngOnDestroy() {
-    console.log('[GameCanvas] 🛑 Stopping Engine and cleaning memory...');
-    this.updateActive = false;
     window.removeEventListener('resize', this.handleResize);
     if (this.engine) {
-      this.engine.destroy(); // Fix: Limpia listeners de window internos del motor
+      this.engine.destroy();
     }
   }
 }
-

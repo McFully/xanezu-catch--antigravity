@@ -1,8 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameStateService } from '../../core/services/game-state.service';
 import { GameState } from '../../core/models/game-state.enum';
 import { AudioService } from '../../core/audio.service';
+import { ProgressionService } from '../../core/services/progression.service';
 
 interface Trophy {
   id: string;
@@ -27,12 +28,12 @@ interface Trophy {
 
       <div class="stats-banner">
         <div class="stat-card">
-          <span class="val">{{ totalXP }}</span>
+          <span class="val">{{ progression.totalXP() | number }}</span>
           <span class="lab">XP TOTAL</span>
         </div>
         <div class="stat-card">
-          <span class="val">{{ highScore }}</span>
-          <span class="lab">BEST SCORE</span>
+          <span class="val">{{ progression.highScore() | number }}</span>
+          <span class="lab">RÉCORD PERSONAL</span>
         </div>
         <div class="stat-card">
           <span class="val">{{ totalDeaths }}</span>
@@ -67,12 +68,12 @@ interface Trophy {
     .title { font-size: 2.5rem; margin: 0; }
     .title span { color: #00f2ff; text-shadow: 0 0 15px rgba(0,242,255,0.4); }
 
-    .stats-banner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem; }
+    .stats-banner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem; width: 100%; max-width: 900px; }
     .stat-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 20px; text-align: center; }
     .stat-card .val { display: block; font-size: 2rem; font-weight: 700; color: #00f2ff; }
     .stat-card .lab { font-size: 0.8rem; letter-spacing: 2px; opacity: 0.5; }
 
-    .trophy-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; overflow-y: auto; }
+    .trophy-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; overflow-y: auto; width: 100%; max-width: 1100px; }
     .trophy-card { 
       background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 1.5rem; border-radius: 20px;
       display: flex; align-items: center; gap: 1.5rem; position: relative; transition: all 0.3s;
@@ -94,17 +95,16 @@ interface Trophy {
 export class TrophiesComponent {
   private gameStateService = inject(GameStateService);
   private audioService = inject(AudioService);
+  public progression = inject(ProgressionService);
 
-  public totalXP = 0;
-  public highScore = 0;
   public totalDeaths = 0;
 
   public trophies: Trophy[] = [
-    { id: 'first_jump', title: 'Saltador Novato', description: 'Realiza 100 saltos en total.', icon: '👟', achieved: false, progress: 45, target: 100 },
-    { id: 'rich_frog', title: 'Rana Capitalista', description: 'Consigue 5,000 monedas acumuladas.', icon: '💰', achieved: false, progress: 1200, target: 5000 },
-    { id: 'survivor', title: 'Superviviente Sónico', description: 'Aguanta 5 minutos en una partida.', icon: '⏱️', achieved: true, progress: 300, target: 300 },
-    { id: 'collector', title: 'Coleccionista de Brillo', description: 'Recoge 50 gemas.', icon: '💎', achieved: false, progress: 12, target: 50 },
-    { id: 'master_pilot', title: 'As del Vuelo', description: 'Llega al nivel 10 en Historia.', icon: '🎖️', achieved: false, progress: 3, target: 10 },
+    { id: 'first_jump', title: 'Saltador Novato', description: 'Realiza 100 saltos en total.', icon: '👟', achieved: false, progress: 0, target: 100 },
+    { id: 'rich_frog', title: 'Rana Capitalista', description: 'Consigue 5,000 monedas acumuladas.', icon: '💰', achieved: false, progress: 0, target: 5000 },
+    { id: 'survivor', title: 'Superviviente Sónico', description: 'Acumula 5 minutos de juego en total.', icon: '⏱️', achieved: false, progress: 0, target: 300 },
+    { id: 'collector', title: 'Coleccionista de Brillo', description: 'Recoge 50 gemas.', icon: '💎', achieved: false, progress: 0, target: 50 },
+    { id: 'master_pilot', title: 'As del Vuelo', description: 'Llega al nivel 10 en cualquier modo.', icon: '🎖️', achieved: false, progress: 0, target: 10 },
   ];
 
   constructor() {
@@ -112,23 +112,24 @@ export class TrophiesComponent {
   }
 
   loadStats() {
-    this.totalXP = parseInt(localStorage.getItem('mx_total_xp') || '0');
-    this.highScore = parseInt(localStorage.getItem('mx_high_score') || '0');
-    this.totalDeaths = parseInt(localStorage.getItem('mx_total_deaths') || '0');
+    this.totalDeaths = parseInt(localStorage.getItem('mx_total_deaths') || '0', 10);
 
-    const totalJumps = parseInt(localStorage.getItem('mx_total_jumps') || '0');
-    const totalCoins = parseInt(localStorage.getItem('mx_total_coins_collected') || '0');
-    const totalGems = parseInt(localStorage.getItem('mx_total_gems_collected') || '0');
-    const maxLevel = parseInt(localStorage.getItem('mx_max_level') || '0');
+    const totalJumps = parseInt(localStorage.getItem('mx_total_jumps') || '0', 10);
+    const totalCoins = parseInt(localStorage.getItem('mx_total_coins_collected') || '0', 10);
+    const totalGems = parseInt(localStorage.getItem('mx_total_gems_collected') || '0', 10);
+    const totalTimeSec = parseInt(localStorage.getItem('mx_total_time_seconds') || '0', 10);
+    const maxLevel = this.progression.maxLevel();
 
-    // Actualizar progreso de trofeos dinámicamente
     this.trophies.forEach(t => {
-      switch(t.id) {
-        case 'first_jump': 
+      switch (t.id) {
+        case 'first_jump':
           t.progress = Math.min(t.target, totalJumps);
           break;
         case 'rich_frog':
           t.progress = Math.min(t.target, totalCoins);
+          break;
+        case 'survivor':
+          t.progress = Math.min(t.target, totalTimeSec);
           break;
         case 'collector':
           t.progress = Math.min(t.target, totalGems);

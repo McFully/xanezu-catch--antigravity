@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Chapter } from './models/chapter.model';
+import { MusicSynth } from '../game/engine/music-synth';
 
 @Injectable({
   providedIn: 'root'
@@ -13,27 +13,24 @@ export class AudioService {
   private musicBuffers: Map<string, AudioBuffer> = new Map();
   private currentMusicSource: AudioBufferSourceNode | null = null;
   private musicGain: GainNode | null = null;
+  public readonly synth = new MusicSynth();
+
+  constructor() {
+    this.isMuted.set(localStorage.getItem('mx_audio_muted') === 'true');
+  }
 
   public isInitialized(): boolean {
     return this.initialized;
   }
 
-  /**
-   * Inicializa el AudioContext con un gesto de usuario y precarga la música del menú.
-   * Debe llamarse desde un evento de click/touch para desbloquear el AudioContext.
-   */
   public async initAndPreload(): Promise<void> {
     if (!this.initialized) {
       await this.init();
     }
     await this.ensureContext();
     await this.preloadMenuMusic();
-    console.log('[AudioService] ✅ AudioContext desbloqueado y música de menú precargada.');
   }
 
-  /**
-   * Pre-carga el buffer de la música del menú sin reproducirla.
-   */
   public async preloadMenuMusic(): Promise<void> {
     if (!this.initialized || !this.ctx) return;
     const path = 'assets/menu/audio/musica%20menu.ogg';
@@ -42,35 +39,24 @@ export class AudioService {
         const response = await fetch(path);
         if (response.ok || response.status === 0) {
           const arrayBuffer = await response.arrayBuffer();
-          const buffer = await this.ctx!.decodeAudioData(arrayBuffer);
+          const buffer = await this.ctx.decodeAudioData(arrayBuffer);
           this.musicBuffers.set(path, buffer);
-          console.log('[AudioService] 🎵 Buffer de música de menú precargado.');
         }
       } catch (e) {
-        console.warn('[AudioService] ⚠️ No se pudo precargar música de menú:', e);
+        console.warn('[AudioService] No se pudo precargar música de menú:', e);
       }
     }
   }
 
-  /**
-   * Reproduce la música del menú. Si ya está precargada, empieza de inmediato.
-   */
   public async playMenuMusic(): Promise<void> {
     if (!this.initialized) await this.init();
     await this.ensureContext();
+    this.synth.stopAll();
     if (!this.isMuted() && !this.currentMusicSource) {
       await this.playMusic('assets/menu/audio/musica%20menu.ogg');
     }
   }
 
-  constructor() {
-    // Intentar cargar preferencia de mute
-    this.isMuted.set(localStorage.getItem('mx_audio_muted') === 'true');
-  }
-
-  /**
-   * Inicializa el AudioContext tras un gesto del usuario.
-   */
   public async init(): Promise<void> {
     if (this.initialized) return;
 
@@ -79,10 +65,9 @@ export class AudioService {
     this.masterGain.gain.value = this.isMuted() ? 0 : 0.4;
 
     this.musicGain = this.ctx.createGain();
-    this.musicGain.gain.value = 0.5; // Música algo más suave que los FX
+    this.musicGain.gain.value = 0.5;
     this.musicGain.connect(this.masterGain);
 
-    // Configuración de Reverb básica
     this.reverb = this.ctx.createConvolver();
     this.reverb.buffer = this.createImpulseResponse(1.5, 2.0);
 
@@ -93,26 +78,20 @@ export class AudioService {
     this.reverb.connect(reverbGain);
     this.masterGain.connect(this.ctx.destination);
 
+    this.synth.bindContext(this.ctx, this.masterGain, this.reverb);
     this.initialized = true;
-    console.log('🔊 Audio Service Initialized');
   }
 
-  /**
-   * Reproduce música desde cualquier ruta.
-   */
   public async playMusic(path: string, loop: boolean = true): Promise<void> {
     if (!this.initialized || !this.ctx) await this.init();
     await this.ensureContext();
-
-    // Detener música actual
     this.stopMusic();
 
     try {
       let buffer = this.musicBuffers.get(path);
       if (!buffer) {
-        console.log(`[AudioService] 🎵 Loading music: ${path}`);
         const response = await fetch(path);
-        if (!response.ok && response.status !== 0) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok && response.status !== 0) throw new Error(`HTTP status: ${response.status}`);
         const arrayBuffer = await response.arrayBuffer();
         buffer = await this.ctx!.decodeAudioData(arrayBuffer);
         this.musicBuffers.set(path, buffer);
@@ -123,9 +102,9 @@ export class AudioService {
       this.currentMusicSource.loop = loop;
       this.currentMusicSource.connect(this.musicGain!);
       this.currentMusicSource.start(0);
-      console.log(`[AudioService] ▶️ Playing: ${path}`);
     } catch (e) {
-      console.error(`[AudioService] ❌ Error playing music: ${path}`, e);
+      console.warn(`[AudioService] Fallback procedural para: ${path}`, e);
+      this.synth.playChapterMusic(1);
     }
   }
 
@@ -137,27 +116,25 @@ export class AudioService {
 
   public async playChapterMusic(mode: string, folder: string): Promise<void> {
     if (!mode || !folder) return;
-
-    if (mode.toUpperCase() === 'ABLIA') {
-      console.log(`[AudioService] 🎵 Skipping chapter music for ABLIA mode.`);
-      return;
-    }
-    
-    // Asegurar que el AudioContext está activo antes de reproducir
     if (!this.initialized) await this.init();
     await this.ensureContext();
-    
+    this.stopMusic();
+
+    if (mode.toUpperCase() === 'ABLIA') {
+      this.synth.playChapterMusic({ mode: 'ABLIA', id: folder });
+      return;
+    }
+
     const path = `assets/${mode.toLowerCase()}/${folder}/audios/${folder}.ogg`;
     await this.playMusic(path, true);
   }
 
   public stopMusic(): void {
+    this.synth.stopAll();
     if (this.currentMusicSource) {
       try {
         this.currentMusicSource.stop();
-      } catch (e) {
-        // Ignorar si ya estaba detenido
-      }
+      } catch {}
       this.currentMusicSource.disconnect();
       this.currentMusicSource = null;
     }
@@ -192,15 +169,11 @@ export class AudioService {
 
     osc.connect(gain);
     gain.connect(this.masterGain!);
-
-    // También conectar a la reverb para profundidad
     if (this.reverb) gain.connect(this.reverb);
 
     osc.start();
     osc.stop(this.ctx.currentTime + dur);
   }
-
-  // --- FX PREDETERMINADOS ---
 
   public playJump(): void {
     this.playTone(300, 0.2, 0.1, 'triangle');
