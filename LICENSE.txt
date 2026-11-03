@@ -1,8 +1,11 @@
-LICENCIA PRIVATIVA DE PROPIEDAD INTELECTUAL
+PROPIEDAD INTELECTUAL Y DERECHOS DE AUTOR
+=========================================
 
-(c) 2026 Aritz Bahamonde Larxé. Todos los derechos reservados.
 © 2026 Aritz Bahamonde Larxé. Todos los derechos reservados.
 
-Este software ("Xanezu Catch"), incluyendo su código fuente, arquitectura híbrida Angular + Canvas, motores de físicas, sintetizadores de audio procedimental, activos visuales, diseños, logotipos y documentación asociada, es propiedad exclusiva de Aritz Bahamonde Larxé.
+Queda estrictamente prohibida la reproducción total o parcial de este software,
+así como su distribución, comercialización, descompilación, ingeniería inversa
+o modificación sin la autorización expresa y por escrito del titular legítimo
+de los derechos: Aritz Bahamonde Larxé.
 
-Queda terminantemente prohibida su reproducción, distribución, modificación, ingeniería inversa, descompilación, sublicenciamiento o uso comercial total o parcial sin la autorización expresa y por escrito del titular de los derechos.
+Este software es propiedad privativa y exclusiva.
